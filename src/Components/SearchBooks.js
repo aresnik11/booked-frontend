@@ -1,6 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { fetchSearchedBooks } from '../actions'
 
 class SearchBooks extends React.Component {
     state = {
@@ -16,30 +17,8 @@ class SearchBooks extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        // this.props.history.push(`/?search=${this.state.search}&type=${this.state.type}`)
-        this.fetchBooks(this.state)
+        this.props.fetchSearchedBooks(this.state)
     }
-
-    fetchBooks = ({ search, type }) => {
-        //     console.log(this.props.location)
-        //     const query = queryString.parse(this.props.location.search)
-        //     console.log(query)
-            fetch('http://localhost:3001/api/v1/search', {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                    "Search-Term": `${search}`,
-                    "Search-Type": `${type}`
-                }
-            })
-            .then(resp => resp.json())
-            .then(response => {
-                console.log("total items:", response.totalItems)
-                console.log("books:", response.books)
-                this.props.fetchBooks(response.totalItems, response.books)
-            })
-        }
 
     render() {
         return (
@@ -97,18 +76,4 @@ class SearchBooks extends React.Component {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        fetchBooks: (totalItems, books) => {
-            dispatch({
-                type: "FETCH_SEARCHED_BOOKS",
-                payload: {
-                    totalItems: totalItems,
-                    searchedBooks: books
-                }
-            })
-        }
-    }
-}
-
-export default connect(null, mapDispatchToProps)(SearchBooks)
+export default connect(null, { fetchSearchedBooks })(SearchBooks)

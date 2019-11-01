@@ -1,34 +1,43 @@
 import React from 'react'
 import BookContainer from './BookContainer'
+import BookListPreview from '../components/BookListPreview'
+import NewBookList from '../components/NewBookList'
 import { Route, Switch } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { fetchBookLists } from '../actions'
 
-const BookListContainer = (props) => {
-    return (
-        <div>
-            <h1>I'm the book list container</h1>
-            <Switch>
-                <Route path="/booklists/:id" render={() => {
-                    return (
-                        <div>
-                            <h1>Book List Page</h1>
-                            {/* {props.searchedBooks.map(book => <BookPreview key={book.id} {...book} />)} */}
-                        </div>
-                    )
-                }} />
-                <Route path="/booklists" render={() => {
-                    return (
-                        <div>
-                            <h1>Book Container within Booklist</h1>
-                            <BookContainer />
-                            {/* {props.searchedBooks.map(book => <BookPreview key={book.id} {...book} />)} */}
-                        </div>
-                    )
-                }} />
-            </Switch>
+class BookListContainer extends React.Component {
+    componentDidMount() {
+        this.props.fetchBookLists()
+    }
 
-            {/* <BookContainer /> */}
-        </div>
-    )
+    render() {
+        return (
+            <div>
+                <h1>I'm the book list container</h1>
+                <Switch>
+                    <Route path="/booklists/:id" render={() => {
+                        return <BookContainer />
+                    }} />
+                    <Route path="/booklists" render={() => {
+                        return (
+                            <div>
+                                <h1>Booklist container</h1>
+                                <NewBookList />
+                                {this.props.bookLists.map(bookList => <BookListPreview key={bookList.id} {...bookList} />)}
+                            </div>
+                        )
+                    }} />
+                </Switch>
+            </div>
+        )
+    }
 }
 
-export default BookListContainer
+function mapStateToProps(state) {
+    return {
+        bookLists: state.booksReducer.bookLists,
+    }
+}
+
+export default connect(mapStateToProps, { fetchBookLists })(BookListContainer)

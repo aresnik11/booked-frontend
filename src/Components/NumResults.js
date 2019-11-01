@@ -12,7 +12,7 @@ const NumResults = (props) => {
 
 function mapStateToProps(state) {
     return {
-        totalItems: state.searchBooksReducer.totalItems
+        totalItems: state.booksReducer.totalItems
     }
 }
 
