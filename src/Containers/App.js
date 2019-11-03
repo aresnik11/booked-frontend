@@ -10,16 +10,12 @@ import BookListContainer from './BookListContainer';
 import BookContainer from './BookContainer'
 import Login from '../components/Login'
 import Signup from '../components/Signup'
+import { connect } from 'react-redux'
+import { setCurrentUser, logOut } from '../actions'
 
 class App extends React.Component {
-  state = {
-    currentUser: null,
-    bookLists: [],
-    authors: []
-  }
-
   componentDidMount() {
-    const token = localStorage.token
+    const token = localStorage.getItem("token")
     if (token) {
       fetch("http://localhost:3001/api/v1/auto_login", {
         headers: {
@@ -28,61 +24,24 @@ class App extends React.Component {
       })
       .then(resp => resp.json())
       .then(response => {
-        console.log(response)
         if (response.errors) {
           console.log(response.errors)
-          this.logout()
+          this.props.logOut()
         }
         else {
-          this.setState({
-            currentUser: {
-              id: response.user.id,
-              username: response.user.username
-            },
-            bookLists: response.user.book_lists,
-            authors: response.user.authors
-          })
+          this.props.setCurrentUser(response.user)
         }
       })
     }
-  }
-
-  setUser = (response) => {
-    console.log(response)
-    if (response.errors) {
-      alert(response.errors)
-    }
-    else {
-      this.setState({
-        currentUser: {
-          id: response.user.id,
-          username: response.user.username
-        },
-        bookLists: response.user.book_lists,
-        authors: response.user.authors
-      }, () => {
-        localStorage.token = response.token
-        this.props.history.push("/profile")
-      })
-    }
-  }
-
-  logout = () => {
-    this.setState({
-      currentUser: null
-    }, () => {
-      localStorage.removeItem("token")
-      this.props.history.push("/login")
-    })
   }
 
   render() {
     return (
       <div className="App">
-        <Header logout={this.logout} />
+        <Route path="/" component={Header} />
         <Switch>
-          <Route path="/login" render={() => <Login setUser={this.setUser} />} />
-          <Route path="/signup" render={() => <Signup setUser={this.setUser} />} />
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
           <Route path="/search" component={SearchBooksContainer} />
           <Route path="/profile" component={Profile} />
           <Route path="/booklists" component={BookListContainer} />
@@ -95,4 +54,8 @@ class App extends React.Component {
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {}
+}
+
+export default connect(mapStateToProps, { setCurrentUser, logOut })(App);

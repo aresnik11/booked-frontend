@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { setCurrentUser } from '../actions'
 
 class Login extends React.Component {
     state = {
@@ -24,7 +25,16 @@ class Login extends React.Component {
             body: JSON.stringify({user: this.state})
         })
         .then(resp => resp.json())
-        .then(response => this.props.setUser(response))
+        .then(response => {
+            if (response.errors) {
+                alert(response.errors)
+            }
+            else {
+                localStorage.setItem("token", response.token)
+                this.props.setCurrentUser(response.user)
+                this.props.history.push("/profile")
+            }
+        })
     }
 
     render() {
@@ -42,4 +52,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login
+export default connect(null, { setCurrentUser })(Login)

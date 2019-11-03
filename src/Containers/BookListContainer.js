@@ -4,15 +4,9 @@ import BookListPreview from '../components/BookListPreview'
 import NewBookList from '../components/NewBookList'
 import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { fetchBookLists } from '../actions'
 
 class BookListContainer extends React.Component {
-    componentDidMount() {
-        // this.props.fetchBookLists()
-    }
-
     render() {
-        console.log(this.props)
         return (
             <div>
                 <h1>I'm the book list container</h1>
@@ -37,8 +31,8 @@ class BookListContainer extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        bookLists: state.booksReducer.bookLists,
+        bookLists: state.userReducer.bookLists
     }
 }
 
-export default connect(mapStateToProps, { fetchBookLists })(BookListContainer)
+export default connect(mapStateToProps, { })(BookListContainer)

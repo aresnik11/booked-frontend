@@ -7,10 +7,10 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import booksReducer from './reducers/booksReducer'
-import authReducer from './reducers/authReducer'
+import userReducer from './reducers/userReducer'
 import thunk from 'redux-thunk'
 
-const rootReducer = combineReducers({booksReducer: booksReducer, authReducer: authReducer})
+const rootReducer = combineReducers({booksReducer: booksReducer, userReducer: userReducer})
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
 

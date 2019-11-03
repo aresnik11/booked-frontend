@@ -1,14 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchBookLists } from '../actions'
 
 class AddToBookList extends React.Component {
     state = {
-        value: ""
-    }
-
-    componentDidMount() {
-        // this.props.fetchBookLists()
+        value: this.props.bookLists ? this.props.bookLists[0].id : ""
     }
 
     handleChange = (e) => {
@@ -22,8 +17,12 @@ class AddToBookList extends React.Component {
         console.log(this.state)
     }
 
+    addBookToBookList = () => {
+        //create a book instance
+        //create a booklistbook instance
+    }
+
     render() {
-        console.log(this.props.bookLists)
         return (
             <form onSubmit={this.handleSubmit}>
                 <label>Select a book list:</label>
@@ -41,8 +40,8 @@ class AddToBookList extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        bookLists: state.booksReducer.bookLists,
+        bookLists: state.userReducer.bookLists
     }
 }
 
-export default connect(mapStateToProps, { fetchBookLists })(AddToBookList)
+export default connect(mapStateToProps, { })(AddToBookList)
