@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { addBookListBook } from '../actions'
 
 class AddToBookList extends React.Component {
     state = {
@@ -14,12 +15,40 @@ class AddToBookList extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        console.log(this.state)
+        this.addBook(this.props.book)
     }
 
-    addBookToBookList = () => {
-        //create a book instance
-        //create a booklistbook instance
+    // addBookToBookList = () => {
+    //     //find or create author -- getting back arrray of authors from /search
+    //     //skipping this for now
+
+    //     //find or create a book instance
+    //     this.props.addBook(this.props.book)
+
+    //     //create a booklistbook instance with book id and book list id
+    //     // this.props.addBookListBook()
+    // }
+
+    addBook = (book) => {
+        fetch("http://localhost:3001/api/v1/books", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Bearer ${localStorage.token}`
+            },
+            body: JSON.stringify(book)
+        })
+        .then(resp => resp.json())
+        .then(response => {
+            console.log("repsonse from book post", response)
+            if (response.errors) {
+                alert(response.errors)
+            }
+            else {
+                this.props.addBookListBook(response, this.state.value)
+            }
+        })
     }
 
     render() {
@@ -39,9 +68,10 @@ class AddToBookList extends React.Component {
 }
 
 function mapStateToProps(state) {
+    console.log("current state", state)
     return {
         bookLists: state.userReducer.bookLists
     }
 }
 
-export default connect(mapStateToProps, { })(AddToBookList)
+export default connect(mapStateToProps, { addBookListBook })(AddToBookList)
