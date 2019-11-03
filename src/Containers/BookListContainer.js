@@ -8,10 +8,11 @@ import { fetchBookLists } from '../actions'
 
 class BookListContainer extends React.Component {
     componentDidMount() {
-        this.props.fetchBookLists()
+        // this.props.fetchBookLists()
     }
 
     render() {
+        console.log(this.props)
         return (
             <div>
                 <h1>I'm the book list container</h1>

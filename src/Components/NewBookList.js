@@ -5,7 +5,6 @@ import { addBookList } from '../actions'
 class NewBookList extends React.Component {
     state = {
         name: "",
-        user_id: 1
     }
 
     handleChange = (e) => {
@@ -18,27 +17,6 @@ class NewBookList extends React.Component {
         e.preventDefault()
         this.props.addBookList(this.state)
     }
-
-    // addBookList = (bookList) => {
-    //     fetch('http://localhost:3001/api/v1/book_lists', {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             "Accept": "application/json"
-    //         },
-    //         body: JSON.stringify(bookList)
-    //     })
-    //     .then(resp => resp.json())
-    //     .then(response => {
-    //         console.log(response)
-    //         if (response.errors) {
-    //             console.log(response.errors)
-    //         }
-    //         else {
-    //             this.props.addBookList(response)
-    //         }
-    //     })
-    // }
 
     render() {
         return (

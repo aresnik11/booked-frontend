@@ -8,7 +8,7 @@ class AddToBookList extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchBookLists()
+        // this.props.fetchBookLists()
     }
 
     handleChange = (e) => {

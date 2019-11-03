@@ -3,20 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './containers/App';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import booksReducer from './reducers/booksReducer'
+import authReducer from './reducers/authReducer'
 import thunk from 'redux-thunk'
 
-const rootReducer = combineReducers({booksReducer: booksReducer})
+const rootReducer = combineReducers({booksReducer: booksReducer, authReducer: authReducer})
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
-            <App />
+            <Route path="/" component={App} />
         </BrowserRouter>
     </Provider>,
     document.getElementById('root')

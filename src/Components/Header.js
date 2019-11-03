@@ -1,8 +1,11 @@
 import React from 'react'
 
-const Header = () => {
+const Header = (props) => {
     return (
-        <h1>Booked</h1>
+        <div>
+            <h1>Booked</h1>
+            <h3 onClick={props.logout}>Logout</h3>
+        </div>
     )
 }
 
