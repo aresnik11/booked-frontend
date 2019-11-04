@@ -10,7 +10,6 @@ import {
 const defaultState = {
     currentUser: null,
     bookLists: [],
-    authors: []
 }
 
 function userReducer(state = defaultState, action) {
@@ -18,14 +17,16 @@ function userReducer(state = defaultState, action) {
         case SET_CURRENT_USER:
             return {
                 ...state,
+                //object with id and username keys
                 currentUser: action.payload.currentUser,
-                bookLists: action.payload.bookLists,
-                authors: action.payload.authors
+                //array of bookList objects, each bookList object contains id, name, and books, which is an array of book objects
+                bookLists: action.payload.bookLists
             }
         case LOG_OUT:
             return {
                 ...state,
-                currentUser: null
+                currentUser: null,
+                bookLists: []
             }
         case ADD_BOOK_LIST:
             return {

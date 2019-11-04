@@ -26,7 +26,7 @@ class SearchBooks extends React.Component {
                 <h4>Search Books</h4>
                 <form onSubmit={this.handleSubmit} >
                     <input
-                        type="text"
+                        type="search"
                         name="search"
                         placeholder="Search..."
                         value={this.state.search}

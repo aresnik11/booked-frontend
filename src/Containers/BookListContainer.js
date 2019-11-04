@@ -3,11 +3,23 @@ import BookContainer from './BookContainer'
 import BookListPreview from '../components/BookListPreview'
 import NewBookList from '../components/NewBookList'
 import BookListShow from '../components/BookListShow'
+import Search from '../components/Search'
 import Error from '../components/Error'
+import ShareBookList from '../components/ShareBookList'
 import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 class BookListContainer extends React.Component {
+    state = {
+        searchTerm: ""
+    }
+
+    searchBookList = (e) => {
+        this.setState({
+            searchTerm: e.target.value
+        })
+    }
+
     render() {
         return (
             <div>
@@ -21,6 +33,9 @@ class BookListContainer extends React.Component {
                             return (
                                 <div>
                                     <BookListShow {...bookListObj} {...routerProps} />
+                                    <br/>
+                                    <ShareBookList />
+                                    <br/><br/>
                                     <BookContainer bookListObj={bookListObj} />
                                 </div>
                             )
@@ -31,12 +46,21 @@ class BookListContainer extends React.Component {
                         }
                     }} />
                     <Route path="/booklists" render={() => {
+                        const filteredBookLists = this.props.bookLists.filter(bookList => bookList.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
                         return (
                             <div>
-                                <h1>Booklist container</h1>
                                 <NewBookList />
-                                {this.props.bookLists.map(bookList => <BookListPreview key={bookList.id} {...bookList} />)}
+                                <br/><br/>
+                                <Search searchTerm={this.state.searchTerm} searchHandler={this.searchBookList} />
+                                <div>
+                                    {filteredBookLists.map(bookList => <BookListPreview key={bookList.id} {...bookList} />)}
+                                </div>
                             </div>
+                        )
+                    }} />
+                    <Route path="/books/:id" render={routerProps => {
+                        return (
+                            <h1>Booklists here</h1>
                         )
                     }} />
                 </Switch>

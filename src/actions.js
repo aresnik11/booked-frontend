@@ -95,7 +95,7 @@ function addBookListBook(book, bookListId) {
 
 function removeBookListBook(bookId, bookListId) {
     return function(dispatch) {
-        fetch("http://localhost:3001/api/v1//book_list_books", {
+        fetch("http://localhost:3001/api/v1/book_list_books", {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -124,7 +124,7 @@ function removeBookListBook(bookId, bookListId) {
 
 function removeBookList(bookListId) {
     return function(dispatch) {
-        fetch(`http://localhost:3001/api/v1//book_lists/${bookListId}`, {
+        fetch(`http://localhost:3001/api/v1/book_lists/${bookListId}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -144,6 +144,24 @@ function removeBookList(bookListId) {
                 })
             }
         })
+    }
+}
+
+function removeAccount() {
+    return function(dispatch) {
+        fetch("http://localhost:3001/api/v1/users", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Bearer ${localStorage.token}`
+            }
+        })
+        .then(resp => resp.json())
+        .then(dispatch({
+                type: LOG_OUT
+            })
+        )
     }
 }
 
@@ -173,6 +191,7 @@ export {
     addBookListBook,
     removeBookListBook,
     removeBookList,
+    removeAccount,
     setCurrentUser,
     logOut
 }

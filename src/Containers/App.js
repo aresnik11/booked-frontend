@@ -2,7 +2,7 @@ import React from 'react';
 import '../App.css';
 import Header from '../components/Header'
 import SearchBooksContainer from './SearchBooksContainer';
-import Profile from './Profile'
+import Profile from '../components/Profile'
 import Homepage from '../components/Homepage'
 import Error from '../components/Error'
 import { Route, Switch } from 'react-router-dom'
@@ -54,5 +54,9 @@ class App extends React.Component {
   }
 }
 
+function mapStateToProps(state) {
+  // console.log(state)
+  return {}
+}
 
-export default connect(null, { setCurrentUser, logOut })(App);
+export default connect(mapStateToProps, { setCurrentUser, logOut })(App);
