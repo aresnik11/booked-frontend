@@ -30,7 +30,6 @@ class AddToBookList extends React.Component {
         })
         .then(resp => resp.json())
         .then(response => {
-            console.log("repsonse from book post", response)
             if (response.errors) {
                 alert(response.errors)
             }

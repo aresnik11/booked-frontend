@@ -3,6 +3,7 @@ import {
     ADD_BOOK_LIST,
     ADD_BOOK_LIST_BOOK,
     REMOVE_BOOK_LIST_BOOK,
+    REMOVE_BOOK_LIST,
     SET_CURRENT_USER,
     LOG_OUT
 } from './types'
@@ -94,7 +95,7 @@ function addBookListBook(book, bookListId) {
 
 function removeBookListBook(bookId, bookListId) {
     return function(dispatch) {
-        fetch("http://localhost:3001/api/v1//book_list_books/delete", {
+        fetch("http://localhost:3001/api/v1//book_list_books", {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -114,6 +115,31 @@ function removeBookListBook(bookId, bookListId) {
             else {
                 dispatch({
                     type: REMOVE_BOOK_LIST_BOOK,
+                    payload: response
+                })
+            }
+        })
+    }
+}
+
+function removeBookList(bookListId) {
+    return function(dispatch) {
+        fetch(`http://localhost:3001/api/v1//book_lists/${bookListId}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Bearer ${localStorage.token}`
+            }
+        })
+        .then(resp => resp.json())
+        .then(response => {
+            if (response.errors) {
+                alert(response.errors)
+            }
+            else {
+                dispatch({
+                    type: REMOVE_BOOK_LIST,
                     payload: response
                 })
             }
@@ -146,6 +172,7 @@ export {
     addBookList,
     addBookListBook,
     removeBookListBook,
+    removeBookList,
     setCurrentUser,
     logOut
 }

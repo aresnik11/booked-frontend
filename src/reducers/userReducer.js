@@ -3,7 +3,8 @@ import {
     LOG_OUT,
     ADD_BOOK_LIST,
     ADD_BOOK_LIST_BOOK,
-    REMOVE_BOOK_LIST_BOOK
+    REMOVE_BOOK_LIST_BOOK,
+    REMOVE_BOOK_LIST
 } from '../types'
 
 const defaultState = {
@@ -22,9 +23,15 @@ function userReducer(state = defaultState, action) {
                 authors: action.payload.authors
             }
         case LOG_OUT:
-            return {...state, currentUser: null}
+            return {
+                ...state,
+                currentUser: null
+            }
         case ADD_BOOK_LIST:
-            return {...state, bookLists: [...state.bookLists, action.payload]}
+            return {
+                ...state,
+                bookLists: [...state.bookLists, action.payload]
+            }
         case ADD_BOOK_LIST_BOOK:
             const copyBookLists = [...state.bookLists]
             //finding the booklist from action.payload.response
@@ -44,6 +51,14 @@ function userReducer(state = defaultState, action) {
             return {
                 ...state,
                 bookLists: bookListsCopy
+            }
+        case REMOVE_BOOK_LIST:
+            const copyBL = [...state.bookLists]
+            //remove the booklist from action.payload from the list of booklists
+            const filteredBookLists = copyBL.filter(bookList => bookList.id !== action.payload.id)
+            return {
+                ...state,
+                bookLists: filteredBookLists
             }
         default:
             return state

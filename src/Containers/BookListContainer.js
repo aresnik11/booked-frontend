@@ -20,8 +20,7 @@ class BookListContainer extends React.Component {
                         if (bookListObj) {
                             return (
                                 <div>
-                                    {/* maybe just have the h1 here and remove BookListShow component */}
-                                    <BookListShow name={bookListObj.name} />
+                                    <BookListShow {...bookListObj} {...routerProps} />
                                     <BookContainer bookListObj={bookListObj} />
                                 </div>
                             )
