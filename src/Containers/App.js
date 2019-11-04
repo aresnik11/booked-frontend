@@ -54,8 +54,5 @@ class App extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {}
-}
 
-export default connect(mapStateToProps, { setCurrentUser, logOut })(App);
+export default connect(null, { setCurrentUser, logOut })(App);

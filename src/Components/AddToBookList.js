@@ -18,17 +18,6 @@ class AddToBookList extends React.Component {
         this.addBook(this.props.book)
     }
 
-    // addBookToBookList = () => {
-    //     //find or create author -- getting back arrray of authors from /search
-    //     //skipping this for now
-
-    //     //find or create a book instance
-    //     this.props.addBook(this.props.book)
-
-    //     //create a booklistbook instance with book id and book list id
-    //     // this.props.addBookListBook()
-    // }
-
     addBook = (book) => {
         fetch("http://localhost:3001/api/v1/books", {
             method: "POST",
@@ -68,7 +57,6 @@ class AddToBookList extends React.Component {
 }
 
 function mapStateToProps(state) {
-    console.log("current state", state)
     return {
         bookLists: state.userReducer.bookLists
     }

@@ -1,5 +1,4 @@
 import React from 'react'
-import BookListContainer from './BookListContainer'
 import { Link } from 'react-router-dom'
 
 const Profile = () => {
@@ -9,7 +8,8 @@ const Profile = () => {
             <Link to="/booklists">
                 <button>Book List</button>
             </Link>
-            {/* <BookListContainer /> */}
+            <br/><br/>
+            <button>Delete account</button>
         </div>
     )
 }

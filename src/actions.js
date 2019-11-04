@@ -2,6 +2,7 @@ import {
     FETCH_SEARCHED_BOOKS,
     ADD_BOOK_LIST,
     ADD_BOOK_LIST_BOOK,
+    REMOVE_BOOK_LIST_BOOK,
     SET_CURRENT_USER,
     LOG_OUT
 } from './types'
@@ -59,30 +60,6 @@ function addBookList(newBookList) {
     }
 }
 
-// function addBook(book, bookListId) {
-//     return function() {
-//         fetch("http://localhost:3001/api/v1/books", {
-//             method: "POST",
-//             headers: {
-//                 "Content-Type": "application/json",
-//                 "Accept": "application/json",
-//                 "Authorization": `Bearer ${localStorage.token}`
-//             },
-//             body: JSON.stringify(book)
-//         })
-//         .then(resp => resp.json())
-//         .then(response => {
-//             console.log("repsonse from book post", response)
-//             if (response.errors) {
-//                 alert(response.errors)
-//             }
-//             else {
-//                 addBookListBook(response, bookListId)
-//             }
-//         })
-//     }
-// }
-
 function addBookListBook(book, bookListId) {
     return function(dispatch) {
         fetch("http://localhost:3001/api/v1/book_list_books", {
@@ -99,20 +76,45 @@ function addBookListBook(book, bookListId) {
         })
         .then(resp => resp.json())
         .then(response => {
-            console.log("repsonse from book list book post", response)
-            console.log("book", book)
             if (response.errors) {
                 alert(response.errors)
             }
             else {
-                //need to do something here
-                //update bookLists.books in state
                 dispatch({
                     type: ADD_BOOK_LIST_BOOK,
                     payload: {
                         response: response,
                         book: book
                     }
+                })
+            }
+        })
+    }
+}
+
+function removeBookListBook(bookId, bookListId) {
+    return function(dispatch) {
+        fetch("http://localhost:3001/api/v1//book_list_books/delete", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Bearer ${localStorage.token}`
+            },
+            body: JSON.stringify({
+                book_id: bookId,
+                book_list_id: bookListId
+            })
+        })
+        .then(resp => resp.json())
+        .then(response => {
+            if (response.errors) {
+                alert(response.errors)
+            }
+            else {
+                dispatch({
+                    type: REMOVE_BOOK_LIST_BOOK,
+                    payload: response
                 })
             }
         })
@@ -142,7 +144,8 @@ function logOut() {
 export {
     fetchSearchedBooks,
     addBookList,
-    setCurrentUser,
     addBookListBook,
+    removeBookListBook,
+    setCurrentUser,
     logOut
 }

@@ -2,7 +2,8 @@ import {
     SET_CURRENT_USER,
     LOG_OUT,
     ADD_BOOK_LIST,
-    ADD_BOOK_LIST_BOOK
+    ADD_BOOK_LIST_BOOK,
+    REMOVE_BOOK_LIST_BOOK
 } from '../types'
 
 const defaultState = {
@@ -33,6 +34,16 @@ function userReducer(state = defaultState, action) {
             return {
                 ...state,
                 bookLists: copyBookLists
+            }
+        case REMOVE_BOOK_LIST_BOOK:
+            const bookListsCopy = [...state.bookLists]
+            //finding the booklist from action.payload
+            const tagetBookList = bookListsCopy.find(bookList => bookList.id === action.payload.book_list_id)
+            //remove the book from action.payload from that booklist
+            tagetBookList.books = tagetBookList.books.filter(book => book.id !== action.payload.book_id)
+            return {
+                ...state,
+                bookLists: bookListsCopy
             }
         default:
             return state
