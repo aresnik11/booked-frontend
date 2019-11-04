@@ -2,8 +2,7 @@ import React from 'react'
 import SearchBooks from '../components/SearchBooks'
 import BookContainer from './BookContainer'
 import NumResults from '../components/NumResults'
-import { connect } from 'react-redux'
-import queryString from 'query-string'
+import withAuth from '../withAuth'
 
 class SearchBooksContainer extends React.Component {
     render() {
@@ -18,4 +17,4 @@ class SearchBooksContainer extends React.Component {
     }
 }
 
-export default SearchBooksContainer
+export default withAuth(SearchBooksContainer)

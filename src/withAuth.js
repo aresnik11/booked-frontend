@@ -21,7 +21,10 @@ function withAuth(MyComponent) {
                 }
                 else {
                     return (
-                        <Redirect to="/login" />
+                        <Redirect to={{
+                            pathname: "/login",
+                            state: { pleaseLogin: true }
+                        }} />
                     )
                 }
             }
@@ -30,7 +33,7 @@ function withAuth(MyComponent) {
 
     function mapStateToProps(state) {
         return {
-            currentUser: state.authReducer.currentUser
+            currentUser: state.userReducer.currentUser
         }
     }
 

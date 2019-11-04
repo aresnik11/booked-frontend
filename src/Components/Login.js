@@ -39,15 +39,23 @@ class Login extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <label>Login</label>
-                <br/>
-                <input type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.handleChange} />
-                <br/>
-                <input type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange} />
-                <br/><br/>
-                <input type="submit" value="Log In" />
-            </form>
+            <>
+                {/* will have pleaseLogin key in state if was redirected from withAuth HOC */}
+                {this.props.location.state && this.props.location.state.pleaseLogin
+                ?
+                <h3>Please login</h3>
+                :
+                null}
+                <form onSubmit={this.handleSubmit}>
+                    <label>Login</label>
+                    <br/>
+                    <input type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.handleChange} />
+                    <br/>
+                    <input type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange} />
+                    <br/><br/>
+                    <input type="submit" value="Log In" />
+                </form>
+            </>
         )
     }
 }

@@ -4,7 +4,7 @@ import { addBookListBook } from '../actions'
 
 class AddToBookList extends React.Component {
     state = {
-        value: this.props.bookLists ? this.props.bookLists[0].id : ""
+        value: this.props.bookLists[0] ? this.props.bookLists[0].id : ""
     }
 
     handleChange = (e) => {

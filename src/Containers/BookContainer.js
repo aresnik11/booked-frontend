@@ -7,6 +7,7 @@ import Search from '../components/Search'
 import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import BookListContainer from './BookListContainer'
+import withAuth from '../withAuth'
 
 class BookContainer extends React.Component {
     state = {
@@ -33,7 +34,8 @@ class BookContainer extends React.Component {
                             return (
                                 <div>
                                     <BookShow key={bookObj.id} {...bookObj} />
-                                    {/* <AddToBookList book={bookObj} /> */}
+                                    <AddToBookList book={bookObj} />
+                                    <BookListContainer book={bookObj} />
                                 </div>
                             )
                         }
@@ -52,7 +54,7 @@ class BookContainer extends React.Component {
                                 <div>
                                     <BookShow key={searchBookObj.volume_id} {...searchBookObj} />
                                     <AddToBookList book={searchBookObj} />
-                                    <BookListContainer />
+                                    <BookListContainer book={searchBookObj} />
                                 </div>
                             )
                         }
@@ -95,4 +97,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(BookContainer)
+export default connect(mapStateToProps)(withAuth(BookContainer))

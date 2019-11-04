@@ -8,6 +8,7 @@ import Error from '../components/Error'
 import ShareBookList from '../components/ShareBookList'
 import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
+import withAuth from '../withAuth'
 
 class BookListContainer extends React.Component {
     state = {
@@ -34,7 +35,7 @@ class BookListContainer extends React.Component {
                                 <div>
                                     <BookListShow {...bookListObj} {...routerProps} />
                                     <br/>
-                                    <ShareBookList />
+                                    <ShareBookList {...bookListObj} />
                                     <br/><br/>
                                     <BookContainer bookListObj={bookListObj} />
                                 </div>
@@ -58,9 +59,25 @@ class BookListContainer extends React.Component {
                             </div>
                         )
                     }} />
-                    <Route path="/books/:id" render={routerProps => {
+                    <Route path="/books/:id" render={() => {
+                        // look through each booklist (this.props.bookList) and look through books (array) within that to see if our book is there, returns book lists that contain our book
+                        // using book.volume_id instead of book.id so that this works for books coming from a book list and a search
+                        // if we found the book, keeping track of the book id so that we can pass it to the backend to remove the book from this booklist
+                        let bookId
+                        const wantedBookLists = this.props.bookLists.filter(bookList => bookList.books.find(book => {
+                            if (book.volume_id === this.props.book.volume_id) {
+                                bookId = book.id
+                                return true
+                            }
+                            return false
+                        }))
                         return (
-                            <h1>Booklists here</h1>
+                            <div>
+                                <h4>Book lists</h4>
+                                <div>
+                                    {wantedBookLists.map(bookList => <BookListPreview key={bookList.id} {...bookList} bookId={bookId} />)}
+                                </div>
+                            </div>
                         )
                     }} />
                 </Switch>
@@ -75,4 +92,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { })(BookListContainer)
+export default connect(mapStateToProps, { })(withAuth(BookListContainer))

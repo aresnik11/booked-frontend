@@ -4,12 +4,14 @@ import {
     ADD_BOOK_LIST,
     ADD_BOOK_LIST_BOOK,
     REMOVE_BOOK_LIST_BOOK,
-    REMOVE_BOOK_LIST
+    REMOVE_BOOK_LIST,
+    FETCH_USERS
 } from '../types'
 
 const defaultState = {
     currentUser: null,
     bookLists: [],
+    users: []
 }
 
 function userReducer(state = defaultState, action) {
@@ -46,9 +48,9 @@ function userReducer(state = defaultState, action) {
         case REMOVE_BOOK_LIST_BOOK:
             const bookListsCopy = [...state.bookLists]
             //finding the booklist from action.payload
-            const tagetBookList = bookListsCopy.find(bookList => bookList.id === action.payload.book_list_id)
+            const targetBookList = bookListsCopy.find(bookList => bookList.id === action.payload.book_list_id)
             //remove the book from action.payload from that booklist
-            tagetBookList.books = tagetBookList.books.filter(book => book.id !== action.payload.book_id)
+            targetBookList.books = targetBookList.books.filter(book => book.id !== action.payload.book_id)
             return {
                 ...state,
                 bookLists: bookListsCopy
@@ -60,6 +62,13 @@ function userReducer(state = defaultState, action) {
             return {
                 ...state,
                 bookLists: filteredBookLists
+            }
+        case FETCH_USERS:
+            // filtering the current user out of the array of all users (from action.payload)
+            const allUsersExceptCurrentUser = action.payload.filter(user => user.id !== state.currentUser.id)
+            return {
+                ...state,
+                users: allUsersExceptCurrentUser
             }
         default:
             return state

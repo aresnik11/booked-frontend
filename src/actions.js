@@ -5,7 +5,8 @@ import {
     REMOVE_BOOK_LIST_BOOK,
     REMOVE_BOOK_LIST,
     SET_CURRENT_USER,
-    LOG_OUT
+    LOG_OUT,
+    FETCH_USERS
 } from './types'
 
 function fetchSearchedBooks({ search, type }) {
@@ -98,8 +99,6 @@ function removeBookListBook(bookId, bookListId) {
         fetch("http://localhost:3001/api/v1/book_list_books", {
             method: "DELETE",
             headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
                 "Authorization": `Bearer ${localStorage.token}`
             },
             body: JSON.stringify({
@@ -127,8 +126,6 @@ function removeBookList(bookListId) {
         fetch(`http://localhost:3001/api/v1/book_lists/${bookListId}`, {
             method: "DELETE",
             headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
                 "Authorization": `Bearer ${localStorage.token}`
             }
         })
@@ -152,8 +149,6 @@ function removeAccount() {
         fetch("http://localhost:3001/api/v1/users", {
             method: "DELETE",
             headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
                 "Authorization": `Bearer ${localStorage.token}`
             }
         })
@@ -185,6 +180,13 @@ function logOut() {
     }
 }
 
+function fetchUsers(users) {
+    return {
+        type: FETCH_USERS,
+        payload: users
+    }
+}
+
 export {
     fetchSearchedBooks,
     addBookList,
@@ -193,5 +195,6 @@ export {
     removeBookList,
     removeAccount,
     setCurrentUser,
-    logOut
+    logOut,
+    fetchUsers
 }

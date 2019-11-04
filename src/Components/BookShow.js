@@ -13,7 +13,6 @@ const BookShow = (props) => {
             <h3>{props.url}</h3>
             <img alt={props.title} src={props.image} />
             <p>{props.description}</p>
-
         </div>
     )
 }

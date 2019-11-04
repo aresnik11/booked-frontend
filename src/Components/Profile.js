@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { removeAccount } from '../actions'
+import withAuth from '../withAuth'
 
 const Profile = (props) => {
     const handleAccountRemove = () => {
@@ -25,4 +26,4 @@ const Profile = (props) => {
     )
 }
 
-export default connect(null, { removeAccount })(Profile)
+export default connect(null, { removeAccount })(withAuth(Profile))
