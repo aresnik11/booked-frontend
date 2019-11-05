@@ -15,14 +15,14 @@ const BookPreview = (props) => {
                     state: { bookListObj: props.bookListObj }
                 }}>
                     {/* <h4>{props.title}</h4> */}
-                    <div class="component">
-                        <ul class="align">
+                    <div className="component">
+                        <ul className="align">
                             <li>
-                                <figure class='book'>
+                                <figure className='book'>
 
                                     {/* Front */}
 
-                                    <ul class='hardcover_front'>
+                                    <ul className='hardcover_front'>
                                         <li>
                                             <img src={props.image} alt="" />
                                         </li>
@@ -31,10 +31,10 @@ const BookPreview = (props) => {
 
                                     {/* Pages */}
 
-                                    <ul class='page'>
+                                    <ul className='page'>
                                         <li></li>
                                         <li>
-                                            <a class="btn" href="#">Download</a>
+                                            <a className="btn" href="#">Download</a>
                                         </li>
                                         <li></li>
                                         <li></li>
@@ -43,11 +43,11 @@ const BookPreview = (props) => {
 
                                     {/* Back */}
 
-                                    <ul class='hardcover_back'>
+                                    <ul className='hardcover_back'>
                                         <li></li>
                                         <li></li>
                                     </ul>
-                                    <ul class='book_spine'>
+                                    <ul className='book_spine'>
                                         <li></li>
                                         <li></li>
                                     </ul>

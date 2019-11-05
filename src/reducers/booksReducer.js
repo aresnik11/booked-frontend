@@ -5,13 +5,21 @@ import {
 
 const defaultState = {
     searchedBooks: [],
-    totalItems: "",
-    loading: false
+    totalItems: 0,
+    loading: false,
+    loadedItems: 0,
+    hasMoreItems: false
 }
 
 function booksReducer(state = defaultState, action) {
     switch(action.type) {
         case FETCH_SEARCHED_BOOKS:
+            // let loadedItems = state.loadedItems
+            // let hasMoreItems = state.hasMoreItems
+            // if (action.payload.searchedBooks) {
+            //     loadedItems = action.payload.searchedBooks.length
+            //     hasMoreItems = action.payload.totalItems > action.payload.searchedBooks.length
+            // }
             return {
                 ...state,
                 totalItems: action.payload.totalItems,

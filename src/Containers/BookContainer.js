@@ -9,10 +9,32 @@ import { connect } from 'react-redux'
 import BookListContainer from './BookListContainer'
 import withAuth from '../withAuth'
 import Loading from '../components/Loading'
+import { fetchSearchedBooks } from '../actions'
 
 class BookContainer extends React.Component {
     state = {
-        searchTerm: ""
+        searchTerm: "",
+        numDisplayed: 40
+    }
+
+    renderMoreResults = () => {
+        //chrome, firefox, IE, opera place overflow at html level, which is targeted via body
+        //safari still uses body
+        if ((document.documentElement.scrollHeight === document.documentElement.scrollTop + window.innerHeight) || (document.body.scrollHeight === document.body.scrollTop + window.innerHeight)) {
+            //check if numDisplayed is less than totalItems
+            //if it is, refetch. otherwise do nothing
+            this.setState({
+                numDisplayed: this.state.numDisplayed + 40
+            });
+        }
+    }
+
+    componentDidMount(){
+        document.addEventListener("scroll", this.renderMoreResults)
+    }
+
+    componentWillUnmount(){
+        document.removeEventListener("scroll", this.renderMoreResults)
     }
 
     searchBook = (e) => {
@@ -22,6 +44,7 @@ class BookContainer extends React.Component {
     }
 
     render() {
+        console.log("numDisplayed:", this.state.numDisplayed)
         return (
             <Switch>
                 <Route path="/books/:id" render={routerProps => {
@@ -80,16 +103,14 @@ class BookContainer extends React.Component {
                 }} />
                 <Route path="/search" render={() => {
                     return (
-                            // <div>
-                            //     {this.props.searchedBooks.map(book => <BookPreview key={book.volume_id} {...book} />)}
-                            // </div>
                         <>
                             {this.props.loading
                             ?
                             <Loading />
                             :
                             <div>
-                                {this.props.searchedBooks.map(book => <BookPreview key={book.volume_id} {...book} />)}
+                                {this.props.searchedBooks.slice(0, this.state.numDisplayed).map(book => <BookPreview key={book.volume_id} {...book} />)}
+                                {/* {this.props.searchedBooks.map(book => <BookPreview key={book.volume_id} {...book} />)} */}
                             </div>
                             }
                         </>
@@ -103,10 +124,13 @@ class BookContainer extends React.Component {
 function mapStateToProps(state) {
     console.log(state)
     return {
-        searchedBooks: state.booksReducer.searchedBooks,
         bookLists: state.userReducer.bookLists,
-        loading: state.booksReducer.loading
+        searchedBooks: state.booksReducer.searchedBooks,
+        loading: state.booksReducer.loading,
+        loadedItems: state.booksReducer.loadedItems,
+        hasMoreItems: state.booksReducer.hasMoreItems,
+        totalItems: state.booksReducer.totalItems
     }
 }
 
-export default connect(mapStateToProps)(withAuth(BookContainer))
+export default connect(mapStateToProps, { fetchSearchedBooks })(withAuth(BookContainer))

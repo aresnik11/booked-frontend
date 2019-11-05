@@ -43,16 +43,18 @@ class App extends React.Component {
     return (
       <div className="App">
         <Route path="/" component={Header} />
-        <Switch>
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/search" component={SearchBooksContainer} />
-          <Route path="/profile" component={Profile} />
-          <Route path="/booklists" component={BookListContainer} />
-          <Route path="/books" component={BookContainer} />
-          <Route exact path="/" component={Homepage} />
-          <Route component={Error} />
-        </Switch>
+        <div className="main-container">
+          <Switch>
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/search" component={SearchBooksContainer} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/booklists" component={BookListContainer} />
+            <Route path="/books" component={BookContainer} />
+            <Route exact path="/" component={Homepage} />
+            <Route component={Error} />
+          </Switch>
+        </div>
       </div>
     );
   }

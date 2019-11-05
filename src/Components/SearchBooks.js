@@ -6,7 +6,8 @@ import { fetchSearchedBooks, setLoading } from '../actions'
 class SearchBooks extends React.Component {
     state = {
         search: "",
-        type: ""
+        type: "",
+        index: 0
     }
 
     handleChange = (e) => {

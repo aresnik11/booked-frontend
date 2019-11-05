@@ -5,13 +5,15 @@ import {
     ADD_BOOK_LIST_BOOK,
     REMOVE_BOOK_LIST_BOOK,
     REMOVE_BOOK_LIST,
-    FETCH_USERS
+    FETCH_USERS,
+    SET_ACTIVE_PAGE
 } from '../types'
 
 const defaultState = {
     currentUser: null,
     bookLists: [],
     users: [],
+    activeItem: ""
 }
 
 function userReducer(state = defaultState, action) {

@@ -7,15 +7,16 @@ import {
     REMOVE_BOOK_LIST,
     SET_CURRENT_USER,
     LOG_OUT,
-    FETCH_USERS
+    FETCH_USERS,
 } from './types'
 
-function fetchSearchedBooks({ search, type }) {
+function fetchSearchedBooks({ search, type, index }) {
     return function(dispatch) {
         fetch("http://localhost:3001/api/v1/search", {
             headers: {
-                "Search-Term": `${search}`,
-                "Search-Type": `${type}`,
+                "Search-Term": search,
+                "Search-Type": type,
+                "Start-Index": index,
                 "Authorization": `Bearer ${localStorage.token}`
             }
         })
@@ -29,7 +30,8 @@ function fetchSearchedBooks({ search, type }) {
                     type: FETCH_SEARCHED_BOOKS,
                     payload: {
                         totalItems: response.totalItems,
-                        searchedBooks: response.books
+                        searchedBooks: response.books,
+                        more: false
                     }
                 })
             }
