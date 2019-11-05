@@ -1,8 +1,14 @@
 import React from 'react'
+import Loader from './Loader'
+import Loading from './Loading'
 
 const Homepage = () => {
     return (
-        <h1>This is the homepage</h1>
+        <div>
+            <h1>This is the homepage</h1>
+            <Loading />
+            {/* <Loader /> */}
+        </div>
     )
 }
 

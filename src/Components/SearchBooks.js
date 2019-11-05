@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { fetchSearchedBooks } from '../actions'
+import { fetchSearchedBooks, setLoading } from '../actions'
 
 class SearchBooks extends React.Component {
     state = {
@@ -17,6 +17,7 @@ class SearchBooks extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
+        this.props.setLoading()
         this.props.fetchSearchedBooks(this.state)
     }
 
@@ -76,4 +77,4 @@ class SearchBooks extends React.Component {
     }
 }
 
-export default connect(null, { fetchSearchedBooks })(SearchBooks)
+export default connect(null, { fetchSearchedBooks, setLoading })(SearchBooks)

@@ -8,6 +8,7 @@ import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import BookListContainer from './BookListContainer'
 import withAuth from '../withAuth'
+import Loading from '../components/Loading'
 
 class BookContainer extends React.Component {
     state = {
@@ -79,9 +80,19 @@ class BookContainer extends React.Component {
                 }} />
                 <Route path="/search" render={() => {
                     return (
-                        <div>
-                            {this.props.searchedBooks.map(book => <BookPreview key={book.volume_id} {...book} />)}
-                        </div>
+                            // <div>
+                            //     {this.props.searchedBooks.map(book => <BookPreview key={book.volume_id} {...book} />)}
+                            // </div>
+                        <>
+                            {this.props.loading
+                            ?
+                            <Loading />
+                            :
+                            <div>
+                                {this.props.searchedBooks.map(book => <BookPreview key={book.volume_id} {...book} />)}
+                            </div>
+                            }
+                        </>
                     )
                 }} />
             </Switch>
@@ -93,7 +104,8 @@ function mapStateToProps(state) {
     console.log(state)
     return {
         searchedBooks: state.booksReducer.searchedBooks,
-        bookLists: state.userReducer.bookLists
+        bookLists: state.userReducer.bookLists,
+        loading: state.booksReducer.loading
     }
 }
 

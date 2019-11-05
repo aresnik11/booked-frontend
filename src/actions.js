@@ -1,5 +1,6 @@
 import {
     FETCH_SEARCHED_BOOKS,
+    SET_LOADING,
     ADD_BOOK_LIST,
     ADD_BOOK_LIST_BOOK,
     REMOVE_BOOK_LIST_BOOK,
@@ -33,6 +34,12 @@ function fetchSearchedBooks({ search, type }) {
                 })
             }
         })
+    }
+}
+
+function setLoading() {
+    return {
+        type: SET_LOADING
     }
 }
 
@@ -189,6 +196,7 @@ function fetchUsers(users) {
 
 export {
     fetchSearchedBooks,
+    setLoading,
     addBookList,
     addBookListBook,
     removeBookListBook,

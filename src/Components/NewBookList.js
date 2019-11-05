@@ -16,6 +16,9 @@ class NewBookList extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault()
         this.props.addBookList(this.state)
+        this.setState({
+            name: ""
+        })
     }
 
     render() {

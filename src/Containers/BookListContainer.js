@@ -9,6 +9,7 @@ import ShareBookList from '../components/ShareBookList'
 import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import withAuth from '../withAuth'
+import Loader from '../components/Loader'
 
 class BookListContainer extends React.Component {
     state = {
@@ -88,7 +89,8 @@ class BookListContainer extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        bookLists: state.userReducer.bookLists
+        bookLists: state.userReducer.bookLists,
+        loading: state.userReducer.loading
     }
 }
 

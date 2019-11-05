@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import Loading from './components/Loading'
 
 function withAuth(MyComponent) {
     class AuthHOC extends React.Component {
@@ -15,9 +16,7 @@ function withAuth(MyComponent) {
             else {
                 // if there isn't, check for a token. its presence indicates that the user is in fact logged in and the fetch from your componentDidMount is still running, so display a loader, otherwise redirect to login page
                 if (localStorage.token) {
-                    return (
-                        <div>Loading...</div>
-                    )
+                    return <Loading />
                 }
                 else {
                     return (

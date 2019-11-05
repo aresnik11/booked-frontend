@@ -11,7 +11,7 @@ import {
 const defaultState = {
     currentUser: null,
     bookLists: [],
-    users: []
+    users: [],
 }
 
 function userReducer(state = defaultState, action) {

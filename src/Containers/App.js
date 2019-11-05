@@ -1,5 +1,9 @@
 import React from 'react';
-import '../App.css';
+import '../css/App.css';
+// import '../css/Loader.scss'
+import '../css/Loading.scss'
+import 'semantic-ui-css/semantic.min.css';
+import '../css/Book.css'
 import Header from '../components/Header'
 import SearchBooksContainer from './SearchBooksContainer';
 import Profile from '../components/Profile'
