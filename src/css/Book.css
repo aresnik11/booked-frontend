@@ -1,4 +1,11 @@
 /* https://codepen.io/fivera/pen/rHigj */
+
+/* my changes to make images fit on the book cover */
+.hardcover_front img {
+    height: 100%;
+    width: 100%;
+}
+
 ::before,
 ::after {
 	content: "";
