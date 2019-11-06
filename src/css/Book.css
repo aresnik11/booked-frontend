@@ -60,11 +60,11 @@ a {
 }
 
 .align > li {
-	width: 500px;
-	min-height: 300px;
+	/* width: 500px; */
+	/* min-height: 300px; */
 	display: inline-block;
-	margin: 30px 20px 30px 30px;
-	padding: 0 0 0 60px;
+	/* margin: 30px 20px 30px 30px; */
+	/* padding: 0 0 0 60px; */
 	vertical-align: top;
 }
 
@@ -591,23 +591,23 @@ Table of Contents
 
 .yellow {
 	background-color: #f1c40f;
-	background-image: -webkit-linear-gradient(top, #f1c40f 58%, #e7ba07 0%);
-	background-image: -moz-linear-gradient(top, #f1c40f 58%, #e7ba07 0%);
-	background-image: linear-gradient(top, #f1c40f 58%, #e7ba07 0%);
+	background-image: -webkit-linear-gradient(to top, #f1c40f 58%, #e7ba07 0%);
+	background-image: -moz-linear-gradient(to top, #f1c40f 58%, #e7ba07 0%);
+	background-image: linear-gradient(to top, #f1c40f 58%, #e7ba07 0%);
 }
 
 .blue {
 	background-color: #3498db;
-	background-image: -webkit-linear-gradient(top, #3498db 58%, #2a90d4 0%);
-	background-image: -moz-linear-gradient(top, #3498db 58%, #2a90d4 0%);
-	background-image: linear-gradient(top, #3498db 58%, #2a90d4 0%);
+	background-image: -webkit-linear-gradient(to top, #3498db 58%, #2a90d4 0%);
+	background-image: -moz-linear-gradient(to top, #3498db 58%, #2a90d4 0%);
+	background-image: linear-gradient(to top, #3498db 58%, #2a90d4 0%);
 }
 
 .grey {
 	background-color: #f8e9d1;
-	background-image: -webkit-linear-gradient(top, #f8e9d1 58%, #e7d5b7 0%);
-	background-image: -moz-linear-gradient(top, #f8e9d1 58%, #e7d5b7 0%);
-	background-image: linear-gradient(top, #f8e9d1 58%, #e7d5b7 0%);
+	background-image: -webkit-linear-gradient(to top, #f8e9d1 58%, #e7d5b7 0%);
+	background-image: -moz-linear-gradient(to top, #f8e9d1 58%, #e7d5b7 0%);
+	background-image: linear-gradient(to top, #f8e9d1 58%, #e7d5b7 0%);
 }
 
 /* Basic ribbon */

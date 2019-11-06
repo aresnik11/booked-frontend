@@ -1,5 +1,4 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
 import Loading from '../components/Loading'
 import BookPreview from '../components/BookPreview'
 import { connect } from 'react-redux'
@@ -33,39 +32,31 @@ class SearchBooksContainer extends React.Component {
 
     render() {
         return (
-            <Switch>
-                <Route path="/search" render={() => {
-                    return (
-                        <>
-                            {this.props.loading
-                            ?
-                            <Loading />
-                            :
-                            <div>
-                                {/* only show number of search results if totalItems isn't null (initial value before search) */}
-                                {this.props.totalItems !== null ? <h3>{this.props.totalItems} search results</h3> : null}
-                                <div>
-                                    {this.props.searchedBooks.map((book, index) => <BookPreview key={index} {...book} />)}
-                                </div>
-                            </div>
-
-                            }
-                        </>
-                    )
-                }} />
-            </Switch>
+            <>
+                {this.props.loading
+                ?
+                <Loading />
+                :
+                <div>
+                    {/* only show number of search results if totalItems isn't null (initial value before search) */}
+                    {this.props.totalItems !== null ? <h3>{this.props.totalItems} search results</h3> : null}
+                    <div>
+                        {this.props.searchedBooks.map((book, index) => <BookPreview key={index} {...book} />)}
+                    </div>
+                </div>}
+            </>
         )
     }
 }
 
 function mapStateToProps(state) {
     return {
-        searchedBooks: state.booksReducer.searchedBooks,
-        totalItems: state.booksReducer.totalItems,
-        searchTerm: state.booksReducer.searchTerm,
-        searchType: state.booksReducer.searchType,
-        startIndex: state.booksReducer.startIndex,
-        loading: state.booksReducer.loading
+        searchedBooks: state.searchBooksReducer.searchedBooks,
+        totalItems: state.searchBooksReducer.totalItems,
+        searchTerm: state.searchBooksReducer.searchTerm,
+        searchType: state.searchBooksReducer.searchType,
+        startIndex: state.searchBooksReducer.startIndex,
+        loading: state.searchBooksReducer.loading
     }
 }
 

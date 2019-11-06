@@ -6,11 +6,11 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
-import booksReducer from './reducers/booksReducer'
+import searchBooksReducer from './reducers/searchBooksReducer'
 import userReducer from './reducers/userReducer'
 import thunk from 'redux-thunk'
 
-const rootReducer = combineReducers({booksReducer: booksReducer, userReducer: userReducer})
+const rootReducer = combineReducers({searchBooksReducer: searchBooksReducer, userReducer: userReducer})
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
 

@@ -80,8 +80,8 @@ class SearchBooks extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        searchTerm: state.booksReducer.searchTerm,
-        searchType: state.booksReducer.searchType
+        searchTerm: state.searchBooksReducer.searchTerm,
+        searchType: state.searchBooksReducer.searchType
     }
 }
 

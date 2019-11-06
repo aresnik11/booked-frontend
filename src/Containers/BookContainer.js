@@ -83,9 +83,8 @@ class BookContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
-    console.log(state)
     return {
-        searchedBooks: state.booksReducer.searchedBooks
+        searchedBooks: state.searchBooksReducer.searchedBooks
     }
 }
 

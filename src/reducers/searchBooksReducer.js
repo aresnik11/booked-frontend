@@ -12,7 +12,7 @@ const defaultState = {
     startIndex: 0
 }
 
-function booksReducer(state = defaultState, action) {
+function searchBooksReducer(state = defaultState, action) {
     switch(action.type) {
         case FETCH_SEARCHED_BOOKS:
             let newSearchedBooks
@@ -49,4 +49,4 @@ function booksReducer(state = defaultState, action) {
     }
 }
 
-export default booksReducer
+export default searchBooksReducer
