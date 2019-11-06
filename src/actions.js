@@ -14,10 +14,10 @@ function fetchSearchedBooks({ search, type, index }) {
     return function(dispatch) {
         fetch("http://localhost:3001/api/v1/search", {
             headers: {
+                "Authorization": `Bearer ${localStorage.token}`,
                 "Search-Term": search,
                 "Search-Type": type,
-                "Start-Index": index,
-                "Authorization": `Bearer ${localStorage.token}`
+                "Start-Index": index
             }
         })
         .then(resp => resp.json())
@@ -31,7 +31,9 @@ function fetchSearchedBooks({ search, type, index }) {
                     payload: {
                         totalItems: response.totalItems,
                         searchedBooks: response.books,
-                        more: false
+                        searchTerm: search,
+                        searchType: type,
+                        startIndex: index
                     }
                 })
             }
@@ -104,10 +106,13 @@ function addBookListBook(book, bookListId) {
 }
 
 function removeBookListBook(bookId, bookListId) {
+    console.log(bookId, bookListId)
     return function(dispatch) {
         fetch("http://localhost:3001/api/v1/book_list_books", {
             method: "DELETE",
             headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
                 "Authorization": `Bearer ${localStorage.token}`
             },
             body: JSON.stringify({

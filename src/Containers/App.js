@@ -1,11 +1,10 @@
 import React from 'react';
 import '../css/App.css';
-// import '../css/Loader.scss'
 import '../css/Loading.scss'
 import 'semantic-ui-css/semantic.min.css';
 import '../css/Book.css'
 import Header from '../components/Header'
-import SearchBooksContainer from './SearchBooksContainer';
+import SearchContainer from './SearchContainer'
 import Profile from '../components/Profile'
 import Homepage from '../components/Homepage'
 import Error from '../components/Error'
@@ -47,7 +46,7 @@ class App extends React.Component {
           <Switch>
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route path="/search" component={SearchBooksContainer} />
+            <Route path="/search" component={SearchContainer} />
             <Route path="/profile" component={Profile} />
             <Route path="/booklists" component={BookListContainer} />
             <Route path="/books" component={BookContainer} />

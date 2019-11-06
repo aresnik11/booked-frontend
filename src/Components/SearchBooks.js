@@ -5,8 +5,8 @@ import { fetchSearchedBooks, setLoading } from '../actions'
 
 class SearchBooks extends React.Component {
     state = {
-        search: "",
-        type: "",
+        search: this.props.searchTerm,
+        type: this.props.searchType,
         index: 0
     }
 
@@ -78,4 +78,11 @@ class SearchBooks extends React.Component {
     }
 }
 
-export default connect(null, { fetchSearchedBooks, setLoading })(SearchBooks)
+function mapStateToProps(state) {
+    return {
+        searchTerm: state.booksReducer.searchTerm,
+        searchType: state.booksReducer.searchType
+    }
+}
+
+export default connect(mapStateToProps, { fetchSearchedBooks, setLoading })(SearchBooks)
