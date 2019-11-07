@@ -3,6 +3,7 @@ import '../css/App.css';
 import '../css/Loading.scss'
 import 'semantic-ui-css/semantic.min.css';
 import '../css/Book.css'
+import '../css/BookShelf.css'
 import Header from '../components/Header'
 import SearchContainer from './SearchContainer'
 import Profile from '../components/Profile'

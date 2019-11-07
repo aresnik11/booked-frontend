@@ -69,7 +69,7 @@ class BookContainer extends React.Component {
                     const filteredBooks = this.props.bookListObj.books.filter(book => book.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
                     return (
                         <div>
-                            <Search searchTerm={this.state.searchTerm} searchHandler={this.searchBook} />
+                            <Search type="Books" searchTerm={this.state.searchTerm} searchHandler={this.searchBook} />
                             <div>
                                 {/* passing books for this booklist in props from BookListContainer component */}
                                 {filteredBooks.map(book => <BookPreview key={book.id} {...book} bookListObj={this.props.bookListObj} />)}

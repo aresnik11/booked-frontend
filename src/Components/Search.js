@@ -1,12 +1,20 @@
 import React from 'react'
+import { Form } from 'semantic-ui-react'
 
 const Search = (props) => {
     return (
-        <form>
-            <label>Search:</label>
-            <br/>
-            <input type="search" name="search" placeholder="Search..." value={props.searchTerm} onChange={props.searchHandler} />
-        </form>
+        <div>
+            <h4>Search {props.type}</h4>
+            <Form className="small-input">
+                <Form.Input
+                    type="search"
+                    name="search"
+                    placeholder="Search..."
+                    value={props.searchTerm}
+                    onChange={props.searchHandler}
+                />
+            </Form>
+        </div>
     )
 }
 

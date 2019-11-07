@@ -48,7 +48,7 @@ class AddToBookList extends React.Component {
                     {/* creating an option tag for each bookList */}
                     {this.props.bookLists.map(bookList => <option key={bookList.id} value={bookList.id}>{bookList.name}</option>)}
                 </select>
-                <br/><br/>
+                <br/>
                 <input type="submit" value="Add to Book List" />
             </form>
         )

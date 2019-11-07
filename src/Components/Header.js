@@ -16,7 +16,6 @@ class Header extends React.Component {
     }
 
     handleLogOut = () => {
-        // this.handleItemClick()
         this.props.logOut()
         localStorage.removeItem("token")
         this.props.history.push("/login")
@@ -32,6 +31,13 @@ class Header extends React.Component {
                     </Menu.Item> */}
                     <Menu.Item
                         as={ Link }
+                        to="/"
+                        name="home"
+                        active={this.state.activeItem === "home"}
+                        onClick={this.handleItemClick}
+                    />
+                    <Menu.Item
+                        as={ Link }
                         to="/profile"
                         name="profile"
                         active={this.state.activeItem === "profile"}
@@ -40,8 +46,8 @@ class Header extends React.Component {
                     <Menu.Item
                         as={ Link }
                         to="/booklists"
-                        name="booklists"
-                        active={this.state.activeItem === "booklists"}
+                        name="book lists"
+                        active={this.state.activeItem === "book lists"}
                         onClick={this.handleItemClick}
                     />
                     <Menu.Item
@@ -55,8 +61,8 @@ class Header extends React.Component {
                         {localStorage.token
                         ?
                         <Menu.Item
-                            name="logout"
-                            active={this.state.activeItem === "logout"}
+                            name="log out"
+                            active={this.state.activeItem === "log out"}
                             onClick={this.handleLogOut}
                         />
                         :
@@ -64,15 +70,15 @@ class Header extends React.Component {
                             <Menu.Item
                                 as={ Link }
                                 to="/login"
-                                name="login"
-                                active={this.state.activeItem === "login"}
+                                name="log in"
+                                active={this.state.activeItem === "log in"}
                                 onClick={this.handleItemClick}
                             />
                             <Menu.Item
                                 as={ Link }
                                 to="/signup"
-                                name="signup"
-                                active={this.state.activeItem === "signup"}
+                                name="sign up"
+                                active={this.state.activeItem === "sign up"}
                                 onClick={this.handleItemClick}
                             />
                         </>

@@ -34,7 +34,6 @@ const BookPreview = (props) => {
                                         state: { bookListObj: props.bookListObj }
                                     }}>
                                         <button className="btn">View Book</button>
-                                        {/* <button className="btn" onClick={() => props.removeBookListBook(props.id, props.bookListObj.id)}>Remove from book list</button> */}
                                     </Link>
                                     :
                                     <Link to={{
@@ -63,6 +62,11 @@ const BookPreview = (props) => {
                     </li>
                 </ul>
             </div>
+            {/* if there is a bookListObj prop, link to book with id (from book list) and pass bookListObj in state, otherwise link to book with volume_id (from search) */}
+            {props.bookListObj
+            ?
+            <button className="btn" onClick={() => props.removeBookListBook(props.id, props.bookListObj.id)}>Remove from book list</button>
+            : null}
         </div>
     )
 }

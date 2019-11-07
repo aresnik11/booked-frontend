@@ -9,6 +9,7 @@ import ShareBookList from '../components/ShareBookList'
 import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import withAuth from '../withAuth'
+import { Grid, Card, Segment } from 'semantic-ui-react'
 
 class BookListContainer extends React.Component {
     state = {
@@ -34,7 +35,7 @@ class BookListContainer extends React.Component {
                             return (
                                 <div>
                                     <BookListShow {...bookListObj} {...routerProps} />
-                                    <br/>
+                                    <br/><br/>
                                     <ShareBookList {...bookListObj} />
                                     <br/><br/>
                                     <BookContainer bookListObj={bookListObj} />
@@ -50,12 +51,15 @@ class BookListContainer extends React.Component {
                         const filteredBookLists = this.props.bookLists.filter(bookList => bookList.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
                         return (
                             <div>
+                                <h1>My Book Lists</h1>
+                                <br/>
                                 <NewBookList />
                                 <br/><br/>
-                                <Search searchTerm={this.state.searchTerm} searchHandler={this.searchBookList} />
-                                <div>
+                                <Search type="Book Lists" searchTerm={this.state.searchTerm} searchHandler={this.searchBookList} />
+                                <br/><br/>
+                                <Card.Group centered>
                                     {filteredBookLists.map(bookList => <BookListPreview key={bookList.id} {...bookList} />)}
-                                </div>
+                                </Card.Group>
                             </div>
                         )
                     }} />

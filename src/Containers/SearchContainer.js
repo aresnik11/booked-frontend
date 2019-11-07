@@ -7,7 +7,6 @@ class SearchContainer extends React.Component {
     render() {
         return (
             <div>
-                <h1>Search Books Container</h1>
                 <SearchBooks />
                 <br/>
                 <SearchBooksContainer />

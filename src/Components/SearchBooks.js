@@ -2,6 +2,7 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchSearchedBooks, setLoading } from '../actions'
+import { Form } from 'semantic-ui-react'
 
 class SearchBooks extends React.Component {
     state = {
@@ -10,9 +11,12 @@ class SearchBooks extends React.Component {
         index: 0
     }
 
-    handleChange = (e) => {
+    //react semantic passes all props from react semantic component as an object as the second argument to onChange
+    //destructuring to pull out the name and value keys
+    //need this here since the radio buttons e.target is technically the label
+    handleChange = (e, { value, name }) => {
         this.setState({
-            [e.target.name]: e.target.value
+            [name]: value
         })
     }
 
@@ -25,54 +29,48 @@ class SearchBooks extends React.Component {
     render() {
         return (
             <div>
-                <h4>Search Books</h4>
-                <form onSubmit={this.handleSubmit} >
-                    <input
-                        type="search"
+                <h1>Search Books</h1>
+                <Form onSubmit={this.handleSubmit} className="small-input">
+                    <Form.Input
                         name="search"
+                        type="search"
                         placeholder="Search..."
                         value={this.state.search}
                         onChange={this.handleChange}
                     />
-                    <br/><br/>
-                    <input
-                        type="radio"
-                        name="type"
-                        value=""
-                        checked={this.state.type === ""}
-                        onChange={this.handleChange}
-                    />
-                    <label>All</label>
-                    &nbsp;&nbsp;&nbsp;
-                    <input
-                        type="radio"
-                        name="type"
-                        value="intitle:"
-                        checked={this.state.type === "intitle:"}
-                        onChange={this.handleChange}
-                    />
-                    <label>Title</label>
-                    &nbsp;&nbsp;&nbsp;
-                    <input
-                        type="radio"
-                        name="type"
-                        value="inauthor:"
-                        checked={this.state.type === "inauthor:"}
-                        onChange={this.handleChange}
-                    />
-                    <label>Author</label>
-                    &nbsp;&nbsp;&nbsp;
-                    <input
-                        type="radio"
-                        name="type"
-                        value="subject:"
-                        checked={this.state.type === "subject:"}
-                        onChange={this.handleChange}
-                    />
-                    <label>Genre</label>
-                    <br/><br/>
-                    <input type="submit" value="Search" />
-                </form>
+                    <Form.Group inline stackable>
+                        <Form.Radio
+                            label='All'
+                            name="type"
+                            value=''
+                            checked={this.state.type === ""}
+                            onChange={this.handleChange}
+                        />
+                        <Form.Radio
+                            label='Title'
+                            name="type"
+                            value='intitle:'
+                            checked={this.state.type === "intitle:"}
+                            onChange={this.handleChange}
+                        />
+                        <Form.Radio
+                            label='Author'
+                            name="type"
+                            value='inauthor:'
+                            checked={this.state.type === "inauthor:"}
+                            onChange={this.handleChange}
+                        />
+                        <Form.Radio
+                            label='Genre'
+                            name="type"
+                            value='subject:'
+                            checked={this.state.type === "subject:"}
+                            onChange={this.handleChange}
+                        />
+                    </Form.Group>
+                    <br/>
+                    <Form.Button basic content="Search" />
+                </Form>
             </div>
         )
     }

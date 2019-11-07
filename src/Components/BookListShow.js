@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { removeBookList } from '../actions'
+import { Button } from 'semantic-ui-react'
 
 const BookListShow = (props) => {
     const handleBookListRemove = () => {
@@ -14,7 +15,7 @@ const BookListShow = (props) => {
     return (
         <div>
             <h1>{props.name}</h1>
-            <button onClick={handleBookListRemove}>Delete book list</button>
+            <Button basic onClick={handleBookListRemove} content="Delete Book List" />
         </div>
     )
 }

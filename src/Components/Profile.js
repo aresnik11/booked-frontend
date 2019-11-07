@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { removeAccount } from '../actions'
 import withAuth from '../withAuth'
+import { Button } from 'semantic-ui-react'
 
 const Profile = (props) => {
     const handleAccountRemove = () => {
@@ -18,10 +19,10 @@ const Profile = (props) => {
         <div>
             <h1>Profile page</h1>
             <Link to="/booklists">
-                <button>Book Lists</button>
+                <Button basic content="Book Lists" />
             </Link>
             <br/><br/>
-            <button onClick={handleAccountRemove}>Delete account</button>
+            <Button basic onClick={handleAccountRemove} content="Delete Account" />
         </div>
     )
 }

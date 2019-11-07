@@ -106,7 +106,6 @@ function addBookListBook(book, bookListId) {
 }
 
 function removeBookListBook(bookId, bookListId) {
-    console.log(bookId, bookListId)
     return function(dispatch) {
         fetch("http://localhost:3001/api/v1/book_list_books", {
             method: "DELETE",

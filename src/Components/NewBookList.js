@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { addBookList } from '../actions'
+import { Form } from 'semantic-ui-react'
 
 class NewBookList extends React.Component {
     state = {
@@ -23,13 +24,19 @@ class NewBookList extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <label>New book list:</label>
-                <br/>
-                <input type="text" name="name" value={this.state.name} onChange={this.handleChange} />
-                <br/><br/>
-                <input type="submit" value="Create New Book List" />
-            </form>
+            <div>
+                <h4>Add New Book List</h4>
+                <Form onSubmit={this.handleSubmit} className="small-input">
+                    <Form.Input
+                        name="name"
+                        placeholder="Book List Name"
+                        value={this.state.name}
+                        onChange={this.handleChange}
+                    />
+                    <Form.Button basic content="Add" />
+                </Form>
+            </div>
+            
         )
     }
 }

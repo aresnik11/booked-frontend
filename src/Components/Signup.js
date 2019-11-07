@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { setCurrentUser } from '../actions'
+import { Form } from 'semantic-ui-react'
 
 class Signup extends React.Component {
     state = {
@@ -39,15 +40,25 @@ class Signup extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <label>Signup</label>
-                <br/>
-                <input type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.handleChange} />
-                <br/>
-                <input type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange} />
-                <br/><br/>
-                <input type="submit" value="Sign Up" />
-            </form>
+            <div>
+                <h1>Sign Up</h1>
+                <Form onSubmit={this.handleSubmit} className="small-input">
+                    <Form.Input
+                        name="username"
+                        placeholder="Username"
+                        value={this.state.username}
+                        onChange={this.handleChange}
+                    />
+                    <Form.Input
+                        name="password"
+                        type="password"
+                        placeholder="Password"
+                        value={this.state.password}
+                        onChange={this.handleChange}
+                    />
+                    <Form.Button basic content="Sign Up" />
+                </Form>
+            </div>
         )
     }
 }

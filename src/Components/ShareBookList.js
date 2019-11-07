@@ -1,10 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { fetchUsers } from '../actions'
+import { Form } from 'semantic-ui-react'
 
 class ShareBookList extends React.Component {
     state = {
-        value: this.props.users[0] ? this.props.users[0].id : "",
+        // value: this.props.users[0] ? this.props.users[0].id : "",
+        value: ""
     }
 
     componentDidMount() {
@@ -19,9 +21,9 @@ class ShareBookList extends React.Component {
         })
     }
 
-    handleChange = (e) => {
+    handleChange = (e, { value }) => {
         this.setState({
-            value: e.target.value
+            value: value
         })
     }
 
@@ -48,21 +50,27 @@ class ShareBookList extends React.Component {
         .then(resp => resp.json())
         .then(response => {
             console.log(response)
+            alert("book list shared!")
         })
     }
     
     render() {
+        // creating an array of objects for each user that will be an option in the dropdown
+        const options = this.props.users.map(user => {
+            return { key: user.id, value: user.id, text: user.username }
+        })
         return (
-            <form onSubmit={this.handleSubmit}>
-                <label>Select a user:</label>
-                <br/>
-                <select value={this.state.value} onChange={this.handleChange}>
-                    {/* creating an option tag for each user */}
-                    {this.props.users.map(user => <option key={user.id} value={user.id}>{user.username}</option>)}
-                </select>
-                <br/><br/>
-                <input type="submit" value="Share Book List" />
-            </form>
+            <div>
+                <h4>Share Book List</h4>
+                <Form onSubmit={this.handleSubmit} className="small-input">
+                    <Form.Select
+                        placeholder="Select a user"
+                        options={options}
+                        onChange={this.handleChange}
+                    />
+                    <Form.Button basic content="Share" />
+                </Form>
+            </div>
         )
     }
 }
