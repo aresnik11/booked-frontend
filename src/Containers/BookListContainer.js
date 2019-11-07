@@ -9,7 +9,7 @@ import ShareBookList from '../components/ShareBookList'
 import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import withAuth from '../withAuth'
-import { Grid, Card, Segment } from 'semantic-ui-react'
+import { Card } from 'semantic-ui-react'
 
 class BookListContainer extends React.Component {
     state = {

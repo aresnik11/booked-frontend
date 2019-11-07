@@ -47,28 +47,28 @@
             transform: scale(1.05);
   }
   
-  .bl-book-green {
-    background-color: darkgreen;
-    border-left: 2px solid #007800;
-    border-right: 2px solid #005000;
+  .bl-book-dark-grey {
+    background-color: #4f4d4d;
+    border-left: 2px solid #575656;
+    border-right: 2px solid #363636;
   }
   
   .bl-book-blue {
-    background-color: #0C347D;
-    border-left: 2px solid #0e3c90;
-    border-right: 2px solid #0a2c6a;
+    background-color: #172d55;
+    border-left: 2px solid #1e3c72;
+    border-right: 2px solid #111f3a;
   }
   
-  .bl-book-umber {
-    background-color: #54290C;
-    border-left: 2px solid #66320f;
-    border-right: 2px solid #422009;
+  .bl-book-light-blue {
+    background-color: #4c7695;
+    border-left: 2px solid #5d8bad;
+    border-right: 2px solid #365b76;
   }
   
-  .bl-book-springer {
-    background-color: #EDED80;
-    border-left: 2px solid #f0f092;
-    border-right: 2px solid #eaea6e;
+  .bl-book-grey {
+    background-color: #999fa5;
+    border-left: 2px solid #bec2c6;
+    border-right: 2px solid #6f7376;
     color: black;
   }
   
@@ -82,7 +82,7 @@
     width: 170px;
   }
   
-  .bl-book h3 {
+  /* .bl-book h3 {
     padding: 0;
     font-size: 0.7em;
     -webkit-transform-origin: 0 0;
@@ -90,5 +90,5 @@
     -webkit-transform: rotate(0.25turn) translateY(-15px) translateX(-20px);
             transform: rotate(0.25turn) translateY(-15px) translateX(-20px);
     width: 150px;
-  }
+  } */
   

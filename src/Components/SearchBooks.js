@@ -1,5 +1,4 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchSearchedBooks, setLoading } from '../actions'
 import { Form } from 'semantic-ui-react'
@@ -38,7 +37,7 @@ class SearchBooks extends React.Component {
                         value={this.state.search}
                         onChange={this.handleChange}
                     />
-                    <Form.Group inline stackable>
+                    <Form.Group inline stackable="true">
                         <Form.Radio
                             label='All'
                             name="type"

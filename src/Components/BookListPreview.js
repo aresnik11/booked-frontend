@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { removeBookList, removeBookListBook } from '../actions'
-import { Button, Grid, Card } from 'semantic-ui-react'
+import { Button, Card } from 'semantic-ui-react'
 
 const BookListPreview = (props) => {
     const handleBookListRemove = () => {
@@ -12,16 +12,41 @@ const BookListPreview = (props) => {
         }
     }
 
+    //returns a random number between 0 and n
+    const getRandomNumber = (n) => {
+        return Math.floor(Math.random() * n)
+    }
+
+    //randomizes class names so books on book shelf have different colors by random
+    const getRandomColorClassName = () => {
+        const classNameArray = ["bl-book bl-book-grey", "bl-book bl-book-blue", "bl-book bl-book-dark-grey", "bl-book bl-book-light-blue"]
+        return classNameArray[getRandomNumber(classNameArray.length)]
+    }
+
     const makeBookShelfBooks = () => {
         //book shelf code from https://codepen.io/kzf/pen/vEYVmL
-        //if there are books in the booklist, make 6 books
+        //if there are books in the booklist, make 5 books
         if (props.books.length) {
-            return props.books.slice(0,6).map(book => {
-                return (
-                    <div key={book.id} className="bl-book bl-book-green">
-                        <h2>{book.title}</h2>
-                    </div>
-                )
+            const randomNum = getRandomNumber(5)
+            return props.books.slice(0,5).map((book, index) => {
+                //if this index matches our random number, make a tilted book with a random color and only show first 53 chars of title
+                if (index === randomNum) {
+                    return (
+                        <div key={book.id} className="bl-book-tilted">
+                            <div className={getRandomColorClassName()}>
+                                <h2>{book.title.slice(0,53)}</h2>
+                            </div>
+                        </div>
+                    )
+                }
+                //otherwise make a regular book with a random color and only show first 53 chars of title
+                else {
+                    return (
+                        <div key={book.id} className={getRandomColorClassName()}>
+                            <h2>{book.title.slice(0,53)}</h2>
+                        </div>
+                    )
+                }
             })
         }
         //otherwise, make an empty book so bookshelf renders
