@@ -1,6 +1,7 @@
 import React from 'react'
 import BookContainer from './BookContainer'
 import BookListPreview from '../components/BookListPreview'
+import BookBookLists from '../components/BookBookLists'
 import NewBookList from '../components/NewBookList'
 import BookListShow from '../components/BookListShow'
 import Search from '../components/Search'
@@ -9,7 +10,7 @@ import ShareBookList from '../components/ShareBookList'
 import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import withAuth from '../withAuth'
-import { Card } from 'semantic-ui-react'
+import { Card, Grid } from 'semantic-ui-react'
 
 class BookListContainer extends React.Component {
     state = {
@@ -57,9 +58,9 @@ class BookListContainer extends React.Component {
                                 <br/><br/>
                                 <Search type="Book Lists" searchTerm={this.state.searchTerm} searchHandler={this.searchBookList} />
                                 <br/><br/>
-                                <Card.Group centered>
+                                <Grid centered>
                                     {filteredBookLists.map(bookList => <BookListPreview key={bookList.id} {...bookList} />)}
-                                </Card.Group>
+                                </Grid>
                             </div>
                         )
                     }} />
@@ -79,7 +80,7 @@ class BookListContainer extends React.Component {
                             <div>
                                 <h4>Book lists</h4>
                                 <div>
-                                    {wantedBookLists.map(bookList => <BookListPreview key={bookList.id} {...bookList} bookId={bookId} />)}
+                                    {wantedBookLists.map(bookList => <BookBookLists key={bookList.id} {...bookList} bookId={bookId} />)}
                                 </div>
                             </div>
                         )

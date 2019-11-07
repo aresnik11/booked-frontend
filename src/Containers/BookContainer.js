@@ -8,6 +8,7 @@ import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import BookListContainer from './BookListContainer'
 import withAuth from '../withAuth'
+import { Grid } from 'semantic-ui-react'
 
 class BookContainer extends React.Component {
     state = {
@@ -70,9 +71,12 @@ class BookContainer extends React.Component {
                     return (
                         <div>
                             <Search type="Books" searchTerm={this.state.searchTerm} searchHandler={this.searchBook} />
+                            <br/><br/>
                             <div>
-                                {/* passing books for this booklist in props from BookListContainer component */}
-                                {filteredBooks.map(book => <BookPreview key={book.id} {...book} bookListObj={this.props.bookListObj} />)}
+                                <Grid centered>
+                                    {/* passing books for this booklist in props from BookListContainer component */}
+                                    {filteredBooks.map(book => <BookPreview key={book.id} {...book} bookListObj={this.props.bookListObj} />)}
+                                </Grid>
                             </div>
                         </div>
                     )

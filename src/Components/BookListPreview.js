@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { removeBookList, removeBookListBook } from '../actions'
-import { Button, Card } from 'semantic-ui-react'
+import { removeBookList } from '../actions'
+import { Button } from 'semantic-ui-react'
 
 const BookListPreview = (props) => {
     const handleBookListRemove = () => {
@@ -59,21 +59,17 @@ const BookListPreview = (props) => {
     }
 
     return (
-        <Card>
+        <div className="bookshelf-container">
             <Link to={`/booklists/${props.id}`}>
-                <Card.Content header={props.name} />
-                <Card.Content className="bookshelf" description={makeBookShelfBooks()} />
+                <h3>{props.name}</h3>
+                <div className="bookshelf">
+                        {makeBookShelfBooks()}
+                </div>
             </Link>
-            <Card.Content extra>
-                {/* if there is a bookId prop, remove button should remove this book from the booklist clicked. if not, remove button should remove the booklist */}
-                {props.bookId
-                ?
-                <Button basic onClick={() => props.removeBookListBook(props.bookId, props.id)} content="Remove from Book List" />
-                :
-                <Button basic onClick={handleBookListRemove} content="Delete Book List" />}
-            </Card.Content>
-        </Card>
+            <br/>
+            <Button basic onClick={handleBookListRemove} content="Delete Book List" />
+        </div>
     )
 }
 
-export default connect(null, { removeBookList, removeBookListBook })(BookListPreview)
+export default connect(null, { removeBookList })(BookListPreview)

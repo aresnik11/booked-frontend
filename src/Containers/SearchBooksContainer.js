@@ -3,6 +3,7 @@ import Loading from '../components/Loading'
 import BookPreview from '../components/BookPreview'
 import { connect } from 'react-redux'
 import { fetchSearchedBooks } from '../actions'
+import { Grid } from 'semantic-ui-react'
 
 class SearchBooksContainer extends React.Component {
     renderMoreResults = () => {
@@ -40,9 +41,9 @@ class SearchBooksContainer extends React.Component {
                 <div>
                     {/* only show number of search results if totalItems isn't null (initial value before search) */}
                     {this.props.totalItems !== null ? <h3>{this.props.totalItems} search results</h3> : null}
-                    <div>
+                    <Grid centered>
                         {this.props.searchedBooks.map((book, index) => <BookPreview key={index} {...book} />)}
-                    </div>
+                    </Grid>
                 </div>}
             </>
         )

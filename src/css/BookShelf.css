@@ -7,13 +7,18 @@
     background-color: #AAACB5;
   } */
   
+  .bookshelf-container {
+    margin: 2%;
+  }
+
   .bookshelf {
     /* width: 100%; */
+    width: 255px;
     /* height: 100%; */
     margin: 0 auto;
     border: 10px #A87328 solid;
     overflow: hidden;
-    background-image: linear-gradient(#241909, #2c1e0b 220px, #b87e2c 220px, #b87e2c 222px, #A87328 222px, #A87328 228px, #986824 228px, #986824 230px);
+    background-image: linear-gradient(rgba(0,0,0,.95), rgba(0,0,0,.87) 220px, #b87e2c 220px, #b87e2c 222px, #A87328 222px, #A87328 228px, #986824 228px, #986824 230px);
     background-size: 10px 230px;
     /* box-shadow: 0px 1000px 0px 400px #7A7668; */
   }
