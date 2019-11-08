@@ -10,15 +10,7 @@ class ShareBookList extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:3001/api/v1/users", {
-            headers: {
-                "Authorization": `Bearer ${localStorage.token}`
-            }
-        })
-        .then(resp => resp.json())
-        .then(response => {
-            this.props.fetchUsers(response)
-        })
+        this.props.fetchUsers()
     }
 
     handleChange = (e, { value }) => {

@@ -12,6 +12,7 @@ import Error from '../components/Error'
 import { Route, Switch } from 'react-router-dom'
 import BookListContainer from './BookListContainer';
 import BookContainer from './BookContainer'
+import BookClubContainer from './BookClubContainer'
 import Login from '../components/Login'
 import Signup from '../components/Signup'
 import { connect } from 'react-redux'
@@ -47,10 +48,11 @@ class App extends React.Component {
           <Switch>
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route path="/search" component={SearchContainer} />
             <Route path="/profile" component={Profile} />
+            <Route path="/search" component={SearchContainer} />
             <Route path="/booklists" component={BookListContainer} />
             <Route path="/books" component={BookContainer} />
+            <Route path="/bookclubs" component={BookClubContainer} />
             <Route exact path="/" component={Homepage} />
             <Route component={Error} />
           </Switch>

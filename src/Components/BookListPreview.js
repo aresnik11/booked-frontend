@@ -63,7 +63,7 @@ const BookListPreview = (props) => {
             <Link to={`/booklists/${props.id}`}>
                 <h3>{props.name}</h3>
                 <div className="bookshelf">
-                        {makeBookShelfBooks()}
+                    {makeBookShelfBooks()}
                 </div>
             </Link>
             <br/>

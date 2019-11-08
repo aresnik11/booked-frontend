@@ -8,7 +8,13 @@ import {
     SET_CURRENT_USER,
     LOG_OUT,
     FETCH_USERS,
+    FETCH_BOOK_CLUBS,
+    ADD_BOOK_CLUB,
+    REMOVE_BOOK_CLUB,
+    ADD_MESSAGE
 } from './types'
+
+//searchBooksReducer
 
 function fetchSearchedBooks({ search, type, index }) {
     return function(dispatch) {
@@ -46,6 +52,8 @@ function setLoading() {
         type: SET_LOADING
     }
 }
+
+//userReducer
 
 function addBookList(newBookList) {
     return function(dispatch) {
@@ -193,10 +201,114 @@ function logOut() {
     }
 }
 
-function fetchUsers(users) {
-    return {
-        type: FETCH_USERS,
-        payload: users
+function fetchUsers() {
+    return function(dispatch) {
+        fetch("http://localhost:3001/api/v1/users", {
+            headers: {
+                "Authorization": `Bearer ${localStorage.token}`
+            }
+        })
+        .then(resp => resp.json())
+        .then(response => {
+            dispatch({
+                type: FETCH_USERS,
+                payload: response
+            })
+        })
+    }
+}
+
+//bookClubReducer
+
+function addBookClub(newBookClub) {
+    return function(dispatch) {
+        fetch("http://localhost:3001/api/v1/book_clubs", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Bearer ${localStorage.token}`
+            },
+            body: JSON.stringify(newBookClub)
+        })
+        .then(resp => resp.json())
+        .then(response => {
+            if (response.errors) {
+                alert(response.errors)
+            }
+            else {
+                dispatch({
+                    type: ADD_BOOK_CLUB,
+                    payload: response
+                })
+            }
+        })
+    }
+}
+
+function fetchBookClubs() {
+    return function(dispatch) {
+        fetch("http://localhost:3001/api/v1/book_clubs", {
+            headers: {
+                "Authorization": `Bearer ${localStorage.token}`
+            }
+        })
+        .then(resp => resp.json())
+        .then(response => {
+            dispatch({
+                type: FETCH_BOOK_CLUBS,
+                payload: response
+            })
+        })
+    }
+}
+
+function removeBookClub(bookClubId) {
+    return function(dispatch) {
+        fetch(`http://localhost:3001/api/v1/book_clubs/${bookClubId}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${localStorage.token}`
+            }
+        })
+        .then(resp => resp.json())
+        .then(response => {
+            if (response.errors) {
+                alert(response.errors)
+            }
+            else {
+                dispatch({
+                    type: REMOVE_BOOK_CLUB,
+                    payload: response
+                })
+            }
+        })
+    }
+}
+
+function addMessage(newMessage) {
+    return function(dispatch) {
+        fetch("http://localhost:3001/api/v1/messages", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Bearer ${localStorage.token}`
+            },
+            body: JSON.stringify(newMessage)
+        })
+        .then(resp => resp.json())
+        .then(response => {
+            if (response.errors) {
+                alert(response.errors)
+            }
+            else {
+                dispatch({
+                    type: ADD_MESSAGE,
+                    payload: response
+                })
+            }
+        })
     }
 }
 
@@ -210,5 +322,9 @@ export {
     removeAccount,
     setCurrentUser,
     logOut,
-    fetchUsers
+    fetchUsers,
+    fetchBookClubs,
+    addBookClub,
+    removeBookClub,
+    addMessage
 }

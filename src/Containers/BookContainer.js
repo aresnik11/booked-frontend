@@ -72,12 +72,10 @@ class BookContainer extends React.Component {
                         <div>
                             <Search type="Books" searchTerm={this.state.searchTerm} searchHandler={this.searchBook} />
                             <br/><br/>
-                            <div>
-                                <Grid centered>
-                                    {/* passing books for this booklist in props from BookListContainer component */}
-                                    {filteredBooks.map(book => <BookPreview key={book.id} {...book} bookListObj={this.props.bookListObj} />)}
-                                </Grid>
-                            </div>
+                            <Grid centered>
+                                {/* passing books for this booklist in props from BookListContainer component */}
+                                {filteredBooks.map(book => <BookPreview key={book.id} {...book} bookListObj={this.props.bookListObj} />)}
+                            </Grid>
                         </div>
                     )
                 }} />

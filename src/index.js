@@ -8,9 +8,14 @@ import { Provider } from 'react-redux'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import searchBooksReducer from './reducers/searchBooksReducer'
 import userReducer from './reducers/userReducer'
+import bookClubReducer from './reducers/bookClubReducer'
 import thunk from 'redux-thunk'
 
-const rootReducer = combineReducers({searchBooksReducer: searchBooksReducer, userReducer: userReducer})
+const rootReducer = combineReducers({
+    searchBooksReducer: searchBooksReducer,
+    userReducer: userReducer,
+    bookClubReducer: bookClubReducer
+})
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
 

@@ -39,3 +39,13 @@
   width: 20%;
   margin: auto;
 }
+
+.ui.comments.message-container {
+  text-align: left;
+  margin: auto;
+}
+
+.ui.comments.message-container .comment.message {
+  margin-left: 5%;
+  margin-right: 5%; 
+}

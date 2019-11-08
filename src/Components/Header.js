@@ -45,6 +45,13 @@ class Header extends React.Component {
                     />
                     <Menu.Item
                         as={ Link }
+                        to="/search"
+                        name="search"
+                        active={this.state.activeItem === "search"}
+                        onClick={this.handleItemClick}
+                    />
+                    <Menu.Item
+                        as={ Link }
                         to="/booklists"
                         name="book lists"
                         active={this.state.activeItem === "book lists"}
@@ -52,9 +59,9 @@ class Header extends React.Component {
                     />
                     <Menu.Item
                         as={ Link }
-                        to="/search"
-                        name="search"
-                        active={this.state.activeItem === "search"}
+                        to="/bookclubs"
+                        name="book clubs"
+                        active={this.state.activeItem === "book clubs"}
                         onClick={this.handleItemClick}
                     />
                     <Menu.Menu position="right">
