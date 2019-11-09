@@ -39,7 +39,7 @@ class BookClubContainer extends React.Component {
                             <div>
                                 <BookListClubShow type="Book Club" {...bookClubObj} />
                                 <br/><br/>
-                                <MessageContainer bookClubObj={bookClubObj} />
+                                <MessageContainer {...routerProps} />
                             </div>
                         )
                     }

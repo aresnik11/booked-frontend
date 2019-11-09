@@ -11,7 +11,7 @@ import {
     FETCH_BOOK_CLUBS,
     ADD_BOOK_CLUB,
     REMOVE_BOOK_CLUB,
-    ADD_MESSAGE
+    RECEIVE_MESSAGE
 } from './types'
 
 //searchBooksReducer
@@ -302,13 +302,20 @@ function addMessage(newMessage) {
             if (response.errors) {
                 alert(response.errors)
             }
-            else {
-                dispatch({
-                    type: ADD_MESSAGE,
-                    payload: response
-                })
-            }
+            // else {
+            //     dispatch({
+            //         type: ADD_MESSAGE,
+            //         payload: response
+            //     })
+            // }
         })
+    }
+}
+
+function receiveMessage(newMessage) {
+    return {
+        type: RECEIVE_MESSAGE,
+        payload: newMessage
     }
 }
 
@@ -326,5 +333,6 @@ export {
     fetchBookClubs,
     addBookClub,
     removeBookClub,
-    addMessage
+    addMessage,
+    receiveMessage
 }

@@ -10,6 +10,7 @@ import searchBooksReducer from './reducers/searchBooksReducer'
 import userReducer from './reducers/userReducer'
 import bookClubReducer from './reducers/bookClubReducer'
 import thunk from 'redux-thunk'
+import { ActionCableProvider } from 'react-actioncable-provider'
 
 const rootReducer = combineReducers({
     searchBooksReducer: searchBooksReducer,
@@ -20,11 +21,13 @@ const rootReducer = combineReducers({
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
 ReactDOM.render(
-    <Provider store={store}>
-        <BrowserRouter>
-            <Route path="/" component={App} />
-        </BrowserRouter>
-    </Provider>,
+    <ActionCableProvider url="ws://localhost:3001/cable">
+        <Provider store={store}>
+            <BrowserRouter>
+                <Route path="/" component={App} />
+            </BrowserRouter>
+        </Provider>
+    </ActionCableProvider>,
     document.getElementById('root')
 );
 

@@ -2,7 +2,7 @@ import {
     FETCH_BOOK_CLUBS,
     ADD_BOOK_CLUB,
     REMOVE_BOOK_CLUB,
-    ADD_MESSAGE
+    RECEIVE_MESSAGE
 } from '../types'
 
 const defaultState = {
@@ -29,7 +29,7 @@ function bookClubReducer(state = defaultState, action) {
                 ...state,
                 bookClubs: filteredBookClubs
             }
-        case ADD_MESSAGE:
+        case RECEIVE_MESSAGE:
             const copyBookClubs = [...state.bookClubs]
             //finding the bookclub from action.payload
             const foundBookClub = copyBookClubs.find(bookClub => bookClub.id === action.payload.book_club_id)
