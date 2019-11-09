@@ -4,11 +4,13 @@ import Search from '../components/Search'
 import New from '../components/New'
 import BookClubPreview from '../components/BookClubPreview'
 import BookListClubShow from '../components/BookListClubShow'
-import MessageContainer from './MessageContainer'
+import Message from '../components/Message'
 import Error from '../components/Error'
 import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { fetchBookClubs } from '../actions'
+import { fetchBookClubs, receiveMessage } from '../actions'
+import { Comment, Header } from 'semantic-ui-react'
+import { ActionCableConsumer } from 'react-actioncable-provider'
 
 class BookClubContainer extends React.Component {
     state = {
@@ -39,7 +41,16 @@ class BookClubContainer extends React.Component {
                             <div>
                                 <BookListClubShow type="Book Club" {...bookClubObj} />
                                 <br/><br/>
-                                <MessageContainer {...routerProps} />
+                                <New type="Message" bookClub={bookClubObj} />
+                                <br/><br/>
+                                <Comment.Group className="message-container">
+                                    <Header as='h3' dividing content="Messages" />
+                                    {bookClubObj.messages.map(message => <Message key={message.id} {...message} />)}
+                                </Comment.Group>
+                                <ActionCableConsumer
+                                    channel={{ channel: "BookClubChannel", book_club_id: bookClubObj.id }}
+                                    onReceived={data => this.props.receiveMessage(data)}
+                                />
                             </div>
                         )
                     }
@@ -76,4 +87,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { fetchBookClubs })(withAuth(BookClubContainer))
+export default connect(mapStateToProps, { fetchBookClubs, receiveMessage })(withAuth(BookClubContainer))

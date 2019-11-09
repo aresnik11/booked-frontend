@@ -1,14 +1,12 @@
 import React from 'react'
-import BookPreview from '../components/BookPreview'
 import BookShow from '../components/BookShow'
 import AddToBookList from '../components/AddToBookList'
 import Error from '../components/Error'
-import Search from '../components/Search'
+import BookBookLists from '../components/BookBookLists'
 import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import BookListContainer from './BookListContainer'
 import withAuth from '../withAuth'
-import { Grid } from 'semantic-ui-react'
 
 class BookContainer extends React.Component {
     state = {
@@ -32,11 +30,17 @@ class BookContainer extends React.Component {
                         const bookObj = bookListObj.books.find(book => book.id === bookId)
                         // only render BookShow component if we found the book object
                         if (bookObj) {
+                            // look through each booklist (this.props.bookList) and look through books (array) within that to see if our book is there, returns book lists that contain our book
+                            // using book.volume_id instead of book.id so that this works for books coming from a book list and a search
+                            const wantedBookLists = this.props.bookLists.filter(bookList => bookList.books.find(book => book.volume_id === bookObj.volume_id))
                             return (
                                 <div>
                                     <BookShow key={bookObj.id} {...bookObj} />
                                     <AddToBookList book={bookObj} />
-                                    <BookListContainer book={bookObj} />
+                                    <h4>Book lists</h4>
+                                    <div>
+                                        {wantedBookLists.map(bookList => <BookBookLists key={bookList.id} {...bookList} bookId={bookId} />)}
+                                    </div>
                                 </div>
                             )
                         }
@@ -45,7 +49,6 @@ class BookContainer extends React.Component {
                             return <Error />
                         }
                     }
-                    // if we came from the search page, book id will be string of letters that becomes NaN when parseInt-ed
                     else {
                         const bookVolumeId = routerProps.match.params.id
                         const searchBookObj = this.props.searchedBooks.find(book => book.volume_id === bookVolumeId)
@@ -64,21 +67,7 @@ class BookContainer extends React.Component {
                             return <Error />
                         }
                     }
-    
                 }}/>
-                <Route path="/booklists/:id" render={() => {
-                    const filteredBooks = this.props.bookListObj.books.filter(book => book.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
-                    return (
-                        <div>
-                            <Search type="Books" searchTerm={this.state.searchTerm} searchHandler={this.searchBook} />
-                            <br/><br/>
-                            <Grid centered>
-                                {/* passing books for this booklist in props from BookListContainer component */}
-                                {filteredBooks.map(book => <BookPreview key={book.id} {...book} bookListObj={this.props.bookListObj} />)}
-                            </Grid>
-                        </div>
-                    )
-                }} />
             </Switch>
         )
     }
@@ -86,7 +75,8 @@ class BookContainer extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        searchedBooks: state.searchBooksReducer.searchedBooks
+        searchedBooks: state.searchBooksReducer.searchedBooks,
+        bookLists: state.userReducer.bookLists
     }
 }
 

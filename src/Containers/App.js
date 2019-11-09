@@ -5,7 +5,7 @@ import 'semantic-ui-css/semantic.min.css';
 import '../css/Book.css'
 import '../css/BookShelf.css'
 import Header from '../components/Header'
-import SearchContainer from './SearchContainer'
+import SearchBooksContainer from './SearchBooksContainer'
 import Profile from '../components/Profile'
 import Homepage from '../components/Homepage'
 import Error from '../components/Error'
@@ -49,7 +49,7 @@ class App extends React.Component {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/profile" component={Profile} />
-            <Route path="/search" component={SearchContainer} />
+            <Route path="/search" component={SearchBooksContainer} />
             <Route path="/booklists" component={BookListContainer} />
             <Route path="/books" component={BookContainer} />
             <Route path="/bookclubs" component={BookClubContainer} />

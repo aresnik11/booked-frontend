@@ -1,7 +1,6 @@
 import React from 'react'
-import BookContainer from './BookContainer'
+import BookPreview from '../components/BookPreview'
 import BookListPreview from '../components/BookListPreview'
-import BookBookLists from '../components/BookBookLists'
 import New from '../components/New'
 import BookListClubShow from '../components/BookListClubShow'
 import Search from '../components/Search'
@@ -17,7 +16,7 @@ class BookListContainer extends React.Component {
         searchTerm: ""
     }
 
-    searchBookList = (e) => {
+    searchHandler = (e) => {
         this.setState({
             searchTerm: e.target.value
         })
@@ -30,7 +29,8 @@ class BookListContainer extends React.Component {
                     //find the booklist that matches this id from this users booklists
                     const bookListId = parseInt(routerProps.match.params.id)
                     const bookListObj = this.props.bookLists.find(bookList => bookList.id === bookListId)
-                    // only render BookContainer component if we found the book list object
+                    const filteredBooks = bookListObj.books.filter(book => book.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+                    // only render components if we found the book list object
                     if (bookListObj) {
                         return (
                             <div>
@@ -38,7 +38,11 @@ class BookListContainer extends React.Component {
                                 <br/><br/>
                                 <ShareBookList {...bookListObj} />
                                 <br/><br/>
-                                <BookContainer bookListObj={bookListObj} />
+                                <Search type="Books" searchTerm={this.state.searchTerm} searchHandler={this.searchHandler} />
+                                <br/><br/>
+                                <Grid centered>
+                                    {filteredBooks.map(book => <BookPreview key={book.id} {...book} bookListObj={bookListObj} />)}
+                                </Grid>
                             </div>
                         )
                     }
@@ -55,32 +59,11 @@ class BookListContainer extends React.Component {
                             <br/>
                             <New type="Book List" />
                             <br/><br/>
-                            <Search type="Book Lists" searchTerm={this.state.searchTerm} searchHandler={this.searchBookList} />
+                            <Search type="Book Lists" searchTerm={this.state.searchTerm} searchHandler={this.searchHandler} />
                             <br/><br/>
                             <Grid centered>
                                 {filteredBookLists.map(bookList => <BookListPreview key={bookList.id} {...bookList} />)}
                             </Grid>
-                        </div>
-                    )
-                }} />
-                <Route path="/books/:id" render={() => {
-                    // look through each booklist (this.props.bookList) and look through books (array) within that to see if our book is there, returns book lists that contain our book
-                    // using book.volume_id instead of book.id so that this works for books coming from a book list and a search
-                    // if we found the book, keeping track of the book id so that we can pass it to the backend to remove the book from this booklist
-                    let bookId
-                    const wantedBookLists = this.props.bookLists.filter(bookList => bookList.books.find(book => {
-                        if (book.volume_id === this.props.book.volume_id) {
-                            bookId = book.id
-                            return true
-                        }
-                        return false
-                    }))
-                    return (
-                        <div>
-                            <h4>Book lists</h4>
-                            <div>
-                                {wantedBookLists.map(bookList => <BookBookLists key={bookList.id} {...bookList} bookId={bookId} />)}
-                            </div>
                         </div>
                     )
                 }} />

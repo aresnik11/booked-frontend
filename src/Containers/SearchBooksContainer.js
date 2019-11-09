@@ -1,8 +1,10 @@
 import React from 'react'
 import Loading from '../components/Loading'
 import BookPreview from '../components/BookPreview'
+import SearchBooks from '../components/SearchBooks'
 import { connect } from 'react-redux'
 import { fetchSearchedBooks } from '../actions'
+import withAuth from '../withAuth'
 import { Grid } from 'semantic-ui-react'
 
 class SearchBooksContainer extends React.Component {
@@ -34,6 +36,8 @@ class SearchBooksContainer extends React.Component {
     render() {
         return (
             <>
+                <SearchBooks />
+                <br/><br/>
                 {this.props.loading
                 ?
                 <Loading />
@@ -61,4 +65,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { fetchSearchedBooks })(SearchBooksContainer)
+export default connect(mapStateToProps, { fetchSearchedBooks })(withAuth(SearchBooksContainer))
