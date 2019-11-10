@@ -26,23 +26,16 @@ const BookPreview = (props) => {
                         <ul className='page'>
                             <li></li>
                             <li>
-                                {/* if there is a bookListObj prop, link to book with id (from book list) and pass bookListObj in state, otherwise link to book with volume_id (from search) */}
-                                {props.bookListObj
+                                {/* if there is a bookListId prop, link to book with id (from book list), otherwise link to book with volume_id (from search) */}
+                                {props.bookListId
                                 ?
-                                <Link
-                                    to={{
-                                    pathname: `/books/${props.id}`,
-                                    state: { bookListObj: props.bookListObj }
-                                }}>
+                                <Link to={`/books/${props.id}`}>
                                     <div className="book-preview-page">
                                         <Button basic content="View Book" />
                                     </div>
                                 </Link>
                                 :
-                                <Link to={{
-                                    pathname: `/books/${props.volume_id}`,
-                                    state: { fromSearch: true }
-                                }}>
+                                <Link to={`/books/${props.volume_id}`}>
                                     <div className="book-preview-page">
                                         <Button basic content="View Book" />
                                     </div>
@@ -66,12 +59,12 @@ const BookPreview = (props) => {
                     </figure>
                 </li>
             </ul>
-            {/* if there is a bookListObj prop, we're on a booklist show page so include button to remove book from book list */}
-            {props.bookListObj
+            {/* if there is a bookListId prop, we're on a booklist show page so include button to remove book from book list */}
+            {props.bookListId
             ?
             <>
                 <br/>
-                <Button basic onClick={() => props.removeBookListBook(props.id, props.bookListObj.id)} content="Remove from Book List" />
+                <Button basic onClick={() => props.removeBookListBook(props.id, props.bookListId)} content="Remove from Book List" />
             </>
             : null}
         </div>

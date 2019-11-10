@@ -51,7 +51,7 @@ class App extends React.Component {
             <Route path="/profile" component={Profile} />
             <Route path="/search" component={SearchBooksContainer} />
             <Route path="/booklists" component={BookListContainer} />
-            <Route path="/books" component={BookContainer} />
+            <Route path="/books/:id" component={BookContainer} />
             <Route path="/bookclubs" component={BookClubContainer} />
             <Route exact path="/" component={Homepage} />
             <Route component={Error} />

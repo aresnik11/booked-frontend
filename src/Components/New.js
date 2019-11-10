@@ -48,7 +48,6 @@ class New extends React.Component {
                     <Form.Button basic content="Add" />
                 </Form>
             </div>
-            
         )
     }
 }

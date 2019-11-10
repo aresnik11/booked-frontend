@@ -29,9 +29,9 @@ class BookListContainer extends React.Component {
                     //find the booklist that matches this id from this users booklists
                     const bookListId = parseInt(routerProps.match.params.id)
                     const bookListObj = this.props.bookLists.find(bookList => bookList.id === bookListId)
-                    const filteredBooks = bookListObj.books.filter(book => book.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
                     // only render components if we found the book list object
                     if (bookListObj) {
+                        const filteredBooks = bookListObj.books.filter(book => book.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
                         return (
                             <div>
                                 <BookListClubShow type="Book List" {...bookListObj} />
@@ -41,7 +41,7 @@ class BookListContainer extends React.Component {
                                 <Search type="Books" searchTerm={this.state.searchTerm} searchHandler={this.searchHandler} />
                                 <br/><br/>
                                 <Grid centered>
-                                    {filteredBooks.map(book => <BookPreview key={book.id} {...book} bookListObj={bookListObj} />)}
+                                    {filteredBooks.map(book => <BookPreview key={book.id} {...book} bookListId={bookListId} />)}
                                 </Grid>
                             </div>
                         )
@@ -74,7 +74,7 @@ class BookListContainer extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        bookLists: state.userReducer.bookLists,
+        bookLists: state.bookListReducer.bookLists,
     }
 }
 

@@ -25,11 +25,11 @@ class SearchBooksContainer extends React.Component {
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         document.addEventListener("scroll", this.renderMoreResults)
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         document.removeEventListener("scroll", this.renderMoreResults)
     }
 
@@ -56,12 +56,12 @@ class SearchBooksContainer extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        searchedBooks: state.searchBooksReducer.searchedBooks,
-        totalItems: state.searchBooksReducer.totalItems,
-        searchTerm: state.searchBooksReducer.searchTerm,
-        searchType: state.searchBooksReducer.searchType,
-        startIndex: state.searchBooksReducer.startIndex,
-        loading: state.searchBooksReducer.loading
+        searchedBooks: state.bookReducer.searchedBooks,
+        totalItems: state.bookReducer.totalItems,
+        searchTerm: state.bookReducer.searchTerm,
+        searchType: state.bookReducer.searchType,
+        startIndex: state.bookReducer.startIndex,
+        loading: state.bookReducer.loading
     }
 }
 

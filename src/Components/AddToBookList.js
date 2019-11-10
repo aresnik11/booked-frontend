@@ -57,7 +57,7 @@ class AddToBookList extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        bookLists: state.userReducer.bookLists
+        bookLists: state.bookListReducer.bookLists
     }
 }
 

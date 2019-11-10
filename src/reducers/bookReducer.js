@@ -1,6 +1,7 @@
 import {
     FETCH_SEARCHED_BOOKS,
-    SET_LOADING
+    SET_LOADING,
+    FETCH_BOOK
 } from '../types'
 
 const defaultState = {
@@ -9,10 +10,11 @@ const defaultState = {
     loading: false,
     searchTerm: "",
     searchType: "",
-    startIndex: 0
+    startIndex: 0,
+    selectedBook: null
 }
 
-function searchBooksReducer(state = defaultState, action) {
+function bookReducer(state = defaultState, action) {
     switch(action.type) {
         case FETCH_SEARCHED_BOOKS:
             let newSearchedBooks
@@ -44,9 +46,14 @@ function searchBooksReducer(state = defaultState, action) {
                 ...state,
                 loading: true
             }
+        case FETCH_BOOK:
+            return {
+                ...state,
+                selectedBook: action.payload
+            }
         default:
             return state
     }
 }
 
-export default searchBooksReducer
+export default bookReducer

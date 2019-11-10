@@ -8,13 +8,14 @@ import {
     SET_CURRENT_USER,
     LOG_OUT,
     FETCH_USERS,
+    FETCH_BOOK,
     FETCH_BOOK_CLUBS,
     ADD_BOOK_CLUB,
     REMOVE_BOOK_CLUB,
     RECEIVE_MESSAGE
 } from './types'
 
-//searchBooksReducer
+//bookReducer
 
 function fetchSearchedBooks({ search, type, index }) {
     return function(dispatch) {
@@ -53,7 +54,7 @@ function setLoading() {
     }
 }
 
-//userReducer
+//bookListReducer
 
 function addBookList(newBookList) {
     return function(dispatch) {
@@ -165,6 +166,8 @@ function removeBookList(bookListId) {
     }
 }
 
+//userReducer
+
 function removeAccount() {
     return function(dispatch) {
         fetch("http://localhost:3001/api/v1/users", {
@@ -189,8 +192,7 @@ function setCurrentUser(user) {
                 id: user.id,
                 username: user.username
             },
-            bookLists: user.book_lists,
-            authors: user.authors
+            bookLists: user.book_lists
         }
     }
 }
@@ -218,33 +220,24 @@ function fetchUsers() {
     }
 }
 
-//bookClubReducer
-
-function addBookClub(newBookClub) {
+function fetchBook(bookId) {
     return function(dispatch) {
-        fetch("http://localhost:3001/api/v1/book_clubs", {
-            method: "POST",
+        fetch(`http://localhost:3001/api/v1/books/${bookId}`, {
             headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
                 "Authorization": `Bearer ${localStorage.token}`
-            },
-            body: JSON.stringify(newBookClub)
+            }
         })
         .then(resp => resp.json())
         .then(response => {
-            if (response.errors) {
-                alert(response.errors)
-            }
-            else {
-                dispatch({
-                    type: ADD_BOOK_CLUB,
-                    payload: response
-                })
-            }
+            dispatch({
+                type: FETCH_BOOK,
+                payload: response
+            })
         })
     }
 }
+
+//bookClubReduce
 
 function fetchBookClubs() {
     return function(dispatch) {
@@ -263,6 +256,26 @@ function fetchBookClubs() {
     }
 }
 
+function addBookClub(newBookClub) {
+    return function(dispatch) {
+        fetch("http://localhost:3001/api/v1/book_clubs", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Bearer ${localStorage.token}`
+            },
+            body: JSON.stringify(newBookClub)
+        })
+        .then(resp => resp.json())
+        .then(response => {
+            if (response.errors) {
+                alert(response.errors)
+            }
+        })
+    }
+}
+
 function removeBookClub(bookClubId) {
     return function(dispatch) {
         fetch(`http://localhost:3001/api/v1/book_clubs/${bookClubId}`, {
@@ -275,12 +288,6 @@ function removeBookClub(bookClubId) {
         .then(response => {
             if (response.errors) {
                 alert(response.errors)
-            }
-            else {
-                dispatch({
-                    type: REMOVE_BOOK_CLUB,
-                    payload: response
-                })
             }
         })
     }
@@ -302,20 +309,28 @@ function addMessage(newMessage) {
             if (response.errors) {
                 alert(response.errors)
             }
-            // else {
-            //     dispatch({
-            //         type: ADD_MESSAGE,
-            //         payload: response
-            //     })
-            // }
         })
     }
 }
 
-function receiveMessage(newMessage) {
+function receiveMessage(message) {
     return {
         type: RECEIVE_MESSAGE,
-        payload: newMessage
+        payload: message
+    }
+}
+
+function receiveAddBookClub(bookClub) {
+    return {
+        type: ADD_BOOK_CLUB,
+        payload: bookClub
+    }
+}
+
+function receiveRemoveBookClub(bookClub) {
+    return {
+        type: REMOVE_BOOK_CLUB,
+        payload: bookClub
     }
 }
 
@@ -330,9 +345,12 @@ export {
     setCurrentUser,
     logOut,
     fetchUsers,
+    fetchBook,
     fetchBookClubs,
     addBookClub,
     removeBookClub,
     addMessage,
-    receiveMessage
+    receiveMessage,
+    receiveAddBookClub,
+    receiveRemoveBookClub
 }

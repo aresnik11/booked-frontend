@@ -8,7 +8,7 @@ import Message from '../components/Message'
 import Error from '../components/Error'
 import { Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { fetchBookClubs, receiveMessage } from '../actions'
+import { fetchBookClubs, receiveMessage, receiveAddBookClub, receiveRemoveBookClub } from '../actions'
 import { Comment, Header } from 'semantic-ui-react'
 import { ActionCableConsumer } from 'react-actioncable-provider'
 
@@ -28,7 +28,6 @@ class BookClubContainer extends React.Component {
     }
 
     render() {
-        const filteredBookClubs = this.props.bookClubs.filter(bookClub => bookClub.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
         return (
             <Switch>
                 <Route path="/bookclubs/:id" render={(routerProps) => {
@@ -48,8 +47,12 @@ class BookClubContainer extends React.Component {
                                     {bookClubObj.messages.map(message => <Message key={message.id} {...message} />)}
                                 </Comment.Group>
                                 <ActionCableConsumer
-                                    channel={{ channel: "BookClubChannel", book_club_id: bookClubObj.id }}
-                                    onReceived={data => this.props.receiveMessage(data)}
+                                    channel={{ channel: "MessagesChannel", book_club_id: bookClubObj.id }}
+                                    onReceived={data => {
+                                        if (data.type === "RECEIVE_MESSAGE") {
+                                            this.props.receiveMessage(data.payload)
+                                        }
+                                    }}
                                 />
                             </div>
                         )
@@ -60,6 +63,7 @@ class BookClubContainer extends React.Component {
                     }
                 }}/>
                 <Route path="/bookclubs" render={() => {
+                    const filteredBookClubs = this.props.bookClubs.filter(bookClub => bookClub.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
                     return (
                         <div>
                             <h1>Book Clubs</h1>
@@ -71,6 +75,17 @@ class BookClubContainer extends React.Component {
                             <div>
                                 {filteredBookClubs.map(bookClub => <BookClubPreview key={bookClub.id} {...bookClub} />)}
                             </div>
+                            <ActionCableConsumer
+                                channel={{ channel: "BookClubsChannel" }}
+                                onReceived={data => {
+                                    if (data.type === "ADD_BOOK_CLUB") {
+                                        this.props.receiveAddBookClub(data.payload)
+                                    }
+                                    else if (data.type === "REMOVE_BOOK_CLUB") {
+                                        this.props.receiveRemoveBookClub(data.payload)
+                                    }
+                                }}
+                            />
                         </div>
                     )
                 }}/>
@@ -81,10 +96,9 @@ class BookClubContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
-    console.log(state)
     return {
         bookClubs: state.bookClubReducer.bookClubs,
     }
 }
 
-export default connect(mapStateToProps, { fetchBookClubs, receiveMessage })(withAuth(BookClubContainer))
+export default connect(mapStateToProps, { fetchBookClubs, receiveMessage, receiveAddBookClub, receiveRemoveBookClub })(withAuth(BookClubContainer))
