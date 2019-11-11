@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { logIn } from '../actions'
+import { logIn, removePleaseLogin } from '../actions'
 import { Form, Message } from 'semantic-ui-react'
 
 class Login extends React.Component {
@@ -17,6 +17,8 @@ class Login extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
+        //removePleaseLogin resets flag in redux store that shows the please login message since either successful or will get new error message
+        this.props.removePleaseLogin()
         this.props.logIn(this.state)
         .then(() => {
             if (this.props.currentUser) {
@@ -26,12 +28,12 @@ class Login extends React.Component {
     }
 
     render() {
+        console.log(this.props.location)
         return (
             <div>
                 <h1>Log In</h1>
 
-                {/* will have pleaseLogin key in state if was redirected from withAuth HOC */}
-                {this.props.location.state && this.props.location.state.pleaseLogin && !this.props.loginError
+                {this.props.pleaseLogIn
                 ?
                 <>
                     <Message
@@ -79,8 +81,9 @@ class Login extends React.Component {
 function mapStateToProps(state) {
     return {
         currentUser: state.userReducer.currentUser,
-        logInError: state.userReducer.logInError
+        logInError: state.userReducer.logInError,
+        pleaseLogIn: state.userReducer.pleaseLogIn
     }
 }
 
-export default connect(mapStateToProps, { logIn })(Login)
+export default connect(mapStateToProps, { logIn, removePleaseLogin })(Login)

@@ -3,13 +3,15 @@ import {
     LOG_OUT,
     FETCH_USERS,
     LOG_IN_ERROR,
-    SIGN_UP_ERROR
+    SIGN_UP_ERROR,
+    PLEASE_LOG_IN
 } from '../types'
 
 const defaultState = {
     currentUser: null,
     logInError: false,
     signUpError: false,
+    pleaseLogIn: false,
     users: [],
 }
 
@@ -21,7 +23,8 @@ function userReducer(state = defaultState, action) {
                 //object with id and username keys
                 currentUser: action.payload.currentUser,
                 logInError: false,
-                signUpError: false
+                signUpError: false,
+                pleaseLogIn: false
             }
         case LOG_OUT:
             return {
@@ -37,6 +40,11 @@ function userReducer(state = defaultState, action) {
             return {
                 ...state,
                 signUpError: action.payload
+            }
+        case PLEASE_LOG_IN:
+            return {
+                ...state,
+                pleaseLogIn: action.payload
             }
         case FETCH_USERS:
             // filtering the current user out of the array of all users (from action.payload)

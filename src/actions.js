@@ -7,6 +7,7 @@ import {
     REMOVE_BOOK_LIST,
     LOG_IN_ERROR,
     SIGN_UP_ERROR,
+    PLEASE_LOG_IN,
     SET_CURRENT_USER,
     LOG_OUT,
     FETCH_USERS,
@@ -384,6 +385,27 @@ function logIn(user) {
     }
 }
 
+function removeLogInError() {
+    return {
+        type: LOG_IN_ERROR,
+        payload: false
+    }
+}
+
+function pleaseLogIn() {
+    return {
+        type: PLEASE_LOG_IN,
+        payload: "Please log in to view other pages"
+    }
+}
+
+function removePleaseLogin() {
+    return {
+        type: PLEASE_LOG_IN,
+        payload: false
+    }
+}
+
 //bookClubReducer
 
 function fetchBookClubs() {
@@ -498,6 +520,9 @@ export {
     autoLogin,
     signUp,
     logIn,
+    removeLogInError,
+    pleaseLogIn,
+    removePleaseLogin,
     fetchBookClubs,
     addBookClub,
     removeBookClub,
