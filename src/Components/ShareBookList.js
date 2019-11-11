@@ -21,7 +21,6 @@ class ShareBookList extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        console.log("sharing to", this.state)
         //this.props.id is booklist id, this.state.value is user id we want to send this to
         this.props.shareBookList(this.props.id, this.state.value)
     }

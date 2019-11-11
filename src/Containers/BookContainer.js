@@ -33,7 +33,6 @@ class BookContainer extends React.Component {
     }
 
     render() {
-        console.log("props", this.props)
         //if selectedBook in props is not null (default), then we may have a book
         if (this.props.selectedBook) {
             //if selectedBook has an id, then we found the book in the backend and can render it

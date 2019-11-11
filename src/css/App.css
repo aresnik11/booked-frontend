@@ -35,8 +35,8 @@
   padding-bottom: 100px;
 }
 
-.small-input {
-  width: 20%;
+.small-input, .ui.warning.message.small-input {
+  width: 30%;
   margin: auto;
 }
 
@@ -48,4 +48,8 @@
 .ui.comments.message-container .comment.message {
   margin-left: 5%;
   margin-right: 5%; 
+}
+
+.ui.message {
+  text-align: left;
 }

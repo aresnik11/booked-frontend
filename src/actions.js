@@ -5,7 +5,8 @@ import {
     ADD_BOOK_LIST_BOOK,
     REMOVE_BOOK_LIST_BOOK,
     REMOVE_BOOK_LIST,
-    LOGIN_ERROR,
+    LOG_IN_ERROR,
+    SIGN_UP_ERROR,
     SET_CURRENT_USER,
     LOG_OUT,
     FETCH_USERS,
@@ -224,7 +225,6 @@ function shareBookList(bookListId, userId) {
         })
         .then(resp => resp.json())
         .then(response => {
-            console.log(response)
             alert("book list shared!")
         })
     }
@@ -295,7 +295,7 @@ function autoLogin() {
         .then(response => {
             if (response.errors) {
                 dispatch({
-                    type: LOG_OUT,
+                    type: LOG_OUT
                 })
             }
             else {
@@ -328,7 +328,8 @@ function signUp(user) {
         .then(response => {
             if (response.errors) {
                 dispatch({
-                    type: LOGIN_ERROR
+                    type: SIGN_UP_ERROR,
+                    payload: response.errors
                 })
             }
             else {
@@ -362,7 +363,8 @@ function logIn(user) {
         .then(response => {
             if (response.errors) {
                 dispatch({
-                    type: LOGIN_ERROR
+                    type: LOG_IN_ERROR,
+                    payload: response.errors
                 })
             }
             else {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Form } from 'semantic-ui-react'
+import { Form, Message } from 'semantic-ui-react'
 import { signUp } from '../actions'
 
 class Signup extends React.Component {
@@ -21,9 +21,6 @@ class Signup extends React.Component {
         .then(() => {
             if (this.props.currentUser) {
                 this.props.history.push("/profile")
-            }
-            else if (this.props.loginError) {
-                console.log("error")
             }
         })
     }
@@ -46,6 +43,15 @@ class Signup extends React.Component {
                         value={this.state.password}
                         onChange={this.handleChange}
                     />
+                    {this.props.signUpError
+                    ?
+                    <Message
+                        negative
+                        header='Error'
+                        list={this.props.signUpError}
+                    />
+                    :
+                    null}
                     <Form.Button basic content="Sign Up" />
                 </Form>
             </div>
@@ -56,7 +62,7 @@ class Signup extends React.Component {
 function mapStateToProps(state) {
     return {
         currentUser: state.userReducer.currentUser,
-        loginError: state.userReducer.loginError
+        signUpError: state.userReducer.signUpError
     }
 }
 

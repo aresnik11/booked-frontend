@@ -70,7 +70,7 @@ class BookClubContainer extends React.Component {
                             <br/>
                             <New type="Book Club" />
                             <br/><br/>
-                            <Search type="Book Clubs" searchTerm={this.state.searchTerm} searchHandler={this.searchBookClub} />
+                            {filteredBookClubs.length ? <Search type="Book Clubs" searchTerm={this.state.searchTerm} searchHandler={this.searchBookClub} /> : null}
                             <br/><br/>
                             <div>
                                 {filteredBookClubs.map(bookClub => <BookClubPreview key={bookClub.id} {...bookClub} />)}

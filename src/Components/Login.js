@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { logIn } from '../actions'
-import { Form } from 'semantic-ui-react'
+import { Form, Message } from 'semantic-ui-react'
 
 class Login extends React.Component {
     state = {
@@ -22,9 +22,6 @@ class Login extends React.Component {
             if (this.props.currentUser) {
                 this.props.history.push("/profile")
             }
-            else if (this.props.loginError) {
-                console.log("error")
-            }
         })
     }
 
@@ -34,9 +31,17 @@ class Login extends React.Component {
                 <h1>Log In</h1>
 
                 {/* will have pleaseLogin key in state if was redirected from withAuth HOC */}
-                {this.props.location.state && this.props.location.state.pleaseLogin
+                {this.props.location.state && this.props.location.state.pleaseLogin && !this.props.loginError
                 ?
-                <h3>Please log in</h3>
+                <>
+                    <Message
+                        warning
+                        className="small-input"
+                        header='Please log in'
+                        content='Please log in to view other pages'
+                    />
+                    <br/>
+                </>
                 :
                 null}
 
@@ -54,8 +59,18 @@ class Login extends React.Component {
                         value={this.state.password}
                         onChange={this.handleChange}
                     />
+                    {this.props.logInError
+                    ?
+                    <Message
+                        negative
+                        header='Error'
+                        content={this.props.logInError}
+                    />
+                    :
+                    null}
                     <Form.Button basic content="Log In" />
                 </Form>
+
             </div>
         )
     }
@@ -64,7 +79,7 @@ class Login extends React.Component {
 function mapStateToProps(state) {
     return {
         currentUser: state.userReducer.currentUser,
-        loginError: state.userReducer.loginError
+        logInError: state.userReducer.logInError
     }
 }
 
