@@ -29,13 +29,20 @@ const BookPreview = (props) => {
                                 {/* if there is a bookListId prop, link to book with id (from book list), otherwise link to book with volume_id (from search) */}
                                 {props.bookListId
                                 ?
-                                <Link to={`/books/${props.id}`}>
+                                <Link
+                                    to={{
+                                    pathname: `/books/${props.id}`,
+                                    state: { fromSearch: false }
+                                }}>
                                     <div className="book-preview-page">
                                         <Button basic content="View Book" />
                                     </div>
                                 </Link>
                                 :
-                                <Link to={`/books/${props.volume_id}`}>
+                                <Link to={{
+                                    pathname: `/books/${props.volume_id}`,
+                                    state: { fromSearch: true }
+                                }}>
                                     <div className="book-preview-page">
                                         <Button basic content="View Book" />
                                     </div>

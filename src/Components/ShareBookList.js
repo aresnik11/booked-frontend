@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchUsers } from '../actions'
+import { fetchUsers, shareBookList } from '../actions'
 import { Form } from 'semantic-ui-react'
 
 class ShareBookList extends React.Component {
@@ -23,28 +23,28 @@ class ShareBookList extends React.Component {
         e.preventDefault()
         console.log("sharing to", this.state)
         //this.props.id is booklist id, this.state.value is user id we want to send this to
-        this.shareBookList(this.props.id, this.state.value)
+        this.props.shareBookList(this.props.id, this.state.value)
     }
 
-    shareBookList = (bookListId, userId) => {
-        fetch("http://localhost:3001/api/v1/share_book_lists", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                "Authorization": `Bearer ${localStorage.token}`
-            },
-            body: JSON.stringify({
-                book_list_id: bookListId,
-                user_id: userId
-            })
-        })
-        .then(resp => resp.json())
-        .then(response => {
-            console.log(response)
-            alert("book list shared!")
-        })
-    }
+    // shareBookList = (bookListId, userId) => {
+    //     fetch("http://localhost:3001/api/v1/share_book_lists", {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             "Accept": "application/json",
+    //             "Authorization": `Bearer ${localStorage.token}`
+    //         },
+    //         body: JSON.stringify({
+    //             book_list_id: bookListId,
+    //             user_id: userId
+    //         })
+    //     })
+    //     .then(resp => resp.json())
+    //     .then(response => {
+    //         console.log(response)
+    //         alert("book list shared!")
+    //     })
+    // }
     
     render() {
         // creating an array of objects for each user that will be an option in the dropdown
@@ -73,4 +73,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { fetchUsers })(ShareBookList)
+export default connect(mapStateToProps, { fetchUsers, shareBookList })(ShareBookList)

@@ -5,6 +5,7 @@ import {
     ADD_BOOK_LIST_BOOK,
     REMOVE_BOOK_LIST_BOOK,
     REMOVE_BOOK_LIST,
+    LOGIN_ERROR,
     SET_CURRENT_USER,
     LOG_OUT,
     FETCH_USERS,
@@ -15,13 +16,15 @@ import {
     RECEIVE_MESSAGE
 } from './types'
 
+const token = localStorage.getItem("token")
+
 //bookReducer
 
 function fetchSearchedBooks({ search, type, index }) {
     return function(dispatch) {
         fetch("http://localhost:3001/api/v1/search", {
             headers: {
-                "Authorization": `Bearer ${localStorage.token}`,
+                "Authorization": `Bearer ${token}`,
                 "Search-Term": search,
                 "Search-Type": type,
                 "Start-Index": index
@@ -54,6 +57,45 @@ function setLoading() {
     }
 }
 
+function fetchBook(bookId) {
+    return function(dispatch) {
+        fetch(`http://localhost:3001/api/v1/books/${bookId}`, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+        .then(resp => resp.json())
+        .then(response => {
+            if (response.errors) {
+                alert(response.errors)
+            }
+            else {
+                dispatch({
+                    type: FETCH_BOOK,
+                    payload: response
+                })
+            }
+        })
+    }
+}
+
+function fetchBookByVolumeId(bookId) {
+    return function(dispatch) {
+        fetch(`http://localhost:3001/api/v1/find_by_volume/${bookId}`, {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+        .then(resp => resp.json())
+        .then(response => {
+            dispatch({
+                type: FETCH_BOOK,
+                payload: response
+            })
+        })
+    }
+}
+
 //bookListReducer
 
 function addBookList(newBookList) {
@@ -63,7 +105,7 @@ function addBookList(newBookList) {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
-                "Authorization": `Bearer ${localStorage.token}`
+                "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify(newBookList)
         })
@@ -89,7 +131,7 @@ function addBookListBook(book, bookListId) {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
-                "Authorization": `Bearer ${localStorage.token}`
+                "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify({
                 book_id: book.id,
@@ -121,7 +163,7 @@ function removeBookListBook(bookId, bookListId) {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
-                "Authorization": `Bearer ${localStorage.token}`
+                "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify({
                 book_id: bookId,
@@ -148,7 +190,7 @@ function removeBookList(bookListId) {
         fetch(`http://localhost:3001/api/v1/book_lists/${bookListId}`, {
             method: "DELETE",
             headers: {
-                "Authorization": `Bearer ${localStorage.token}`
+                "Authorization": `Bearer ${token}`
             }
         })
         .then(resp => resp.json())
@@ -166,6 +208,28 @@ function removeBookList(bookListId) {
     }
 }
 
+function shareBookList(bookListId, userId) {
+    return function(dispatch) {
+        fetch("http://localhost:3001/api/v1/share_book_lists", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                book_list_id: bookListId,
+                user_id: userId
+            })
+        })
+        .then(resp => resp.json())
+        .then(response => {
+            console.log(response)
+            alert("book list shared!")
+        })
+    }
+}
+
 //userReducer
 
 function removeAccount() {
@@ -173,7 +237,7 @@ function removeAccount() {
         fetch("http://localhost:3001/api/v1/users", {
             method: "DELETE",
             headers: {
-                "Authorization": `Bearer ${localStorage.token}`
+                "Authorization": `Bearer ${token}`
             }
         })
         .then(resp => resp.json())
@@ -207,7 +271,7 @@ function fetchUsers() {
     return function(dispatch) {
         fetch("http://localhost:3001/api/v1/users", {
             headers: {
-                "Authorization": `Bearer ${localStorage.token}`
+                "Authorization": `Bearer ${token}`
             }
         })
         .then(resp => resp.json())
@@ -220,30 +284,111 @@ function fetchUsers() {
     }
 }
 
-function fetchBook(bookId) {
+function autoLogin() {
     return function(dispatch) {
-        fetch(`http://localhost:3001/api/v1/books/${bookId}`, {
+        fetch("http://localhost:3001/api/v1/auto_login", {
             headers: {
-                "Authorization": `Bearer ${localStorage.token}`
+                "Authorization": `Bearer ${token}`
             }
         })
         .then(resp => resp.json())
         .then(response => {
-            dispatch({
-                type: FETCH_BOOK,
-                payload: response
-            })
+            if (response.errors) {
+                dispatch({
+                    type: LOG_OUT,
+                })
+            }
+            else {
+                dispatch({
+                    type: SET_CURRENT_USER,
+                    payload: {
+                        currentUser: {
+                            id: response.user.id,
+                            username: response.user.username
+                        },
+                        bookLists: response.user.book_lists
+                    }
+                })
+            }
         })
     }
 }
 
-//bookClubReduce
+function signUp(user) {
+    return function (dispatch) {
+        return fetch("http://localhost:3001/api/v1/signup", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({user: user})
+        })
+        .then(resp => resp.json())
+        .then(response => {
+            if (response.errors) {
+                dispatch({
+                    type: LOGIN_ERROR
+                })
+            }
+            else {
+                localStorage.setItem("token", response.token)
+                dispatch({
+                    type: SET_CURRENT_USER,
+                    payload: {
+                        currentUser: {
+                            id: response.user.id,
+                            username: response.user.username
+                        },
+                        bookLists: response.user.book_lists
+                    }
+                })
+            }
+        })
+    }
+}
+
+function logIn(user) {
+    return function (dispatch) {
+        return fetch("http://localhost:3001/api/v1/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({user: user})
+        })
+        .then(resp => resp.json())
+        .then(response => {
+            if (response.errors) {
+                dispatch({
+                    type: LOGIN_ERROR
+                })
+            }
+            else {
+                localStorage.setItem("token", response.token)
+                dispatch({
+                    type: SET_CURRENT_USER,
+                    payload: {
+                        currentUser: {
+                            id: response.user.id,
+                            username: response.user.username
+                        },
+                        bookLists: response.user.book_lists
+                    }
+                })
+            }
+        })
+    }
+}
+
+//bookClubReducer
 
 function fetchBookClubs() {
     return function(dispatch) {
         fetch("http://localhost:3001/api/v1/book_clubs", {
             headers: {
-                "Authorization": `Bearer ${localStorage.token}`
+                "Authorization": `Bearer ${token}`
             }
         })
         .then(resp => resp.json())
@@ -263,7 +408,7 @@ function addBookClub(newBookClub) {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
-                "Authorization": `Bearer ${localStorage.token}`
+                "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify(newBookClub)
         })
@@ -281,7 +426,7 @@ function removeBookClub(bookClubId) {
         fetch(`http://localhost:3001/api/v1/book_clubs/${bookClubId}`, {
             method: "DELETE",
             headers: {
-                "Authorization": `Bearer ${localStorage.token}`
+                "Authorization": `Bearer ${token}`
             }
         })
         .then(resp => resp.json())
@@ -300,7 +445,7 @@ function addMessage(newMessage) {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
-                "Authorization": `Bearer ${localStorage.token}`
+                "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify(newMessage)
         })
@@ -337,15 +482,20 @@ function receiveRemoveBookClub(bookClub) {
 export {
     fetchSearchedBooks,
     setLoading,
+    fetchBook,
+    fetchBookByVolumeId,
     addBookList,
     addBookListBook,
     removeBookListBook,
     removeBookList,
+    shareBookList,
     removeAccount,
     setCurrentUser,
     logOut,
     fetchUsers,
-    fetchBook,
+    autoLogin,
+    signUp,
+    logIn,
     fetchBookClubs,
     addBookClub,
     removeBookClub,

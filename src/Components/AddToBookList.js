@@ -18,6 +18,7 @@ class AddToBookList extends React.Component {
         this.addBook(this.props.book)
     }
 
+    //need to add or find the book in the backend before adding it to a booklist (creating a booklistbook)
     addBook = (book) => {
         fetch("http://localhost:3001/api/v1/books", {
             method: "POST",

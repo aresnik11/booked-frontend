@@ -1,11 +1,13 @@
 import {
     SET_CURRENT_USER,
     LOG_OUT,
-    FETCH_USERS
+    FETCH_USERS,
+    LOGIN_ERROR
 } from '../types'
 
 const defaultState = {
     currentUser: null,
+    loginError: false,
     users: [],
 }
 
@@ -16,11 +18,17 @@ function userReducer(state = defaultState, action) {
                 ...state,
                 //object with id and username keys
                 currentUser: action.payload.currentUser,
+                loginError: false
             }
         case LOG_OUT:
             return {
                 ...state,
                 currentUser: null
+            }
+        case LOGIN_ERROR:
+            return {
+                ...state,
+                loginError: true
             }
         case FETCH_USERS:
             // filtering the current user out of the array of all users (from action.payload)

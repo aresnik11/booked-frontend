@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { setCurrentUser } from '../actions'
 import { Form } from 'semantic-ui-react'
+import { signUp } from '../actions'
 
 class Signup extends React.Component {
     state = {
@@ -17,23 +17,13 @@ class Signup extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        fetch("http://localhost:3001/api/v1/signup", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({user: this.state})
-        })
-        .then(resp => resp.json())
-        .then(response => {
-            if (response.errors) {
-                alert(response.errors)
-            }
-            else {
-                localStorage.setItem("token", response.token)
-                this.props.setCurrentUser(response.user)
+        this.props.signUp(this.state)
+        .then(() => {
+            if (this.props.currentUser) {
                 this.props.history.push("/profile")
+            }
+            else if (this.props.loginError) {
+                console.log("error")
             }
         })
     }
@@ -63,4 +53,11 @@ class Signup extends React.Component {
     }
 }
 
-export default connect(null, { setCurrentUser })(Signup)
+function mapStateToProps(state) {
+    return {
+        currentUser: state.userReducer.currentUser,
+        loginError: state.userReducer.loginError
+    }
+}
+
+export default connect(mapStateToProps, { signUp })(Signup)

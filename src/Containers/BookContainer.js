@@ -7,7 +7,7 @@ import BookBookLists from '../components/BookBookLists'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import withAuth from '../withAuth'
-import { fetchBook } from '../actions'
+import { fetchBook, fetchBookByVolumeId } from '../actions'
 
 class BookContainer extends React.Component {
     state = {
@@ -21,12 +21,19 @@ class BookContainer extends React.Component {
     }
 
     componentDidMount() {
-        //fetching the book
         const bookId = this.props.match.params.id
-        this.props.fetchBook(bookId)
+        //if we came from search, need to fetch book via volume id
+        if (this.props.location.state && this.props.location.state.fromSearch) {
+            this.props.fetchBookByVolumeId(bookId)
+        }
+        //otherwise can fetch the book normally
+        else {
+            this.props.fetchBook(bookId)
+        }
     }
 
     render() {
+        console.log("props", this.props)
         //if selectedBook in props is not null (default), then we may have a book
         if (this.props.selectedBook) {
             //if selectedBook has an id, then we found the book in the backend and can render it
@@ -48,7 +55,8 @@ class BookContainer extends React.Component {
             }
             //if selectedBook doesn't have an id, we only got back the volume_id and need to look for it in the array of searchedBooks
             else {
-                const book = this.props.searchedBooks.find(book => book.volume_id === this.props.selectedBook.volume_id)
+                // const book = this.props.searchedBooks.find(book => book.volume_id === this.props.selectedBook.volume_id)
+                const book = this.props.searchedBooks.find(book => book.volume_id === this.props.match.params.id)
                 //if we found the book in the searchedBooks array, render it
                 if (book) {
                     let bookId
@@ -162,4 +170,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { fetchBook })(withAuth(BookContainer))
+export default connect(mapStateToProps, { fetchBook, fetchBookByVolumeId })(withAuth(BookContainer))
