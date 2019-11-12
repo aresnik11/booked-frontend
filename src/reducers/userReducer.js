@@ -13,6 +13,7 @@ const defaultState = {
     signUpError: false,
     pleaseLogIn: false,
     users: [],
+    loading: true
 }
 
 function userReducer(state = defaultState, action) {
@@ -51,7 +52,8 @@ function userReducer(state = defaultState, action) {
             const allUsersExceptCurrentUser = action.payload.filter(user => user.id !== state.currentUser.id)
             return {
                 ...state,
-                users: allUsersExceptCurrentUser
+                users: allUsersExceptCurrentUser,
+                loading: false
             }
         default:
             return state

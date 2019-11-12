@@ -11,7 +11,7 @@ const defaultState = {
     searchTerm: "",
     searchType: "",
     startIndex: 0,
-    selectedBook: null
+    selectedBook: null,
 }
 
 function bookReducer(state = defaultState, action) {
@@ -49,7 +49,7 @@ function bookReducer(state = defaultState, action) {
         case FETCH_BOOK:
             return {
                 ...state,
-                selectedBook: action.payload
+                selectedBook: action.payload,
             }
         default:
             return state

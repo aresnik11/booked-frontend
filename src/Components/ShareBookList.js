@@ -1,12 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchUsers, shareBookList } from '../actions'
-import { Form } from 'semantic-ui-react'
+import { fetchUsers } from '../actions'
+import { Form, Message } from 'semantic-ui-react'
 
 class ShareBookList extends React.Component {
     state = {
-        // value: this.props.users[0] ? this.props.users[0].id : "",
-        value: ""
+        value: "",
+        shareError: false,
+        shared: false
     }
 
     componentDidMount() {
@@ -22,43 +23,80 @@ class ShareBookList extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault()
         //this.props.id is booklist id, this.state.value is user id we want to send this to
-        this.props.shareBookList(this.props.id, this.state.value)
+        this.shareBookList(this.props.id, this.state.value)
     }
 
-    // shareBookList = (bookListId, userId) => {
-    //     fetch("http://localhost:3001/api/v1/share_book_lists", {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             "Accept": "application/json",
-    //             "Authorization": `Bearer ${localStorage.token}`
-    //         },
-    //         body: JSON.stringify({
-    //             book_list_id: bookListId,
-    //             user_id: userId
-    //         })
-    //     })
-    //     .then(resp => resp.json())
-    //     .then(response => {
-    //         console.log(response)
-    //         alert("book list shared!")
-    //     })
-    // }
+    shareBookList = (bookListId, userId) => {
+        fetch("http://localhost:3001/api/v1/share_book_lists", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Bearer ${localStorage.token}`
+            },
+            body: JSON.stringify({
+                book_list_id: bookListId,
+                user_id: userId
+            })
+        })
+        .then(resp => resp.json())
+        .then(response => {
+            if (response.errors) {
+                this.setState({
+                    shareError: response.errors
+                })
+            }
+            else {
+                this.setState({
+                    shareError: false,
+                    shared: true
+                })
+            }
+        })
+    }
     
     render() {
-        // creating an array of objects for each user that will be an option in the dropdown
-        const options = this.props.users.map(user => {
-            return { key: user.id, value: user.id, text: user.username }
-        })
+        //setting options default to empty array so that dropdown will still load while we're fetching all users
+        let options = []
+        //once we have fetched users (no longer loading), update the dropdown
+        if (!this.props.loading) {
+            // creating an array of objects for each user that will be an option in the dropdown
+            options = this.props.users.map(user => {
+                return { key: user.id, value: user.id, text: user.username }
+            })
+        }
+
         return (
             <div>
                 <h4>Share Book List</h4>
+                {this.state.shared
+                ?
+                <>
+                    <Message
+                        positive
+                        className="small-input"
+                        header='Success'
+                        content="Book list shared"
+                    />
+                    <br/>
+                </>
+                :
+                null}
                 <Form onSubmit={this.handleSubmit} className="small-input">
                     <Form.Select
                         placeholder="Select a user"
                         options={options}
                         onChange={this.handleChange}
                     />
+                    {this.state.shareError
+                    ?
+                    <Message
+                        negative
+                        header='Error'
+                        list={this.state.shareError}
+                    />
+                    :
+                    null}
                     <Form.Button basic content="Share" />
                 </Form>
             </div>
@@ -68,8 +106,9 @@ class ShareBookList extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        users: state.userReducer.users
+        users: state.userReducer.users,
+        loading: state.userReducer.loading
     }
 }
 
-export default connect(mapStateToProps, { fetchUsers, shareBookList })(ShareBookList)
+export default connect(mapStateToProps, { fetchUsers })(ShareBookList)

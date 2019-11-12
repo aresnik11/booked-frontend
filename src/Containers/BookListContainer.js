@@ -38,7 +38,7 @@ class BookListContainer extends React.Component {
                                 <br/><br/>
                                 <ShareBookList {...bookListObj} />
                                 <br/><br/>
-                                {filteredBooks.length? <Search type="Books" searchTerm={this.state.searchTerm} searchHandler={this.searchHandler} /> : null}
+                                {filteredBooks.length ? <Search type="Books" searchTerm={this.state.searchTerm} searchHandler={this.searchHandler} /> : null}
                                 <br/><br/>
                                 <Grid centered>
                                     {filteredBooks.map(book => <BookPreview key={book.id} {...book} bookListId={bookListId} />)}

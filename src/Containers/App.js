@@ -30,19 +30,17 @@ class App extends React.Component {
         return (
             <div className="App">
                 <Route path="/" component={Header} />
-                <div className="main-container">
                     <Switch>
-                        <Route path="/login" component={Login} />
-                        <Route path="/signup" component={Signup} />
-                        <Route path="/profile" component={Profile} />
-                        <Route path="/search" component={SearchBooksContainer} />
-                        <Route path="/booklists" component={BookListContainer} />
-                        <Route path="/books/:id" component={BookContainer} />
-                        <Route path="/bookclubs" component={BookClubContainer} />
-                        <Route exact path="/" component={Homepage} />
-                        <Route component={Error} />
+                        <Route path="/login" render={(routerProps) => <div className="bookshelf-background"><Login {...routerProps} /></div>}/>
+                        <Route path="/signup" render={(routerProps) => <div className="bookshelf-background"><Signup {...routerProps} /></div>} />
+                        <Route path="/profile" render={() => <div className="bookshelf-background"><Profile /></div>} />
+                        <Route path="/search" render={() => <div className="main-container"><SearchBooksContainer /></div>} />
+                        <Route path="/booklists" render={() => <div className="main-container"><BookListContainer /></div>} />
+                        <Route path="/books/:id" render={(routerProps) => <div className="main-container"><BookContainer {...routerProps} /></div>} />
+                        <Route path="/bookclubs" render={() => <div className="main-container"><BookClubContainer /></div>} />
+                        <Route exact path="/" render={() => <div className="bookshelf-background"><Homepage /></div>} />
+                        <Route render={() => <div className="bookshelf-background"><Error /></div>} />
                     </Switch>
-                </div>
             </div>
         );
     }

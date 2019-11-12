@@ -2,11 +2,14 @@ import {
     FETCH_BOOK_CLUBS,
     ADD_BOOK_CLUB,
     REMOVE_BOOK_CLUB,
-    RECEIVE_MESSAGE
+    RECEIVE_MESSAGE,
+    ADD_BOOK_CLUB_ERROR
 } from '../types'
 
 const defaultState = {
-    bookClubs: []
+    bookClubs: [],
+    bookClubError: false,
+    loading: true
 }
 
 function bookClubReducer(state = defaultState, action) {
@@ -14,12 +17,20 @@ function bookClubReducer(state = defaultState, action) {
         case FETCH_BOOK_CLUBS:
             return {
                 ...state,
-                bookClubs: action.payload
+                bookClubs: action.payload,
+                loading: false,
+                bookClubError: false
             }
         case ADD_BOOK_CLUB:
             return {
                 ...state,
-                bookClubs: [...state.bookClubs, action.payload]
+                bookClubs: [...state.bookClubs, action.payload],
+                bookClubError: false
+            }
+        case ADD_BOOK_CLUB_ERROR:
+            return {
+                ...state,
+                bookClubError: action.payload
             }
         case REMOVE_BOOK_CLUB:
             const bookClubsCopy = [...state.bookClubs]

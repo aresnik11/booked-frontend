@@ -11,6 +11,7 @@ const BookBookLists = (props) => {
                 <h3>{props.name}</h3>
             </Link>
             <Button basic onClick={() => props.removeBookListBook(props.bookId, props.id)} content="Remove from Book List" />
+            <br/><br/>
         </div>
     )
 }

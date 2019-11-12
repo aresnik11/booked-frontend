@@ -1,15 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { addBookListBook } from '../actions'
+import { Form, Message } from 'semantic-ui-react'
 
 class AddToBookList extends React.Component {
     state = {
-        value: this.props.bookLists[0] ? this.props.bookLists[0].id : ""
+        value: "",
+        addBookError: false
     }
 
-    handleChange = (e) => {
+    handleChange = (e, { value }) => {
         this.setState({
-            value: e.target.value
+            value: value
         })
     }
 
@@ -32,7 +34,9 @@ class AddToBookList extends React.Component {
         .then(resp => resp.json())
         .then(response => {
             if (response.errors) {
-                alert(response.errors)
+                this.setState({
+                    addBookError: response.errors
+                })
             }
             else {
                 this.props.addBookListBook(response, this.state.value)
@@ -41,24 +45,44 @@ class AddToBookList extends React.Component {
     }
 
     render() {
+        const options = this.props.bookLists.map(bookList => {
+            return { key: bookList.id, value: bookList.id, text: bookList.name }
+        })
         return (
-            <form onSubmit={this.handleSubmit}>
-                <label>Select a book list:</label>
-                <br/>
-                <select value={this.state.value} onChange={this.handleChange}>
-                    {/* creating an option tag for each bookList */}
-                    {this.props.bookLists.map(bookList => <option key={bookList.id} value={bookList.id}>{bookList.name}</option>)}
-                </select>
-                <br/>
-                <input type="submit" value="Add to Book List" />
-            </form>
+            <Form onSubmit={this.handleSubmit} className="add-to-booklist">
+                    <Form.Select
+                        placeholder="Select a book list"
+                        options={options}
+                        onChange={this.handleChange}
+                    />
+                    {this.props.addError
+                    ?
+                    <Message
+                        negative
+                        header='Error'
+                        list={this.props.addError}
+                    />
+                    :
+                    null}
+                    {this.state.addBookError
+                    ?
+                    <Message
+                        negative
+                        header='Error'
+                        list={this.state.addBookError}
+                    />
+                    :
+                    null}
+                    <Form.Button basic content="Add to Book List" />
+                </Form>
         )
     }
 }
 
 function mapStateToProps(state) {
     return {
-        bookLists: state.bookListReducer.bookLists
+        bookLists: state.bookListReducer.bookLists,
+        addError: state.bookListReducer.addError
     }
 }
 

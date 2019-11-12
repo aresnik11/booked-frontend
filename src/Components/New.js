@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { addBookList, addBookClub, addMessage } from '../actions'
-import { Form } from 'semantic-ui-react'
+import { Form, Message } from 'semantic-ui-react'
 
 class New extends React.Component {
     state = {
@@ -45,6 +45,24 @@ class New extends React.Component {
                         value={this.state.text}
                         onChange={this.handleChange}
                     />
+                    {this.props.bookListError && this.props.type === "Book List"
+                    ?
+                    <Message
+                        negative
+                        header='Error'
+                        list={this.props.bookListError}
+                    />
+                    :
+                    null}
+                    {this.props.bookClubError && this.props.type === "Book Club"
+                    ?
+                    <Message
+                        negative
+                        header='Error'
+                        list={this.props.bookClubError}
+                    />
+                    :
+                    null}
                     <Form.Button basic content="Add" />
                 </Form>
             </div>
@@ -52,4 +70,11 @@ class New extends React.Component {
     }
 }
 
-export default connect(null, { addBookList, addBookClub, addMessage })(New)
+function mapStateToProps(state) {
+    return {
+        bookListError: state.bookListReducer.bookListError,
+        bookClubError: state.bookClubReducer.bookClubError
+    }
+}
+
+export default connect(mapStateToProps, { addBookList, addBookClub, addMessage })(New)

@@ -35,7 +35,7 @@ class SearchBooksContainer extends React.Component {
 
     render() {
         return (
-            <>
+            <div>
                 <SearchBooks />
                 <br/><br/>
                 {this.props.loading
@@ -49,7 +49,7 @@ class SearchBooksContainer extends React.Component {
                         {this.props.searchedBooks.map((book, index) => <BookPreview key={index} {...book} />)}
                     </Grid>
                 </div>}
-            </>
+            </div>
         )
     }
 }

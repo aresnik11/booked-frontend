@@ -2,13 +2,18 @@ import {
     SET_CURRENT_USER,
     LOG_OUT,
     ADD_BOOK_LIST,
+    ADD_BOOK_LIST_ERROR,
     ADD_BOOK_LIST_BOOK,
+    ADD_BOOK_LIST_BOOK_ERROR,
+    FETCH_BOOK,
     REMOVE_BOOK_LIST_BOOK,
     REMOVE_BOOK_LIST,
 } from '../types'
 
 const defaultState = {
-    bookLists: []
+    bookLists: [],
+    bookListError: false,
+    addError: false
 }
 
 function bookListReducer(state = defaultState, action) {
@@ -27,7 +32,13 @@ function bookListReducer(state = defaultState, action) {
         case ADD_BOOK_LIST:
             return {
                 ...state,
-                bookLists: [...state.bookLists, action.payload]
+                bookLists: [...state.bookLists, action.payload],
+                bookListError: false
+            }
+        case ADD_BOOK_LIST_ERROR:
+            return {
+                ...state,
+                bookListError: action.payload
             }
         case ADD_BOOK_LIST_BOOK:
             const copyBookLists = [...state.bookLists]
@@ -37,7 +48,18 @@ function bookListReducer(state = defaultState, action) {
             foundBookList.books = [...foundBookList.books, action.payload.book]
             return {
                 ...state,
-                bookLists: copyBookLists
+                bookLists: copyBookLists,
+                addError: false
+            }
+        case ADD_BOOK_LIST_BOOK_ERROR:
+            return {
+                ...state,
+                addError: action.payload
+            }
+        case FETCH_BOOK:
+            return {
+                ...state,
+                addError: false,
             }
         case REMOVE_BOOK_LIST_BOOK:
             const bookListsCopy = [...state.bookLists]
