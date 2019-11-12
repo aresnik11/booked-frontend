@@ -30,7 +30,7 @@ class Profile extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="profile-container">
                 <h1>Welcome, {this.props.currentUser.username}</h1>
                 <Link to="/booklists">
                     <Button content="Book Lists" />

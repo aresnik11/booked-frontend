@@ -29,7 +29,7 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="mini-container">
                 <h1>Log In</h1>
 
                 {this.props.pleaseLogIn
@@ -69,7 +69,7 @@ class Login extends React.Component {
                     />
                     :
                     null}
-                    <Form.Button basic content="Log In" />
+                    <Form.Button content="Log In" />
                 </Form>
 
             </div>

@@ -1,7 +1,7 @@
 import React from 'react';
+import 'semantic-ui-css/semantic.min.css';
 import '../css/App.css';
 import '../css/Loading.scss'
-import 'semantic-ui-css/semantic.min.css';
 import '../css/Book.css'
 import '../css/BookShelf.css'
 import Header from '../components/Header'
@@ -33,13 +33,13 @@ class App extends React.Component {
                     <Switch>
                         <Route path="/login" render={(routerProps) => <div className="bookshelf-background"><Login {...routerProps} /></div>}/>
                         <Route path="/signup" render={(routerProps) => <div className="bookshelf-background"><Signup {...routerProps} /></div>} />
-                        <Route path="/profile" render={() => <div className="bookshelf-background"><Profile /></div>} />
+                        <Route path="/profile" render={() => <div className="profile-background"><Profile /></div>} />
                         <Route path="/search" render={() => <div className="main-container"><SearchBooksContainer /></div>} />
                         <Route path="/booklists" render={() => <div className="main-container"><BookListContainer /></div>} />
                         <Route path="/books/:id" render={(routerProps) => <div className="main-container"><BookContainer {...routerProps} /></div>} />
                         <Route path="/bookclubs" render={() => <div className="main-container"><BookClubContainer /></div>} />
                         <Route exact path="/" render={() => <div className="bookshelf-background"><Homepage /></div>} />
-                        <Route render={() => <div className="bookshelf-background"><Error /></div>} />
+                        <Route render={() => <div className="error-background"><Error /></div>} />
                     </Switch>
             </div>
         );

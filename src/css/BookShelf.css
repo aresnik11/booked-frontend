@@ -1,20 +1,11 @@
 /* https://codepen.io/kzf/pen/vEYVmL */
-/* html {
-    height: 100%;
-  }
-  
-  body {
-    background-color: #AAACB5;
-  } */
-  
+
   .bookshelf-container {
     margin: 2%;
   }
 
   .bookshelf {
-    /* width: 100%; */
     width: 255px;
-    /* height: 100%; */
     margin: 0 auto;
     border: 10px #A87328 solid;
     overflow: hidden;
@@ -29,7 +20,6 @@
     float: left;
     color: white;
     font-size: 0.9em;
-    /* font-family: Verdana, sans-serif; */
     margin-bottom: 10px;
     margin-top: 20px;
     transition: -webkit-transform 0.4s ease;
@@ -86,14 +76,4 @@
             transform: rotate(0.25turn) translateY(-35px);
     width: 170px;
   }
-  
-  /* .bl-book h3 {
-    padding: 0;
-    font-size: 0.7em;
-    -webkit-transform-origin: 0 0;
-            transform-origin: 0 0;
-    -webkit-transform: rotate(0.25turn) translateY(-15px) translateX(-20px);
-            transform: rotate(0.25turn) translateY(-15px) translateX(-20px);
-    width: 150px;
-  } */
   

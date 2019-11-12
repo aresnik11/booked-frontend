@@ -4,7 +4,7 @@ import * as moment from 'moment'
 
 const Message = (props) => {
     return (
-        <Comment className="message">
+        <Comment>
             <Comment.Content>
                 <Comment.Author as="a" content={props.user.username} />
                 <Comment.Metadata content={moment(props.created_at).format("M/D h:mma")} />

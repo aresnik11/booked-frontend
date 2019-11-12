@@ -2,25 +2,22 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
+/* sets background color, font, font color for entire app */
+body {
+	background: #deebef;
+	color: #34495e;
+	font-family: 'Lato', 'Arial', sans-serif;
+	font-weight: 400;
+	line-height: 1.2;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* sets link color and hover */
+a, a:hover {
+	color: #2c3e50;
+	text-decoration: none;
 }
 
-.App-link {
-  color: #09d3ac;
-}
-
+/* makes header fixed to the top of the screen, full width, and above all other content */
 .ui.segment.fixed {
   top: 0;
   position: fixed;
@@ -28,6 +25,8 @@
   z-index: 11;
 }
 
+/* main container for most pages */
+/* adds margin and padding so content is not cramped and clear header */
 .main-container {
   margin-left: 2%;
   margin-right: 2%;
@@ -35,61 +34,114 @@
   padding-bottom: 100px;
 }
 
+/* BOOK SHOW PAGE */
+
+/* main container for book show page, centers and shrinks width */
+.book-show-container {
+  width: 80%;
+  margin: auto;
+}
+
+/* makes white container with shadow */
+.book-show {
+  padding: 2%;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* shrinks width of add to booklist dropdown and centers */
+.add-to-booklist {
+  width: 70%;
+  margin: auto;
+}
+
+/* centers the image */
+.image-show {
+  margin: auto;
+}
+
+/* INPUTS & ERROR MESSAGES */
+
+/* decreases width of various input fields and error messages and centers them */
 .small-input, .ui.message.small-input {
   width: 20%;
   margin: auto;
 }
 
+/* left justifies text in error messages */
+.ui.message {
+  text-align: left;
+}
+
+/* BOOK CLUB MESSAGES */
+
+/* centers the container and left justifies text of messages within it */
 .ui.comments.message-container {
   text-align: left;
   margin: auto;
 }
 
-.ui.comments.message-container .comment.message {
+/* adds margin to each message */
+.ui.comments.message-container .comment {
   margin-left: 5%;
   margin-right: 5%; 
 }
 
-.ui.message, .left-text {
-  text-align: left;
-}
+/* HOMEPAGE, LOGIN, SIGNUP PAGES */
 
+/* sets background image for the homepage, login, and signup pages */
 .bookshelf-background {
   height: 100vh;
   background: url("https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2053&q=80");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  padding-top: 30vh;
+  padding-top: 40vh;
+
 }
 
-.bookshelf-background .title {
+/* increases font size of title on homepage */
+.mini-container .title {
   color: white;
   font-size: 100px;
+}
+
+/* increases font size of all h1s */
+.mini-container h1 {
+  color: white;
+  font-size: 48px;
+}
+
+/* PROFILE PAGE */
+
+/* sets background image for the profile page */
+.profile-background {
+  height: 100vh;
+  background: url("https://images.unsplash.com/photo-1517770413964-df8ca61194a6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  padding-top: 20vh;
+}
+
+.profile-container h1 {
+  color: black;
+  font-size: 48px;
+}
+
+/* ERROR PAGE */
+
+/* sets background image for the error page */
+.error-background {
+  height: 100vh;
+  background: url("https://images.unsplash.com/photo-1521714161819-15534968fc5f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   padding-top: 40vh;
 }
 
-.bookshelf-background h1 {
+.error-container h1 {
   color: white;
-  /* font-size: 100px; */
-}
-
-.image-show {
-  margin: auto;
-}
-
-.book-show-container, .add-to-booklist {
-  width: 80%;
-  margin: auto;
-}
-
-.add-to-booklist {
-  width: 70%;
-  margin: auto;
-}
-
-.book-show {
-  padding: 2%;
-  background: #fff;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  font-size: 48px;
 }

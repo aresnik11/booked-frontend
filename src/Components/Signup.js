@@ -27,7 +27,7 @@ class Signup extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="mini-container">
                 <h1>Sign Up</h1>
                 <Form onSubmit={this.handleSubmit} className="small-input">
                     <Form.Input
@@ -52,7 +52,7 @@ class Signup extends React.Component {
                     />
                     :
                     null}
-                    <Form.Button basic content="Sign Up" />
+                    <Form.Button content="Sign Up" />
                 </Form>
             </div>
         )
