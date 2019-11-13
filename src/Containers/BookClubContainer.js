@@ -5,9 +5,8 @@ import New from '../components/New'
 import BookClubPreview from '../components/BookClubPreview'
 import BookListClubShow from '../components/BookListClubShow'
 import Message from '../components/Message'
-import Error from '../components/Error'
 import Loading from '../components/Loading'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchBookClubs, receiveMessage, receiveAddBookClub, receiveRemoveBookClub } from '../actions'
 import { Comment, Header } from 'semantic-ui-react'
@@ -63,9 +62,9 @@ class BookClubContainer extends React.Component {
                                 </div>
                             )
                         }
-                        // if we couldn't find the book club object, render Error component
+                        // if we couldn't find the book club object, redirect to /error, which will render the Error component
                         else {
-                            return <Error />
+                            return <Redirect to="/error" />
                         }
                     }}/>
                     <Route path="/bookclubs" render={() => {

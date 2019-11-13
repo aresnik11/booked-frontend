@@ -27,7 +27,7 @@ class Signup extends React.Component {
 
     render() {
         return (
-            <div className="mini-container">
+            <div className="login-container">
                 <h1>Sign Up</h1>
                 <Form onSubmit={this.handleSubmit} className="small-input">
                     <Form.Input

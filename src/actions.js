@@ -89,6 +89,13 @@ function fetchBookByVolumeId(bookId) {
     }
 }
 
+function resetSelectedBook() {
+    return {
+        type: FETCH_BOOK,
+        payload: null
+    }
+}
+
 //bookListReducer
 
 function addBookList(newBookList) {
@@ -487,6 +494,7 @@ export {
     setLoading,
     fetchBook,
     fetchBookByVolumeId,
+    resetSelectedBook,
     addBookList,
     addBookListBook,
     removeBookListBook,

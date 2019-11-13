@@ -4,12 +4,12 @@ import BookListPreview from '../components/BookListPreview'
 import New from '../components/New'
 import BookListClubShow from '../components/BookListClubShow'
 import Search from '../components/Search'
-import Error from '../components/Error'
 import ShareBookList from '../components/ShareBookList'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import withAuth from '../withAuth'
 import { Grid } from 'semantic-ui-react'
+import { resetSelectedBook } from '../actions'
 
 class BookListContainer extends React.Component {
     state = {
@@ -20,6 +20,11 @@ class BookListContainer extends React.Component {
         this.setState({
             searchTerm: e.target.value
         })
+    }
+
+    componentDidMount() {
+        //need to reset selectedBook back to null so that if you click on a book preview after searching and clicking on a book preview everything works as expected
+        this.props.resetSelectedBook()
     }
 
     render() {
@@ -46,9 +51,9 @@ class BookListContainer extends React.Component {
                             </div>
                         )
                     }
-                    // if we couldn't find the book list object, render Error component
+                    // if we couldn't find the book list object, redirect to /error, which will render the Error component
                     else {
-                        return <Error />
+                        return <Redirect to="/error" />
                     }
                 }} />
                 <Route path="/booklists" render={() => {
@@ -78,4 +83,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(withAuth(BookListContainer))
+export default connect(mapStateToProps, { resetSelectedBook })(withAuth(BookListContainer))

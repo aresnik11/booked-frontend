@@ -39,7 +39,7 @@ const Loading = () => {
                             </svg>
                         </li>
                         </ul>
-                    </div><h3>Loading...</h3>
+                    </div><h2>Loading...</h2>
                 </div>
             </div>
         </div>

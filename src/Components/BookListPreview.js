@@ -50,7 +50,7 @@ class BookListPreview extends React.Component {
                     return (
                         <div key={book.id} className="bl-book-tilted">
                             <div className={this.getRandomColorClassName()}>
-                                <h2>{book.title.slice(0,53)}</h2>
+                                <h3>{book.title.slice(0,53)}</h3>
                             </div>
                         </div>
                     )
@@ -59,7 +59,7 @@ class BookListPreview extends React.Component {
                 else {
                     return (
                         <div key={book.id} className={this.getRandomColorClassName()}>
-                            <h2>{book.title.slice(0,53)}</h2>
+                            <h3>{book.title.slice(0,53)}</h3>
                         </div>
                     )
                 }

@@ -29,7 +29,7 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div className="mini-container">
+            <div className="login-container">
                 <h1>Log In</h1>
 
                 {this.props.pleaseLogIn

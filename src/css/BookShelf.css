@@ -11,7 +11,9 @@
     overflow: hidden;
     background-image: linear-gradient(rgba(0,0,0,.95), rgba(0,0,0,.87) 220px, #b87e2c 220px, #b87e2c 222px, #A87328 222px, #A87328 228px, #986824 228px, #986824 230px);
     background-size: 10px 230px;
-    /* box-shadow: 0px 1000px 0px 400px #7A7668; */
+    box-shadow: 0px 1000px 0px 400px #7A7668;
+    box-shadow: 10px 10px 8px #888888;
+
   }
   
   .bl-book {
@@ -67,7 +69,7 @@
     color: black;
   }
   
-  .bl-book h2 {
+  .bl-book h3 {
     padding: 0;
     font-size: 1em;
     -webkit-transform-origin: 0% 0%;

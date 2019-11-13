@@ -24,9 +24,7 @@ function withAuth(MyComponent) {
                     this.props.pleaseLogIn()
                     //removes any previous error messages from invalid logins, since now showing the please login message
                     this.props.removeLogInError()
-                    return (
-                        <Redirect to="/login" />
-                    )
+                    return <Redirect to="/login" />
                 }
             }
         }
