@@ -35,7 +35,11 @@ class BookClubPreview extends React.Component {
                     <h3>{this.props.name}</h3>
                 </Link>
                 <br/>
-                <Button basic onClick={this.showConfirmation} content="Delete Book Club" />
+                <Button
+                    id="btn"
+                    onClick={this.showConfirmation}
+                    content="Delete Book Club"
+                />
                 <Confirm
                     open={this.state.open}
                     header="Please Confirm"

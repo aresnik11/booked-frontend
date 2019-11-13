@@ -18,8 +18,21 @@ h1, h2 {
 
 /* sets link color and hover */
 a, a:hover {
-	color: #2c3e50;
+	color: #34495e;
 	text-decoration: none;
+}
+
+/* custom background color for button */
+#btn {
+  color: #fff;
+  background: #34495e;
+}
+
+/* custom background color for button on hover */
+#btn:hover {
+  color: #fff;
+  background: #3e5770;
+  /* background: #283847; */
 }
 
 /* makes header fixed to the top of the screen, full width, and above all other content */
@@ -121,7 +134,7 @@ a, a:hover {
 
 /* increases font size of title on homepage */
 .home-login-container .title {
-  color: white;
+  color: #fff;
   font-size: 150px;
   font-family: 'Dancing Script', cursive;
 }
@@ -131,6 +144,7 @@ a, a:hover {
   font-size: 48px;
 }
 
+/* creates login/signup div with white background */
 .login-container {
   width: 30em;
   margin: auto;
@@ -152,7 +166,7 @@ a, a:hover {
 }
 
 .profile-container h1 {
-  color: black;
+  color: #000;
   font-size: 48px;
 }
 
@@ -169,6 +183,6 @@ a, a:hover {
 }
 
 .error-container h1 {
-  color: white;
+  color: #fff;
   font-size: 48px;
 }

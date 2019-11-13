@@ -8,6 +8,7 @@ const Search = (props) => {
             <Form className="small-input">
                 <Form.Input
                     type="search"
+                    icon="search"
                     name="search"
                     placeholder="Search..."
                     value={props.searchTerm}

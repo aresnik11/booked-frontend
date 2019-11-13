@@ -33,6 +33,8 @@ class SearchBooks extends React.Component {
                     <Form.Input
                         name="search"
                         type="search"
+                        icon="search"
+                        loading={this.props.loading}
                         placeholder="Search..."
                         value={this.state.search}
                         onChange={this.handleChange}
@@ -68,7 +70,10 @@ class SearchBooks extends React.Component {
                         />
                     </Form.Group>
                     <br/>
-                    <Form.Button basic content="Search" />
+                    <Form.Button
+                        id="btn"
+                        content="Search"
+                    />
                 </Form>
             </div>
         )
@@ -78,7 +83,8 @@ class SearchBooks extends React.Component {
 function mapStateToProps(state) {
     return {
         searchTerm: state.bookReducer.searchTerm,
-        searchType: state.bookReducer.searchType
+        searchType: state.bookReducer.searchType,
+        loading: state.bookReducer.loading
     }
 }
 

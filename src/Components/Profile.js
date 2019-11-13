@@ -32,11 +32,19 @@ class Profile extends React.Component {
         return (
             <div>
                 <h1>Welcome, {this.props.currentUser.username}</h1>
+                <br/>
                 <Link to="/booklists">
-                    <Button content="Book Lists" />
+                    <Button
+                        color="black"
+                        content="Book Lists"
+                    />
                 </Link>
                 <br/><br/>
-                <Button onClick={this.showConfirmation} content="Delete Account" />
+                <Button
+                    color="black"
+                    onClick={this.showConfirmation}
+                    content="Delete Account"
+                />
                 <Confirm
                     open={this.state.open}
                     header="Please Confirm"

@@ -97,7 +97,10 @@ class ShareBookList extends React.Component {
                     />
                     :
                     null}
-                    <Form.Button basic content="Share" />
+                    <Form.Button
+                        id="btn"
+                        content="Share"
+                    />
                 </Form>
             </div>
         )

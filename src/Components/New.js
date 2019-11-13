@@ -63,7 +63,10 @@ class New extends React.Component {
                     />
                     :
                     null}
-                    <Form.Button basic content="Add" />
+                    <Form.Button
+                        id="btn"
+                        content="Add"
+                    />
                 </Form>
             </div>
         )

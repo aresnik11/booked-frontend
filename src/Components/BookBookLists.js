@@ -10,7 +10,11 @@ const BookBookLists = (props) => {
             <Link to={`/booklists/${props.id}`}>
                 <h3>{props.name}</h3>
             </Link>
-            <Button basic onClick={() => props.removeBookListBook(props.bookId, props.id)} content="Remove from Book List" />
+            <Button
+                id="btn"
+                onClick={() => props.removeBookListBook(props.bookId, props.id)}
+                content="Remove from Book List"
+            />
             <br/><br/>
         </div>
     )

@@ -36,7 +36,11 @@ class BookListClubShow extends React.Component {
         return (
             <div>
                 <h1>{this.props.name}</h1>
-                <Button basic onClick={this.showConfirmation} content={content} />
+                <Button
+                    id="btn"
+                    onClick={this.showConfirmation}
+                    content={content}
+                />
                 {this.props.type === "Book List"
                 ?
                 <Confirm
