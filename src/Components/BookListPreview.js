@@ -3,30 +3,31 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { removeBookList } from '../actions'
 import { Button, Confirm } from 'semantic-ui-react'
+import Delete from './Delete'
 
 class BookListPreview extends React.Component {
-    state = {
-        open: false
-    }
+    // state = {
+    //     open: false
+    // }
 
-    showConfirmation = () => {
-        this.setState({
-            open: true
-        })
-    }
+    // showConfirmation = () => {
+    //     this.setState({
+    //         open: true
+    //     })
+    // }
 
-    handleCancel = () => {
-        this.setState({
-            open: false
-        })
-    }
+    // handleCancel = () => {
+    //     this.setState({
+    //         open: false
+    //     })
+    // }
 
-    handleBookListRemove = () => {
-        this.props.removeBookList(this.props.id)
-        this.setState({
-            open: false
-        })
-    }
+    // handleBookListRemove = () => {
+    //     this.props.removeBookList(this.props.id)
+    //     this.setState({
+    //         open: false
+    //     })
+    // }
 
     //returns a random number between 0 and n
     getRandomNumber = (n) => {
@@ -84,7 +85,8 @@ class BookListPreview extends React.Component {
                     </div>
                 </Link>
                 <br/>
-                <Button
+                <Delete type="Book List" id={this.props.id} />
+                {/* <Button
                     id="btn"
                     onClick={this.showConfirmation}
                     content="Delete Book List"
@@ -96,7 +98,7 @@ class BookListPreview extends React.Component {
                     confirmButton="Delete"
                     onCancel={this.handleCancel}
                     onConfirm={this.handleBookListRemove}
-                />
+                /> */}
             </div>
         )
     }

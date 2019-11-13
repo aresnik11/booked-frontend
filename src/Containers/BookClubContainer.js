@@ -3,13 +3,13 @@ import withAuth from '../withAuth'
 import Search from '../components/Search'
 import New from '../components/New'
 import BookClubPreview from '../components/BookClubPreview'
-import BookListClubShow from '../components/BookListClubShow'
+import Delete from '../components/Delete'
 import Message from '../components/Message'
 import Loading from '../components/Loading'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchBookClubs, receiveMessage, receiveAddBookClub, receiveRemoveBookClub } from '../actions'
-import { Comment, Header } from 'semantic-ui-react'
+import { Comment, Header, Grid } from 'semantic-ui-react'
 import { ActionCableConsumer } from 'react-actioncable-provider'
 
 class BookClubContainer extends React.Component {
@@ -35,7 +35,7 @@ class BookClubContainer extends React.Component {
                 <Loading />
                 :
                 <Switch>
-                    <Route path="/bookclubs/:id" render={(routerProps) => {
+                    <Route exact path="/bookclubs/:id" render={(routerProps) => {
                         //find the bookclub that matches this id from all bookclubs
                         const bookClubId = parseInt(routerProps.match.params.id)
                         const bookClubObj = this.props.bookClubs.find(bookClub => bookClub.id === bookClubId)
@@ -43,7 +43,9 @@ class BookClubContainer extends React.Component {
                         if (bookClubObj) {
                             return (
                                 <div>
-                                    <BookListClubShow type="Book Club" {...bookClubObj} />
+                                    <h1>{bookClubObj.name}</h1>
+                                    <br/>
+                                    <Delete type="Book Club" id={bookClubObj.id} />
                                     <br/><br/>
                                     <New type="Message" bookClub={bookClubObj} />
                                     <br/><br/>
@@ -67,15 +69,24 @@ class BookClubContainer extends React.Component {
                             return <Redirect to="/error" />
                         }
                     }}/>
-                    <Route path="/bookclubs" render={() => {
+                    <Route exact path="/bookclubs" render={() => {
                         const filteredBookClubs = this.props.bookClubs.filter(bookClub => bookClub.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
                         return (
                             <div>
                                 <h1>Book Clubs</h1>
                                 <br/>
-                                <New type="Book Club" />
-                                <br/><br/>
-                                {filteredBookClubs.length ? <Search type="Book Clubs" searchTerm={this.state.searchTerm} searchHandler={this.searchBookClub} /> : null}
+                                <Grid columns="equal">
+                                    <Grid.Column>
+                                        <New type="Book Club" />
+                                    </Grid.Column>
+                                    {this.props.bookClubs.length
+                                    ?
+                                    <Grid.Column>
+                                        <Search type="Book Clubs" searchTerm={this.state.searchTerm} searchHandler={this.searchBookClub} />
+                                    </Grid.Column>
+                                    :
+                                    null}
+                                </Grid>
                                 <br/><br/>
                                 <div>
                                     {filteredBookClubs.map(bookClub => <BookClubPreview key={bookClub.id} {...bookClub} />)}
@@ -94,6 +105,8 @@ class BookClubContainer extends React.Component {
                             </div>
                         )
                     }}/>
+                    {/* if we didn't match either path, redirect to error */}
+                    <Redirect to="/error" />
                 </Switch>}
             </>
         )

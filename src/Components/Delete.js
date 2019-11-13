@@ -4,7 +4,7 @@ import { removeBookList, removeBookClub } from '../actions'
 import { Button, Confirm } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
 
-class BookListClubShow extends React.Component {
+class Delete extends React.Component {
     state = {
         open: false
     }
@@ -35,7 +35,6 @@ class BookListClubShow extends React.Component {
         const content = `Delete ${this.props.type}`
         return (
             <div>
-                <h1>{this.props.name}</h1>
                 <Button
                     id="btn"
                     onClick={this.showConfirmation}
@@ -68,4 +67,4 @@ class BookListClubShow extends React.Component {
 
 }
 
-export default connect(null, { removeBookList, removeBookClub })(withRouter(BookListClubShow))
+export default connect(null, { removeBookList, removeBookClub })(withRouter(Delete))

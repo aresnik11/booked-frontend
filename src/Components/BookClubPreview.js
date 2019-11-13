@@ -3,30 +3,31 @@ import { Link } from 'react-router-dom'
 import { Button, Confirm } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { removeBookClub } from '../actions'
+import Delete from './Delete'
 
 class BookClubPreview extends React.Component {
-    state = {
-        open: false
-    }
+    // state = {
+    //     open: false
+    // }
 
-    showConfirmation = () => {
-        this.setState({
-            open: true
-        })
-    }
+    // showConfirmation = () => {
+    //     this.setState({
+    //         open: true
+    //     })
+    // }
 
-    handleCancel = () => {
-        this.setState({
-            open: false
-        })
-    }
+    // handleCancel = () => {
+    //     this.setState({
+    //         open: false
+    //     })
+    // }
 
-    handleBookClubRemove = () => {
-        this.props.removeBookClub(this.props.id)
-        this.setState({
-            open: false
-        })
-    }
+    // handleBookClubRemove = () => {
+    //     this.props.removeBookClub(this.props.id)
+    //     this.setState({
+    //         open: false
+    //     })
+    // }
 
     render() {
         return (
@@ -35,7 +36,8 @@ class BookClubPreview extends React.Component {
                     <h3>{this.props.name}</h3>
                 </Link>
                 <br/>
-                <Button
+                <Delete type="Book Club" id={this.props.id} />
+                {/* <Button
                     id="btn"
                     onClick={this.showConfirmation}
                     content="Delete Book Club"
@@ -47,7 +49,7 @@ class BookClubPreview extends React.Component {
                     confirmButton="Delete"
                     onCancel={this.handleCancel}
                     onConfirm={this.handleBookClubRemove}
-                />
+                /> */}
                 <br/><br/>
             </div>
         )

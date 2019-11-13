@@ -31,12 +31,12 @@ class App extends React.Component {
             <div className="App">
                 <Route path="/" component={Header} />
                     <Switch>
-                        <Route path="/login" render={(routerProps) => <div className="home-login-container "><Login {...routerProps} /></div>}/>
-                        <Route path="/signup" render={(routerProps) => <div className="home-login-container "><Signup {...routerProps} /></div>} />
-                        <Route path="/profile" render={() => <div className="profile-container"><Profile /></div>} />
-                        <Route path="/search" render={() => <div className="main-container"><SearchBooksContainer /></div>} />
+                        <Route exact path="/login" render={(routerProps) => <div className="home-login-container "><Login {...routerProps} /></div>}/>
+                        <Route exact path="/signup" render={(routerProps) => <div className="home-login-container "><Signup {...routerProps} /></div>} />
+                        <Route exact path="/profile" render={() => <div className="profile-container"><Profile /></div>} />
+                        <Route exact path="/search" render={() => <div className="main-container"><SearchBooksContainer /></div>} />
                         <Route path="/booklists" render={() => <div className="main-container"><BookListContainer /></div>} />
-                        <Route path="/books/:id" render={(routerProps) => <div className="main-container"><BookContainer {...routerProps} /></div>} />
+                        <Route exact path="/books/:id" render={(routerProps) => <div className="main-container"><BookContainer {...routerProps} /></div>} />
                         <Route path="/bookclubs" render={() => <div className="main-container"><BookClubContainer /></div>} />
                         <Route exact path="/" render={() => <div className="home-login-container "><Homepage /></div>} />
                         <Route render={() => <div className="error-container"><Error /></div>} />

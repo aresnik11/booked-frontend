@@ -56,34 +56,34 @@ a, a:hover {
 
 /* main container for book show page, centers and shrinks width */
 .book-show-container {
-  width: 80%;
+  width: 90%;
   margin: auto;
   margin-top: 2%;
 }
 
-/* makes white container with shadow for title */
-.book-show-title {
-  padding: 2%;
+/* makes white container with shadow with all other boxes */
+.book-show {
   background: #fff;
-  /* box-shadow: 0 10px 30px rgba(0,0,0,0.5); */
   box-shadow: 10px 10px 8px #888888;
   border-radius: 15px;
 }
 
-/* makes white container with shadow with all other boxes */
-.book-show {
-  padding: 10%;
-  background: #fff;
-  /* box-shadow: 0 10px 30px rgba(0,0,0,0.5); */
-  box-shadow: 10px 10px 8px #888888;
-  border-radius: 15px;
-  height: 50vh;
-  overflow: auto;
+/* adds padding for title */
+.book-show.title {
+  padding: 2%;
+}
+
+/* adds padding and sets height and overflow for main boxes */
+.book-show.content {
+    padding: 10%;
+    height: 60vh;
+    overflow: auto;
+    margin: 2%;
 }
 
 /* shrinks width of add to booklist dropdown and centers */
 .add-to-booklist {
-  width: 70%;
+  width: 18em;
   margin: auto;
 }
 

@@ -6,7 +6,7 @@ import BookBookLists from '../components/BookBookLists'
 import { connect } from 'react-redux'
 import withAuth from '../withAuth'
 import { fetchBook, fetchBookByVolumeId } from '../actions'
-import { Grid, Image, Segment } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 import { Redirect } from 'react-router-dom'
 
 class BookContainer extends React.Component {
@@ -42,58 +42,38 @@ class BookContainer extends React.Component {
                 const wantedBookLists = this.props.bookLists.filter(bookList => bookList.books.find(bookListBook => bookListBook.id === book.id))
                 return (
                     <div className="book-show-container">
-                        <Grid >
+                        <Grid>
                             <Grid.Row>
-                                <Grid.Column className="book-show-title">
-                                    <h1>{book.title}</h1>
-                                    {book.subtitle ? <h3>{book.subtitle}</h3> : null}
+                                <Grid.Column>
+                                    <div className="book-show title">
+                                        <h1>{book.title}</h1>
+                                        {book.subtitle ? <h2>{book.subtitle}</h2> : null}
+                                    </div>
                                 </Grid.Column>
                             </Grid.Row>
                             <Grid.Row>
-                                <Grid.Column width={3}>
-                                    <div className="book-show">
-                                        <Image alt={book.title} src={book.image} className="image-show" />
-                                    </div>
-                                </Grid.Column>
-                                <Grid.Column width={4}>
-                                    <BookShow key={book.id} {...book} />
-                                </Grid.Column>
+                                {/* bookShow contains 2 grid columns with image, info, and description */}
+                                <BookShow key={book.id} {...book} />
                                 <Grid.Column width={5}>
-                                    <div className="book-show">
-                                        <p>{book.description}</p>
-                                    </div>
-                                </Grid.Column>
-                                <Grid.Column width={4}>
-                                    <div className="book-show">
+                                    <div className="book-show content">
                                         <AddToBookList book={book} />
-                                    </div>
                                     {/* only render Book Lists section if this book is on any of the users book lists */}
                                     {wantedBookLists.length
                                     ?
                                     <>
-                                        <br/><br/>
-                                        <div className="book-show">
-                                            <h3>Book lists</h3>
-                                            <div>
-                                                {wantedBookLists.map(bookList => <BookBookLists key={bookList.id} {...bookList} bookId={book.id} />)}
-                                            </div>
+                                        <br/>
+                                        <h2>Book lists</h2>
+                                        <div>
+                                            {wantedBookLists.map(bookList => <BookBookLists key={bookList.id} {...bookList} bookId={book.id} />)}
                                         </div>
                                     </>
                                     :
                                     null}
+                                    </div>
                                 </Grid.Column>
                             </Grid.Row>
                         </Grid>
                     </div>
-
-                        // {/* <BookShow key={book.id} {...book} />
-                        // <br/><br/>
-                        // <AddToBookList book={book} /> */}
-                        // {/* only render Book Lists header if this book is on any of the users book lists */}
-                        // {/* {wantedBookLists.length ? <h4>Book lists</h4> : null}
-                        // <div>
-                        //     {wantedBookLists.map(bookList => <BookBookLists key={bookList.id} {...bookList} bookId={book.id} />)}
-                        // </div> */}
                 )
             }
             //if selectedBook doesn't have an id, we couldn't find it in our backend and need to look for it in the array of searchedBooks
@@ -114,52 +94,38 @@ class BookContainer extends React.Component {
                     }))
                     return (
                         <div className="book-show-container">
-                            <Grid columns='equal' className="book-show">
+                            <Grid>
                                 <Grid.Row>
                                     <Grid.Column>
-                                        <h1>{book.title}</h1>
-                                        {book.subtitle ? <h3>{book.subtitle}</h3> : null}
+                                        <div className="book-show title">
+                                            <h1>{book.title}</h1>
+                                            {book.subtitle ? <h2>{book.subtitle}</h2> : null}
+                                        </div>
                                     </Grid.Column>
                                 </Grid.Row>
                                 <Grid.Row>
-                                    <Grid.Column width={2}>
-                                        <div>
-                                            <Image alt={book.title} src={book.image} className="image-show" />
-                                        </div>
-                                    </Grid.Column>
-                                    <Grid.Column>
-                                        <BookShow key={book.volume_id} {...book} />
-                                    </Grid.Column>
-                                    <Grid.Column>
-                                        <div>
-                                            <p>{book.description}</p>
-                                        </div>
-                                    </Grid.Column>
-                                    <Grid.Column>
-                                        <div>
+                                    {/* bookShow contains 2 grid columns with image, info, and description */}
+                                    <BookShow key={book.volume_id} {...book} />
+                                    <Grid.Column width={5}>
+                                        <div className="book-show content">
                                             <AddToBookList book={book} />
-                                        </div>
-                                        <br/><br/>
-                                        <div>
-                                            {/* only render Book Lists header if this book is on any of the users book lists */}
-                                            {wantedBookLists.length ? <h3>Book lists</h3> : null}
+                                        {/* only render Book Lists section if this book is on any of the users book lists */}
+                                        {wantedBookLists.length
+                                        ?
+                                        <>
+                                            <br/>
+                                            <h2>Book lists</h2>
                                             <div>
                                                 {wantedBookLists.map(bookList => <BookBookLists key={bookList.id} {...bookList} bookId={bookId} />)}
                                             </div>
+                                        </>
+                                        :
+                                        null}
                                         </div>
                                     </Grid.Column>
                                 </Grid.Row>
                             </Grid>
                         </div>
-                        // <div>
-                        //     <BookShow key={book.volume_id} {...book} />
-                        //     <AddToBookList book={book} />
-                        //     {/* only render Book Lists header if this book is on any of the users book lists */}
-                        //     {wantedBookLists.length ? <h4>Book lists</h4> : null}
-                        //     <div>
-                        //         {wantedBookLists.map(bookList => <BookBookLists key={bookList.id} {...bookList} bookId={bookId} />)}
-                        //     </div>                                
-                        // </div>
                     )
                 }
                 //otherwise, we don't know that the book is so redirect to /error, which will render the Error component

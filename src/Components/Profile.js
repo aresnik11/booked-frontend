@@ -36,7 +36,21 @@ class Profile extends React.Component {
                 <Link to="/booklists">
                     <Button
                         color="black"
-                        content="Book Lists"
+                        content="My Book Lists"
+                    />
+                </Link>
+                <br/><br/>
+                <Link to="/search">
+                    <Button
+                        color="black"
+                        content="Search Books"
+                    />
+                </Link>
+                <br/><br/>
+                <Link to="/bookclubs">
+                    <Button
+                        color="black"
+                        content="See Book Clubs"
                     />
                 </Link>
                 <br/><br/>
