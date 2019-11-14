@@ -84,6 +84,7 @@ class ShareBookList extends React.Component {
                 null}
                 <Form onSubmit={this.handleSubmit} className="small-input">
                     <Form.Select
+                        search
                         placeholder="Select a user"
                         options={options}
                         onChange={this.handleChange}

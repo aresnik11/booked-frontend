@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { logOut } from '../actions'
 import { Menu, Segment } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-import Booked from '../Booked.png'
 
 class Header extends React.Component {
     state = {

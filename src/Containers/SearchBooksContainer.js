@@ -45,6 +45,7 @@ class SearchBooksContainer extends React.Component {
         window.scrollTo({
             behavior: "smooth",
             top: 0,
+            left: 0
         })
         this.setState({
             backToTopVisible: false

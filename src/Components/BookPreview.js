@@ -74,7 +74,7 @@ const BookPreview = (props) => {
                 <Button
                     className="btn"
                     onClick={() => props.removeBookListBook(props.id, props.bookListId)}
-                    content="Remove from Book List"
+                    content="Remove"
                 />
             </>
             : null}

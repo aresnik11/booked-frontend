@@ -51,6 +51,7 @@ class AddToBookList extends React.Component {
         return (
             <Form onSubmit={this.handleSubmit} className="add-to-booklist">
                     <Form.Select
+                        search
                         placeholder="Select a book list"
                         options={options}
                         onChange={this.handleChange}

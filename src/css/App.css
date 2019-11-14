@@ -23,16 +23,21 @@ a, a:hover {
 }
 
 /* custom background color for button */
-.ui.button.btn, .btn .ui.button, .ui.action.input .ui.button {
+.ui.button.btn, .btn .ui.button, .ui.action.input .ui.button, .ui.tiny.label.btn {
   color: #fff;
   background: #34495e;
 }
 
 /* custom background color for button on hover */
-.ui.button.btn:hover, .btn .ui.button:hover, .ui.action.input .ui.button:hover {
+.ui.button.btn:hover, .btn .ui.button:hover, .ui.action.input .ui.button:hover, .ui.tiny.label.btn:hover {
   color: #fff;
   background: #3e5770;
   /* background: #283847; */
+}
+
+/* custom text color */
+.ui.comments .comment .author, .ui.comments .comment .text, .ui.radio.checkbox label, .ui.menu .item, .ui.secondary.menu .active.item, .ui.secondary.menu a.item:hover, .ui.secondary.menu .active.item:hover {
+  color: #34495e;
 }
 
 /* makes header fixed to the top of the screen, full width, and above all other content */
@@ -112,7 +117,6 @@ a, a:hover {
 
 .book-club {
   width: 255px;
-  padding: 2%;
   margin: 2%;
 }
 
@@ -121,7 +125,22 @@ a, a:hover {
   color: #fff;
 }
 
+.book-club #x {
+  float: right;
+  margin-top: 3%;
+  color: #34495e;
+}
 
+.book-club div {
+  height: 100%;
+  width: 100%;
+  padding: 10%;
+}
+
+/* makes cursor look like label is clickable */
+.ui.tiny.label.btn, .book-club #x {
+  cursor: pointer;
+}
 
 /* BOOK CLUB MESSAGES */
 
@@ -154,10 +173,10 @@ a, a:hover {
 }
 
 /* keeps sender name and date on the same line */
-.author {
+/* also keeps book list name on same line as x-button on book show page */
+.author, .book-bl-name {
   display: inline-block;
 }
-
 
 /* HOMEPAGE, LOGIN, SIGNUP PAGES */
 

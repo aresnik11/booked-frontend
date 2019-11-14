@@ -18,6 +18,7 @@ import Login from '../components/Login'
 import Signup from '../components/Signup'
 import { connect } from 'react-redux'
 import { autoLogin } from '../actions'
+import ScrollToTop from '../ScrollToTop'
 
 class App extends React.Component {
     componentDidMount() {
@@ -31,18 +32,86 @@ class App extends React.Component {
         return (
             <div className="App">
                 <Route path="/" component={Header} />
-                    <Switch>
-                        <Route exact path="/login" render={(routerProps) => <div className="home-login-container "><Login {...routerProps} /></div>}/>
-                        <Route exact path="/signup" render={(routerProps) => <div className="home-login-container "><Signup {...routerProps} /></div>} />
-                        <Route exact path="/profile" render={() => <div className="profile-container"><Profile /></div>} />
-                        <Route exact path="/search" render={() => <div className="main-container"><SearchBooksContainer /></div>} />
-                        <Route path="/booklists" render={() => <div className="main-container"><BookListContainer /></div>} />
-                        <Route exact path="/books/:id" render={(routerProps) => <div className="main-container"><BookContainer {...routerProps} /></div>} />
-                        <Route exact path="/bookclubs/:id" render={(routerProps) => <div className="main-container"><MessageContainer {...routerProps} /></div>} />
-                        <Route exact path="/bookclubs" render={() => <div className="main-container"><BookClubContainer /></div>} />
-                        <Route exact path="/" render={() => <div className="home-login-container "><Homepage /></div>} />
-                        <Route render={() => <div className="error-container"><Error /></div>} />
-                    </Switch>
+                    {/* <ScrollToTop> */}
+                        <Switch>
+                            <Route exact path="/login" render={(routerProps) => {
+                                return (
+                                    <div className="home-login-container ">
+                                        <Login {...routerProps} />
+                                    </div>
+                                )
+                            }}/>
+                            <Route exact path="/signup" render={(routerProps) => {
+                                return (
+                                    <div className="home-login-container ">
+                                        <Signup {...routerProps} />
+                                    </div>
+                                )
+                            }}/>
+                            <Route exact path="/profile" render={() => {
+                                return (
+                                    <div className="profile-container">
+                                        <Profile />
+                                    </div>
+                                )
+                            }}/>
+                            <Route exact path="/search" render={() => {
+                                return (
+                                    <ScrollToTop>
+                                        <div className="main-container">
+                                            <SearchBooksContainer />
+                                        </div>
+                                    </ScrollToTop>
+                                )
+                            }}/>
+                            <Route path="/booklists" render={() => {
+                                return (
+                                    <ScrollToTop>
+                                        <div className="main-container">
+                                            <BookListContainer />
+                                        </div>
+                                    </ScrollToTop>
+                                )
+                            }}/>
+                            <Route exact path="/books/:id" render={(routerProps) => {
+                                return (
+                                    <div className="main-container">
+                                        <BookContainer {...routerProps} />
+                                    </div>
+                                )
+                            }}/>
+                            <Route exact path="/bookclubs/:id" render={(routerProps) => {
+                                return (
+                                    <div className="main-container">
+                                        <MessageContainer {...routerProps} />
+                                    </div>
+                                )
+                            }}/>
+                            <Route exact path="/bookclubs" render={() => {
+                                return (
+                                    <ScrollToTop>
+                                        <div className="main-container">
+                                            <BookClubContainer />
+                                        </div>
+                                    </ScrollToTop>
+                                )
+                            }}/>
+                            <Route exact path="/" render={() => {
+                                return (
+                                    <div className="home-login-container ">
+                                        <Homepage />
+                                    </div>
+                                )
+                            }}/>
+                            <Route render={() => {
+                                return (
+                                    <div className="error-container">
+                                        <Error />
+                                    </div>
+                                )
+                            }}/>
+                        </Switch>
+                    {/* </ScrollToTop> */}
             </div>
         );
     }
