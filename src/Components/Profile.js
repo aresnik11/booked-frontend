@@ -25,7 +25,7 @@ class Profile extends React.Component {
     handleAccountRemove = () => {
         this.props.removeAccount()
         localStorage.removeItem("token")
-        this.props.history.push("/signup")
+        // this.props.history.push("/signup")
     }
 
     render() {
