@@ -71,7 +71,7 @@ class SearchBooks extends React.Component {
                     </Form.Group>
                     <br/>
                     <Form.Button
-                        id="btn"
+                        className="btn"
                         content="Search"
                     />
                 </Form>

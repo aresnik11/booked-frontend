@@ -87,7 +87,7 @@ class BookListPreview extends React.Component {
                 <br/>
                 <Delete type="Book List" id={this.props.id} />
                 {/* <Button
-                    id="btn"
+                    className="btn"
                     onClick={this.showConfirmation}
                     content="Delete Book List"
                 />

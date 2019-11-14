@@ -74,7 +74,7 @@ class AddToBookList extends React.Component {
                     :
                     null}
                     <Form.Button
-                        id="btn"
+                        className="btn"
                         content="Add to Book List"
                     />
                 </Form>

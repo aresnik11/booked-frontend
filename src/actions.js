@@ -194,7 +194,7 @@ function removeBookListBook(bookId, bookListId) {
 
 function removeBookList(bookListId) {
     return function(dispatch) {
-        fetch(`http://localhost:3001/api/v1/book_lists/${bookListId}`, {
+        return fetch(`http://localhost:3001/api/v1/book_lists/${bookListId}`, {
             method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -434,7 +434,7 @@ function addBookClub(newBookClub) {
 
 function removeBookClub(bookClubId) {
     return function(dispatch) {
-        fetch(`http://localhost:3001/api/v1/book_clubs/${bookClubId}`, {
+        return fetch(`http://localhost:3001/api/v1/book_clubs/${bookClubId}`, {
             method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("token")}`

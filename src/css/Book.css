@@ -13,7 +13,7 @@
   }
 
 /* vertically centers view book button within the page */
-.book-preview-page #btn {
+.book-preview-page .btn {
 	margin-top: 90px;
 }
 

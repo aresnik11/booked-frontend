@@ -23,19 +23,19 @@ class Delete extends React.Component {
 
     handleBookListRemove = () => {
         this.props.removeBookList(this.props.id)
-        this.props.history.push("/booklists")
+        .then(() => this.props.history.push("/booklists"))
     }
 
     handleBookClubRemove = () => {
         this.props.removeBookClub(this.props.id)
-        this.props.history.push("/bookclubs")
+        .then(() => this.props.history.push("/bookclubs"))
     }
 
     render() {
         return (
             <div>
                 <Button
-                    id="btn"
+                    className="btn"
                     onClick={this.showConfirmation}
                     content="Delete"
                 />

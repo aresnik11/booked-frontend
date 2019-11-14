@@ -53,7 +53,7 @@ class Signup extends React.Component {
                     :
                     null}
                     <Form.Button
-                        id="btn"
+                        className="btn"
                         content="Sign Up"
                     />
                 </Form>

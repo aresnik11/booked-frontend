@@ -23,29 +23,27 @@ a, a:hover {
 }
 
 /* custom background color for button */
-#btn {
+.ui.button.btn, .btn .ui.button, .ui.action.input .ui.button {
   color: #fff;
   background: #34495e;
 }
 
 /* custom background color for button on hover */
-#btn:hover {
+.ui.button.btn:hover, .btn .ui.button:hover, .ui.action.input .ui.button:hover {
   color: #fff;
   background: #3e5770;
   /* background: #283847; */
 }
 
 /* makes header fixed to the top of the screen, full width, and above all other content */
+/* transform is to increase z-index for safari, books were previously above */
 .ui.segment.fixed {
   top: 0;
   position: fixed;
   width: 100%;
   z-index: 11;
-}
-
-.header-home {
-  font-family: 'Dancing Script', cursive;
-  font-size: 18px;
+  -webkit-transform: translate3d(0, 0, 200px);
+  transform: translate3d(0, 0, 200px);
 }
 
 /* main container for most pages */
@@ -58,7 +56,7 @@ a, a:hover {
 }
 
 /* makes white container with shadow with all other boxes */
-.book-show, .message-container {
+.book-show, .message-container, .book-club {
   background: #fff;
   box-shadow: 10px 10px 8px #888888;
   border-radius: 15px;
@@ -109,6 +107,21 @@ a, a:hover {
 .ui.message {
   text-align: left;
 }
+
+/* BOOK CLUBS */
+
+.book-club {
+  width: 255px;
+  padding: 2%;
+  margin: 2%;
+}
+
+.book-club:hover, .book-club:hover h3 {
+  background: #34495e;
+  color: #fff;
+}
+
+
 
 /* BOOK CLUB MESSAGES */
 
@@ -211,4 +224,13 @@ a, a:hover {
 .error-container h1 {
   color: #fff;
   font-size: 48px;
+}
+
+/* back to top icon on search page */
+
+#back-to-top {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 5%;
 }

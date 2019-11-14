@@ -13,6 +13,7 @@ import { Route, Switch } from 'react-router-dom'
 import BookListContainer from './BookListContainer';
 import BookContainer from './BookContainer'
 import BookClubContainer from './BookClubContainer'
+import MessageContainer from './MessageContainer'
 import Login from '../components/Login'
 import Signup from '../components/Signup'
 import { connect } from 'react-redux'
@@ -37,7 +38,8 @@ class App extends React.Component {
                         <Route exact path="/search" render={() => <div className="main-container"><SearchBooksContainer /></div>} />
                         <Route path="/booklists" render={() => <div className="main-container"><BookListContainer /></div>} />
                         <Route exact path="/books/:id" render={(routerProps) => <div className="main-container"><BookContainer {...routerProps} /></div>} />
-                        <Route path="/bookclubs" render={() => <div className="main-container"><BookClubContainer /></div>} />
+                        <Route exact path="/bookclubs/:id" render={(routerProps) => <div className="main-container"><MessageContainer {...routerProps} /></div>} />
+                        <Route exact path="/bookclubs" render={() => <div className="main-container"><BookClubContainer /></div>} />
                         <Route exact path="/" render={() => <div className="home-login-container "><Homepage /></div>} />
                         <Route render={() => <div className="error-container"><Error /></div>} />
                     </Switch>

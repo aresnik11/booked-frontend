@@ -31,27 +31,13 @@ class BookClubPreview extends React.Component {
 
     render() {
         return (
-            <div>
-                <Link to={`/bookclubs/${this.props.id}`}>
-                    <h3>{this.props.name}</h3>
-                </Link>
-                <br/>
-                <Delete type="Book Club" id={this.props.id} />
-                {/* <Button
-                    id="btn"
-                    onClick={this.showConfirmation}
-                    content="Delete Book Club"
-                />
-                <Confirm
-                    open={this.state.open}
-                    header="Please Confirm"
-                    content="Are you sure you want to delete this book club? All messages will also be deleted."
-                    confirmButton="Delete"
-                    onCancel={this.handleCancel}
-                    onConfirm={this.handleBookClubRemove}
-                /> */}
-                <br/><br/>
-            </div>
+            <Link to={`/bookclubs/${this.props.id}`} className="book-club">
+                <h3>{this.props.name}</h3>
+                
+            </Link>
+
+            /* <br/>
+            <Delete type="Book Club" id={this.props.id} /> */
         )
     }
 }

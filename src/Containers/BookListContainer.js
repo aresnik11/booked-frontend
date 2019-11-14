@@ -48,7 +48,7 @@ class BookListContainer extends React.Component {
                                     <Grid.Column>
                                         <Link to="/search">
                                             <Button
-                                                id="btn"
+                                                className="btn"
                                                 content="Search All Books"
                                             />
                                         </Link>

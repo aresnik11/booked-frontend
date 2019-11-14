@@ -70,7 +70,7 @@ class Login extends React.Component {
                     :
                     null}
                     <Form.Button
-                        id="btn"
+                        className="btn"
                         content="Log In"
                     />
                 </Form>

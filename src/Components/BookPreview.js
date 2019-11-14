@@ -35,7 +35,7 @@ const BookPreview = (props) => {
                                     state: { fromSearch: false }
                                 }}>
                                     <div className="book-preview-page">
-                                        <Button id="btn" content="View Book" />
+                                        <Button className="btn" content="View Book" />
                                     </div>
                                 </Link>
                                 :
@@ -44,7 +44,7 @@ const BookPreview = (props) => {
                                     state: { fromSearch: true }
                                 }}>
                                     <div className="book-preview-page">
-                                        <Button id="btn" content="View Book" />
+                                        <Button className="btn" content="View Book" />
                                     </div>
                                 </Link>}
                             </li>
@@ -72,7 +72,7 @@ const BookPreview = (props) => {
             <>
                 <br/>
                 <Button
-                    id="btn"
+                    className="btn"
                     onClick={() => props.removeBookListBook(props.id, props.bookListId)}
                     content="Remove from Book List"
                 />
