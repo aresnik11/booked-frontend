@@ -32,13 +32,12 @@ class Delete extends React.Component {
     }
 
     render() {
-        const content = `Delete ${this.props.type}`
         return (
             <div>
                 <Button
                     id="btn"
                     onClick={this.showConfirmation}
-                    content={content}
+                    content="Delete"
                 />
                 {this.props.type === "Book List"
                 ?

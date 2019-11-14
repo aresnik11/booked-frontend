@@ -18,7 +18,8 @@ import {
     ADD_BOOK_CLUB,
     ADD_BOOK_CLUB_ERROR,
     REMOVE_BOOK_CLUB,
-    RECEIVE_MESSAGE
+    RECEIVE_MESSAGE,
+    MESSAGE_ERROR
 } from './types'
 
 //bookReducer
@@ -462,7 +463,10 @@ function addMessage(newMessage) {
         .then(resp => resp.json())
         .then(response => {
             if (response.errors) {
-                alert(response.errors)
+                dispatch({
+                    type: MESSAGE_ERROR,
+                    payload: response.errors
+                })
             }
         })
     }

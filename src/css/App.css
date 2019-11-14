@@ -13,7 +13,7 @@ body {
 }
 
 h1, h2 {
-    font-family: 'DM Serif Display', serif;
+  font-family: 'DM Serif Display', serif;
 }
 
 /* sets link color and hover */
@@ -43,13 +43,25 @@ a, a:hover {
   z-index: 11;
 }
 
+.header-home {
+  font-family: 'Dancing Script', cursive;
+  font-size: 18px;
+}
+
 /* main container for most pages */
 /* adds margin and padding so content is not cramped and clear header */
 .main-container {
   margin-left: 2%;
   margin-right: 2%;
-  padding-top: 100px;
-  padding-bottom: 100px;
+  padding-top: 15vh;
+  padding-bottom: 10vh;
+}
+
+/* makes white container with shadow with all other boxes */
+.book-show, .message-container {
+  background: #fff;
+  box-shadow: 10px 10px 8px #888888;
+  border-radius: 15px;
 }
 
 /* BOOK SHOW PAGE */
@@ -58,14 +70,7 @@ a, a:hover {
 .book-show-container {
   width: 90%;
   margin: auto;
-  margin-top: 2%;
-}
-
-/* makes white container with shadow with all other boxes */
-.book-show {
-  background: #fff;
-  box-shadow: 10px 10px 8px #888888;
-  border-radius: 15px;
+  /* margin-top: 2%; */
 }
 
 /* adds padding for title */
@@ -75,10 +80,10 @@ a, a:hover {
 
 /* adds padding and sets height and overflow for main boxes */
 .book-show.content {
-    padding: 10%;
-    height: 60vh;
-    overflow: auto;
-    margin: 2%;
+  padding: 10%;
+  height: 60vh;
+  overflow: auto;
+  margin: 2%;
 }
 
 /* shrinks width of add to booklist dropdown and centers */
@@ -107,17 +112,39 @@ a, a:hover {
 
 /* BOOK CLUB MESSAGES */
 
-/* centers the container and left justifies text of messages within it */
-.ui.comments.message-container {
+.message-container {
+  max-width: 650px;
+  margin: auto;
+  padding: 2% 3% 2% 3%;
+}
+
+.message-header h1 {
+  float: left;
+}
+
+.message-header div {
+  text-align: right;
+}
+
+/* centers, left justifies messages, white background, set height and scroll if longer */
+.ui.comments {
   text-align: left;
+  /* margin: auto; */
+  /* padding: 2%; */
+  height: 55vh;
+  overflow: auto;
+}
+
+.new-message {
+  padding-top: 2%;
   margin: auto;
 }
 
-/* adds margin to each message */
-.ui.comments.message-container .comment {
-  margin-left: 5%;
-  margin-right: 5%; 
+/* keeps sender name and date on the same line */
+.author {
+  display: inline-block;
 }
+
 
 /* HOMEPAGE, LOGIN, SIGNUP PAGES */
 
@@ -129,7 +156,6 @@ a, a:hover {
   background-position: center;
   background-size: cover;
   padding-top: 35vh;
-
 }
 
 /* increases font size of title on homepage */

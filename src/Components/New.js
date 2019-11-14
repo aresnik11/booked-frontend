@@ -63,6 +63,15 @@ class New extends React.Component {
                     />
                     :
                     null}
+                    {this.props.messageError && this.props.type === "Message"
+                    ?
+                    <Message
+                        negative
+                        header='Error'
+                        list={this.props.messageError}
+                    />
+                    :
+                    null}
                     <Form.Button
                         id="btn"
                         content="Add"
@@ -76,7 +85,8 @@ class New extends React.Component {
 function mapStateToProps(state) {
     return {
         bookListError: state.bookListReducer.bookListError,
-        bookClubError: state.bookClubReducer.bookClubError
+        bookClubError: state.bookClubReducer.bookClubError,
+        messageError: state.bookClubReducer.messageError
     }
 }
 

@@ -3,13 +3,15 @@ import {
     ADD_BOOK_CLUB,
     REMOVE_BOOK_CLUB,
     RECEIVE_MESSAGE,
-    ADD_BOOK_CLUB_ERROR
+    ADD_BOOK_CLUB_ERROR,
+    MESSAGE_ERROR
 } from '../types'
 
 const defaultState = {
     bookClubs: [],
     bookClubError: false,
-    loading: true
+    loading: true,
+    messageError: false
 }
 
 function bookClubReducer(state = defaultState, action) {
@@ -19,7 +21,8 @@ function bookClubReducer(state = defaultState, action) {
                 ...state,
                 bookClubs: action.payload,
                 loading: false,
-                bookClubError: false
+                bookClubError: false,
+                messageError: false
             }
         case ADD_BOOK_CLUB:
             return {
@@ -48,7 +51,13 @@ function bookClubReducer(state = defaultState, action) {
             foundBookClub.messages = [...foundBookClub.messages, action.payload]
             return {
                 ...state,
-                bookClubs: copyBookClubs
+                bookClubs: copyBookClubs,
+                messageError: false
+            }
+        case MESSAGE_ERROR:
+            return {
+                ...state,
+                messageError: action.payload
             }
         default:
             return state

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { logOut } from '../actions'
 import { Menu, Segment } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import Booked from '../Booked.png'
 
 class Header extends React.Component {
     state = {
@@ -27,13 +28,14 @@ class Header extends React.Component {
                 {/* may want to add stackable, makes menu stack in mobile views */}
                 <Menu secondary size="large">
                     {/* <Menu.Item>
-                        <img src='/logo.png' alt=""/>
+                        <img src={Booked} alt="Booked"/>
                     </Menu.Item> */}
                     <Menu.Item
+                        icon="book"
                         as={ Link }
                         to="/"
-                        name="home"
-                        active={this.state.activeItem === "home"}
+                        name="booked"
+                        active={this.state.activeItem === "booked"}
                         onClick={this.handleItemClick}
                     />
                     <Menu.Item

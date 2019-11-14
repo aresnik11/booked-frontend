@@ -6,7 +6,7 @@ const Message = (props) => {
     return (
         <Comment>
             <Comment.Content>
-                <Comment.Author as="a" content={props.user.username} />
+                <Comment.Author content={props.user.username} />
                 <Comment.Metadata content={moment(props.created_at).format("M/D h:mma")} />
                 <Comment.Text content={props.content} />
             </Comment.Content>
