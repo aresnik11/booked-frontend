@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import Loading from '../components/Loading'
+import Loading from '../comps/Loading'
 import { pleaseLogIn, removeLogInError } from '../actions/user'
 
 function withAuth(MyComponent) {
