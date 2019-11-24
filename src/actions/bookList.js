@@ -9,7 +9,7 @@ import {
 
 function addBookList(newBookList) {
     return function(dispatch) {
-        fetch("http://localhost:3001/api/v1/book_lists", {
+        fetch("https://booked-backend.herokuapp.com/api/v1/book_lists", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -38,7 +38,7 @@ function addBookList(newBookList) {
 
 function addBookListBook(book, bookListId) {
     return function(dispatch) {
-        fetch("http://localhost:3001/api/v1/book_list_books", {
+        fetch("https://booked-backend.herokuapp.com/api/v1/book_list_books", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -73,7 +73,7 @@ function addBookListBook(book, bookListId) {
 
 function removeBookListBook(bookId, bookListId) {
     return function(dispatch) {
-        fetch("http://localhost:3001/api/v1/book_list_books", {
+        fetch("https://booked-backend.herokuapp.com/api/v1/book_list_books", {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -102,7 +102,7 @@ function removeBookListBook(bookId, bookListId) {
 
 function removeBookList(bookListId) {
     return function(dispatch) {
-        return fetch(`http://localhost:3001/api/v1/book_lists/${bookListId}`, {
+        return fetch(`https://booked-backend.herokuapp.com/api/v1/book_lists/${bookListId}`, {
             method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("token")}`

@@ -24,7 +24,7 @@ class AddToBookList extends React.Component {
 
     //need to add or find the book in the backend before adding it to a booklist (creating a booklistbook)
     addBook = (book) => {
-        fetch("http://localhost:3001/api/v1/books", {
+        fetch("https://booked-backend.herokuapp.com/api/v1/books", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

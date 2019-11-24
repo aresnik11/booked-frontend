@@ -6,7 +6,7 @@ import {
 
 function fetchSearchedBooks({ search, type, index }) {
     return function(dispatch) {
-        fetch("http://localhost:3001/api/v1/search", {
+        fetch("https://booked-backend.herokuapp.com/api/v1/search", {
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("token")}`,
                 "Search-Term": search,
@@ -38,7 +38,7 @@ function setLoading() {
 
 function fetchBook(bookId) {
     return function(dispatch) {
-        fetch(`http://localhost:3001/api/v1/books/${bookId}`, {
+        fetch(`https://booked-backend.herokuapp.com/api/v1/books/${bookId}`, {
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("token")}`
             }
@@ -55,7 +55,7 @@ function fetchBook(bookId) {
 
 function fetchBookByVolumeId(bookId) {
     return function(dispatch) {
-        fetch(`http://localhost:3001/api/v1/find_by_volume/${bookId}`, {
+        fetch(`https://booked-backend.herokuapp.com/api/v1/find_by_volume/${bookId}`, {
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("token")}`
             }

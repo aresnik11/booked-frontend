@@ -12,6 +12,7 @@ import bookListReducer from './reducers/bookListReducer'
 import thunk from 'redux-thunk'
 import { ActionCableProvider } from 'react-actioncable-provider'
 
+// combining all reducers using combineReducers
 const rootReducer = combineReducers({
     bookReducer: bookReducer,
     userReducer: userReducer,
@@ -22,7 +23,9 @@ const rootReducer = combineReducers({
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
 ReactDOM.render(
-    <ActionCableProvider url="ws://localhost:3001/cable">
+    // web socket connection url
+    <ActionCableProvider url="wss://booked-backend.herokuapp.com/cable">
+        {/* passing redux store into Provider */}
         <Provider store={store}>
             <BrowserRouter>
                 <Route path="/" component={App} />

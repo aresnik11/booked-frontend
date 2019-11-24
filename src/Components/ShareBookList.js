@@ -31,7 +31,7 @@ class ShareBookList extends React.Component {
 
     // adds shared book list to user we shared it with in backend
     shareBookList = (bookListId, userId) => {
-        fetch("http://localhost:3001/api/v1/share_book_lists", {
+        fetch("https://booked-backend.herokuapp.com/api/v1/share_book_lists", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

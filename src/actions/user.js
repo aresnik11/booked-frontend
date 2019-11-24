@@ -9,7 +9,7 @@ import {
 
 function removeAccount() {
     return function(dispatch) {
-        fetch("http://localhost:3001/api/v1/users", {
+        fetch("https://booked-backend.herokuapp.com/api/v1/users", {
             method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -44,7 +44,7 @@ function logOut() {
 
 function fetchUsers() {
     return function(dispatch) {
-        fetch("http://localhost:3001/api/v1/users", {
+        fetch("https://booked-backend.herokuapp.com/api/v1/users", {
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("token")}`
             }
@@ -61,7 +61,7 @@ function fetchUsers() {
 
 function autoLogin() {
     return function(dispatch) {
-        fetch("http://localhost:3001/api/v1/auto_login", {
+        fetch("https://booked-backend.herokuapp.com/api/v1/auto_login", {
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("token")}`
             }
@@ -92,7 +92,7 @@ function autoLogin() {
 
 function signUp(user) {
     return function (dispatch) {
-        return fetch("http://localhost:3001/api/v1/signup", {
+        return fetch("https://booked-backend.herokuapp.com/api/v1/signup", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -127,7 +127,7 @@ function signUp(user) {
 
 function logIn(user) {
     return function (dispatch) {
-        return fetch("http://localhost:3001/api/v1/login", {
+        return fetch("https://booked-backend.herokuapp.com/api/v1/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

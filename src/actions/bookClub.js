@@ -9,7 +9,7 @@ import {
 
 function fetchBookClubs() {
     return function(dispatch) {
-        fetch("http://localhost:3001/api/v1/book_clubs", {
+        fetch("https://booked-backend.herokuapp.com/api/v1/book_clubs", {
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("token")}`
             }
@@ -26,7 +26,7 @@ function fetchBookClubs() {
 
 function addBookClub(newBookClub) {
     return function(dispatch) {
-        fetch("http://localhost:3001/api/v1/book_clubs", {
+        fetch("https://booked-backend.herokuapp.com/api/v1/book_clubs", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -49,7 +49,7 @@ function addBookClub(newBookClub) {
 
 function removeBookClub(bookClubId) {
     return function(dispatch) {
-        return fetch(`http://localhost:3001/api/v1/book_clubs/${bookClubId}`, {
+        return fetch(`https://booked-backend.herokuapp.com/api/v1/book_clubs/${bookClubId}`, {
             method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -66,7 +66,7 @@ function removeBookClub(bookClubId) {
 
 function addMessage(newMessage) {
     return function(dispatch) {
-        fetch("http://localhost:3001/api/v1/messages", {
+        fetch("https://booked-backend.herokuapp.com/api/v1/messages", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
