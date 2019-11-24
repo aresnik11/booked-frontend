@@ -1,5 +1,5 @@
 import React from 'react';
-import './node_modules/semantic-ui-css/semantic.min.css';
+import 'semantic-ui-css/semantic.min.css';
 import '../css/App.css';
 import '../css/Loading.scss'
 import '../css/Book.css'
