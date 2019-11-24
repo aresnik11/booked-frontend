@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { removeBookListBook } from '../actions/bookList'
-import { Label } from 'semantic-ui-react'
+import { Icon } from 'semantic-ui-react'
 
 const BookBookLists = (props) => {
     return (
@@ -13,7 +13,10 @@ const BookBookLists = (props) => {
             </Link>
             &nbsp;&nbsp;&nbsp;
             {/* x-button removes book from book list */}
-            <Label as="button" className="btn" content="X" size="tiny" onClick={() => props.removeBookListBook(props.bookId, props.id)} />
+            <Icon
+                className="x"
+                onClick={() => props.removeBookListBook(props.bookId, props.id)}
+            />
             <br/><br/>
         </div>
     )

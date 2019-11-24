@@ -6,7 +6,7 @@ const BookClubPreview = (props) => {
     return (
         <div className="book-club">
             {/* x-button, on click shows confirmation */}
-            <Delete type="Book Club" id={props.id} bookClubPreview />
+            <Delete type="Book Club" id={props.id} />
             {/* links to specific book club */}
             <Link to={`/bookclubs/${props.id}`}>
                 <div className="book-club-name">

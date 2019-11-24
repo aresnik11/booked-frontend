@@ -135,10 +135,9 @@ a, a:hover {
 }
 
 /* makes x button on book club cards in top right corner and sets color */
-.book-club #x {
+.book-club .icon.x {
   float: right;
-  margin-top: 3%;
-  color: #34495e;
+  margin-top: 4%;
 }
 
 .book-club .book-club-name {
@@ -147,8 +146,8 @@ a, a:hover {
   padding: 10%;
 }
 
-/* makes cursor look like label is clickable */
-.ui.tiny.label.btn, .book-club #x {
+/* makes cursor look like x-button icon is clickable */
+.icon.x {
   cursor: pointer;
 }
 
@@ -166,8 +165,9 @@ a, a:hover {
 }
 
 /* makes delete book club button appear in top right */
-.message-header div {
-  text-align: right;
+.message-header .icon.x {
+  float: right;
+  margin-top: 1%;
 }
 
 /* centers, left justifies messages, white background, set height and scroll if longer */
@@ -177,6 +177,7 @@ a, a:hover {
   /* padding: 2%; */
   height: 55vh;
   overflow: auto;
+  width: 100%;
 }
 
 /* .new-message {

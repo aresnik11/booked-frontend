@@ -2,7 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { removeBookList } from '../actions/bookList'
 import { removeBookClub } from '../actions/bookClub'
-import { Button, Confirm, Label } from 'semantic-ui-react'
+import { removeAccount } from '../actions/user'
+import { Button, Confirm, Icon } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
 
 class Delete extends React.Component {
@@ -36,23 +37,27 @@ class Delete extends React.Component {
         .then(() => this.props.history.push("/bookclubs"))
     }
 
+    // deletes account and removes token from localStorage on click in confirmation modal
+    handleAccountRemove = () => {
+        this.props.removeAccount()
+        localStorage.removeItem("token")
+    }
+
     render() {
         return (
-            <div>
-                {/* if we came from bookClubPreview, render special x-button, otherwise regular delete button */}
-                {this.props.bookClubPreview
+            <>
+                {/* if we're on a book club page, render special x-button, otherwise regular delete button */}
+                {this.props.type === "Book Club"
                 ?
-                <Label
-                    as="button"
-                    id="x"
-                    content="X"
-                    size="tiny"
-                    basic
+                <Icon
+                    className="x"
                     onClick={this.showConfirmation}
                 />
                 :
                 <Button
-                    className="btn"
+                    // only add btn className if type is not Account - btn changes color
+                    className={this.props.type === "Account" ? null : "btn"}
+                    color="black"
                     onClick={this.showConfirmation}
                     content="Delete"
                 />}
@@ -82,10 +87,23 @@ class Delete extends React.Component {
                 />
                 :
                 null}
-            </div>
+                {/* confirmation modal, hidden until delete is clicked and we're on a book club */}
+                {this.props.type === "Account"
+                ?
+                <Confirm
+                    open={this.state.open}
+                    header="Please Confirm"
+                    content="Are you sure you want to delete your account?"
+                    confirmButton="Delete"
+                    onCancel={this.handleCancel}
+                    onConfirm={this.handleAccountRemove}
+                />
+                :
+                null}
+            </>
         )
     }
 
 }
 
-export default connect(null, { removeBookList, removeBookClub })(withRouter(Delete))
+export default connect(null, { removeBookList, removeBookClub, removeAccount })(withRouter(Delete))
