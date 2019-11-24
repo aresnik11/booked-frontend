@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { removeBookList } from '../actions'
+import { removeBookList } from '../actions/bookList'
 import Delete from './Delete'
 
 const BookListPreview = (props) => {

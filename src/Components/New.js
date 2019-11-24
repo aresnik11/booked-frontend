@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addBookList, addBookClub } from '../actions'
+import { addBookList } from '../actions/bookList'
+import { addBookClub } from '../actions/bookClub'
 import { Form, Message } from 'semantic-ui-react'
 
 class New extends React.Component {
@@ -32,7 +33,7 @@ class New extends React.Component {
 
     render() {
         return (
-            <div>
+            <>
                 <h4>Add New {this.props.type}</h4>
                 <Form onSubmit={this.handleSubmit} className="small-input">
                     <Form.Input
@@ -66,7 +67,7 @@ class New extends React.Component {
                         content="Add"
                     />
                 </Form>
-            </div>
+            </>
         )
     }
 }

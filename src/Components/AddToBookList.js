@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addBookListBook } from '../actions'
+import { addBookListBook } from '../actions/bookList'
 import { Form, Message } from 'semantic-ui-react'
 
 class AddToBookList extends React.Component {
@@ -54,37 +54,37 @@ class AddToBookList extends React.Component {
         })
         return (
             <Form onSubmit={this.handleSubmit} className="add-to-booklist">
-                    <Form.Select
-                        search
-                        placeholder="Select a book list"
-                        options={options}
-                        onChange={this.handleChange}
-                    />
-                    {/* show message if error adding book to book list */}
-                    {this.props.addError
-                    ?
-                    <Message
-                        negative
-                        header='Error'
-                        list={this.props.addError}
-                    />
-                    :
-                    null}
-                    {/* show message if error  */}
-                    {this.state.addBookError
-                    ?
-                    <Message
-                        negative
-                        header='Error'
-                        list={this.state.addBookError}
-                    />
-                    :
-                    null}
-                    <Form.Button
-                        className="btn"
-                        content="Add to Book List"
-                    />
-                </Form>
+                <Form.Select
+                    search
+                    placeholder="Select a book list"
+                    options={options}
+                    onChange={this.handleChange}
+                />
+                {/* show message if error adding book to book list */}
+                {this.props.addError
+                ?
+                <Message
+                    negative
+                    header='Error'
+                    list={this.props.addError}
+                />
+                :
+                null}
+                {/* show message if error  */}
+                {this.state.addBookError
+                ?
+                <Message
+                    negative
+                    header='Error'
+                    list={this.state.addBookError}
+                />
+                :
+                null}
+                <Form.Button
+                    className="btn"
+                    content="Add to Book List"
+                />
+            </Form>
         )
     }
 }

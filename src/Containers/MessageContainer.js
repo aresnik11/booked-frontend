@@ -1,11 +1,11 @@
 import React from 'react'
-import withAuth from '../components/withAuth'
+import withAuth from '../helpers/withAuth'
 import NewMessage from '../components/NewMessage'
 import Delete from '../components/Delete'
 import Message from '../components/Message'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { fetchBookClubs, receiveMessage } from '../actions'
+import { fetchBookClubs, receiveMessage } from '../actions/bookClub'
 import { Comment } from 'semantic-ui-react'
 import { ActionCableConsumer } from 'react-actioncable-provider'
 

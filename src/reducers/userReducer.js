@@ -5,7 +5,7 @@ import {
     LOG_IN_ERROR,
     SIGN_UP_ERROR,
     PLEASE_LOG_IN
-} from '../types'
+} from '../actions/types'
 
 const defaultState = {
     currentUser: null,
@@ -43,6 +43,7 @@ function userReducer(state = defaultState, action) {
                 signUpError: action.payload
             }
         case PLEASE_LOG_IN:
+            // called if someone tries to go to any pages other than homepage, login, and signup while not logged in
             return {
                 ...state,
                 pleaseLogIn: action.payload

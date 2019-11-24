@@ -7,9 +7,9 @@ import Search from '../components/Search'
 import ShareBookList from '../components/ShareBookList'
 import { Route, Switch, Redirect, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import withAuth from '../components/withAuth'
+import withAuth from '../helpers/withAuth'
 import { Grid, Button } from 'semantic-ui-react'
-import { resetSelectedBook } from '../actions'
+import { resetSelectedBook } from '../actions/book'
 
 class BookListContainer extends React.Component {
     state = {
@@ -51,7 +51,7 @@ class BookListContainer extends React.Component {
                     // only render components if we found the book list object
                     if (bookListObj) {
                         return (
-                            <div>
+                            <>
                                 <h1>{bookListObj.name}</h1>
                                 <br/>
                                 {/* options grid including share book list, link to search all books, delete book list, search books */}
@@ -84,7 +84,7 @@ class BookListContainer extends React.Component {
                                 <Grid centered>
                                     {this.makeBookListBooks(bookListObj)}
                                 </Grid>
-                            </div>
+                            </>
                         )
                     }
                     // if we couldn't find the book list object, redirect to /error, which will render the Error component
@@ -94,7 +94,7 @@ class BookListContainer extends React.Component {
                 }} />
                 <Route exact path="/booklists" render={() => {
                     return (
-                        <div>
+                        <>
                             <h1>My Book Lists</h1>
                             <br/>
                             {/* options grid including new book list and search book lists */}
@@ -116,7 +116,7 @@ class BookListContainer extends React.Component {
                             <Grid centered>
                                 {this.makeBookLists()}
                             </Grid>
-                        </div>
+                        </>
                     )
                 }} />
                 {/* if we didn't match either path, redirect to error */}

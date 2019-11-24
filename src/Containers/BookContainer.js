@@ -4,8 +4,8 @@ import AddToBookList from '../components/AddToBookList'
 import Loading from '../components/Loading'
 import BookBookLists from '../components/BookBookLists'
 import { connect } from 'react-redux'
-import withAuth from '../components/withAuth'
-import { fetchBook, fetchBookByVolumeId } from '../actions'
+import withAuth from '../helpers/withAuth'
+import { fetchBook, fetchBookByVolumeId } from '../actions/book'
 import { Grid } from 'semantic-ui-react'
 import { Redirect } from 'react-router-dom'
 
@@ -23,23 +23,23 @@ class BookContainer extends React.Component {
 
     componentDidMount() {
         const bookId = this.props.match.params.id
-        //if we came from search, need to fetch book via volume id
+        // if we came from search, need to fetch book via volume id
         if (this.props.location.state && this.props.location.state.fromSearch) {
             this.props.fetchBookByVolumeId(bookId)
         }
-        //otherwise can fetch the book normally
+        // otherwise can fetch the book normally
         else {
             this.props.fetchBook(bookId)
         }
     }
 
     render() {
-        //if selectedBook in props is not null (default), then we may have a book
+        // if selectedBook in props is not null (default), then we may have a book
         if (this.props.selectedBook) {
-            //if selectedBook has an id, then we found the book in the backend and can render it
+            // if selectedBook has an id, then we found the book in the backend and can render it
             if (this.props.selectedBook.id) {
                 const book = this.props.selectedBook
-                //finding the users booklists that this book is on
+                // finding the users booklists that this book is on
                 const wantedBookLists = this.props.bookLists.filter(bookList => bookList.books.find(bookListBook => bookListBook.id === book.id))
                 return (
                     <div className="book-show-container">
@@ -77,14 +77,14 @@ class BookContainer extends React.Component {
                     </div>
                 )
             }
-            //if selectedBook doesn't have an id, we couldn't find it in our backend and need to look for it in the array of searchedBooks
+            // if selectedBook doesn't have an id, we couldn't find it in our backend and need to look for it in the array of searchedBooks
             else {
                 const book = this.props.searchedBooks.find(book => book.volume_id === this.props.match.params.id)
-                //if we found the book in the searchedBooks array, render it
+                // if we found the book in the searchedBooks array, render it
                 if (book) {
                     let bookId
-                    //finding the users booklists that this book is on
-                    //keeping track of the book id if we find the book on a booklist since we only have volume_id from a search
+                    // finding the users booklists that this book is on
+                    // keeping track of the book id if we find the book on a booklist since we only have volume_id from a search
                     const wantedBookLists = this.props.bookLists.filter(bookList => bookList.books.find(bookListBook => {
                         if (bookListBook.volume_id === book.volume_id) {
                             bookId = bookListBook.id

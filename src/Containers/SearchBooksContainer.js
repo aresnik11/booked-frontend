@@ -3,8 +3,8 @@ import Loading from '../components/Loading'
 import BookPreview from '../components/BookPreview'
 import SearchBooks from '../components/SearchBooks'
 import { connect } from 'react-redux'
-import { fetchSearchedBooks } from '../actions'
-import withAuth from '../components/withAuth'
+import { fetchSearchedBooks } from '../actions/book'
+import withAuth from '../helpers/withAuth'
 import { Grid, Button } from 'semantic-ui-react'
 
 class SearchBooksContainer extends React.Component {
@@ -70,7 +70,7 @@ class SearchBooksContainer extends React.Component {
 
     render() {
         return (
-            <div>
+            <>
                 {/* search options */}
                 <SearchBooks />
                 <br/><br/>
@@ -103,7 +103,7 @@ class SearchBooksContainer extends React.Component {
                     :
                     null}
                 </div>}
-            </div>
+            </>
         )
     }
 }

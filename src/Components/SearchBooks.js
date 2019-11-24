@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchSearchedBooks, setLoading } from '../actions'
+import { fetchSearchedBooks, setLoading } from '../actions/book'
 import { Form } from 'semantic-ui-react'
 
 class SearchBooks extends React.Component {

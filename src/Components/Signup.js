@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Form, Message } from 'semantic-ui-react'
-import { signUp } from '../actions'
+import { signUp } from '../actions/user'
 
 class Signup extends React.Component {
     state = {

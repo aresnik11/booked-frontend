@@ -1,11 +1,11 @@
 import React from 'react'
-import withAuth from '../components/withAuth'
+import withAuth from '../helpers/withAuth'
 import Search from '../components/Search'
 import New from '../components/New'
 import BookClubPreview from '../components/BookClubPreview'
 import Loading from '../components/Loading'
 import { connect } from 'react-redux'
-import { fetchBookClubs, receiveMessage, receiveAddBookClub, receiveRemoveBookClub } from '../actions'
+import { fetchBookClubs, receiveMessage, receiveAddBookClub, receiveRemoveBookClub } from '../actions/bookClub'
 import { Grid } from 'semantic-ui-react'
 import { ActionCableConsumer } from 'react-actioncable-provider'
 
@@ -40,7 +40,7 @@ class BookClubContainer extends React.Component {
                 ?
                 <Loading />
                 :
-                <div>
+                <>
                     <h1>Book Clubs</h1>
                     <br/>
                     {/* options grid including add new book club and search book clubs */}
@@ -78,7 +78,7 @@ class BookClubContainer extends React.Component {
                             }
                         }}
                     />
-                </div>}
+                </>}
             </>
         )
     }

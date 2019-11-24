@@ -3,7 +3,7 @@ import { Form } from 'semantic-ui-react'
 
 const Search = (props) => {
     return (
-        <div>
+        <>
             <h4>Search {props.type}</h4>
             <Form className="small-input">
                 <Form.Input
@@ -15,7 +15,7 @@ const Search = (props) => {
                     onChange={props.searchHandler}
                 />
             </Form>
-        </div>
+        </>
     )
 }
 

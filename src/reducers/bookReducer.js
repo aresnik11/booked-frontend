@@ -2,7 +2,7 @@ import {
     FETCH_SEARCHED_BOOKS,
     SET_LOADING,
     FETCH_BOOK
-} from '../types'
+} from '../actions/types'
 
 const defaultState = {
     searchedBooks: [],
@@ -18,22 +18,22 @@ function bookReducer(state = defaultState, action) {
     switch(action.type) {
         case FETCH_SEARCHED_BOOKS:
             let newSearchedBooks
-            //if start index is 0, this is the initial fetch and totalSearchedBooks should only be the searchedBooks from the response (clear out any old fetch)
+            // if start index is 0, this is the initial fetch and totalSearchedBooks should only be the searchedBooks from the response (clear out any old fetch)
             if (action.payload.startIndex === 0) {
                 newSearchedBooks = [...action.payload.searchedBooks]
             }
-            //if it isn't 0, this is a refetch and we want to copy the existing arrray and add the new books from the fetch response
+            // if it isn't 0, this is a refetch and we want to copy the existing arrray and add the new books from the fetch response
             else {
                 newSearchedBooks = [...state.searchedBooks, ...action.payload.searchedBooks]
             }
-            //sometimes getting back duplicate books (with the same volume id) when increasing startIndex, so filtering them out
-            //do we care? maybe want to avoid this filter + map
+            // sometimes getting back duplicate books (with the same volume id) when increasing startIndex, so filtering them out
+            // do we care? maybe want to avoid this filter + map
             // const filteredTotalSearchedBooks = newSearchedBooks.filter((obj, pos, arr) => {
             //     return arr.map(mapObj => mapObj.volume_id).indexOf(obj.volume_id) === pos
             // })
             return {
                 ...state,
-                //total items coming back from the fetch
+                // total items coming back from the fetch
                 totalItems: action.payload.totalItems,
                 searchTerm: action.payload.searchTerm,
                 searchType: action.payload.searchType,
@@ -47,6 +47,7 @@ function bookReducer(state = defaultState, action) {
                 loading: true
             }
         case FETCH_BOOK:
+            // updates selectedBook based on fetched book - may be an error if unable to find it and handle that in BookContainer
             return {
                 ...state,
                 selectedBook: action.payload,

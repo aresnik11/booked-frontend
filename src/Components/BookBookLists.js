@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { removeBookListBook } from '../actions'
+import { removeBookListBook } from '../actions/bookList'
 import { Label } from 'semantic-ui-react'
 
 const BookBookLists = (props) => {

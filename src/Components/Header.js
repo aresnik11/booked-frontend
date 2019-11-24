@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { logOut } from '../actions'
+import { logOut } from '../actions/user'
 import { Menu, Segment } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 

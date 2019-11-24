@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchUsers } from '../actions'
+import { fetchUsers } from '../actions/user'
 import { Form, Message } from 'semantic-ui-react'
 
 class ShareBookList extends React.Component {
@@ -74,7 +74,7 @@ class ShareBookList extends React.Component {
         }
 
         return (
-            <div>
+            <>
                 <h4>Share Book List</h4>
                 {/* message appears on successful book list share */}
                 {this.state.shared
@@ -112,7 +112,7 @@ class ShareBookList extends React.Component {
                         content="Share"
                     />
                 </Form>
-            </div>
+            </>
         )
     }
 }

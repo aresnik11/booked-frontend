@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { logIn, removePleaseLogin } from '../actions'
+import { logIn, removePleaseLogin } from '../actions/user'
 import { Form, Message } from 'semantic-ui-react'
 
 class Login extends React.Component {

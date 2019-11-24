@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { removeBookList, removeBookClub } from '../actions'
-import { Button, Confirm } from 'semantic-ui-react'
+import { removeBookList } from '../actions/bookList'
+import { removeBookClub } from '../actions/bookClub'
+import { Button, Confirm, Label } from 'semantic-ui-react'
 import { withRouter } from 'react-router-dom'
 
 class Delete extends React.Component {
@@ -38,11 +39,23 @@ class Delete extends React.Component {
     render() {
         return (
             <div>
+                {/* if we came from bookClubPreview, render special x-button, otherwise regular delete button */}
+                {this.props.bookClubPreview
+                ?
+                <Label
+                    as="button"
+                    id="x"
+                    content="X"
+                    size="tiny"
+                    basic
+                    onClick={this.showConfirmation}
+                />
+                :
                 <Button
                     className="btn"
                     onClick={this.showConfirmation}
                     content="Delete"
-                />
+                />}
                 {/* confirmation modal, hidden until delete is clicked and we're on a book list */}
                 {this.props.type === "Book List"
                 ?

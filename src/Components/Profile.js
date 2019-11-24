@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { removeAccount } from '../actions'
-import withAuth from './withAuth'
+import { removeAccount } from '../actions/user'
+import withAuth from '../helpers/withAuth'
 import { Button, Confirm } from 'semantic-ui-react'
 
 class Profile extends React.Component {
@@ -32,7 +32,7 @@ class Profile extends React.Component {
 
     render() {
         return (
-            <div>
+            <>
                 <h1>Welcome, {this.props.currentUser.username}</h1>
                 <br/>
                 <Link to="/booklists">
@@ -70,7 +70,7 @@ class Profile extends React.Component {
                     onCancel={this.handleCancel}
                     onConfirm={this.handleAccountRemove}
                 />
-            </div>
+            </>
         )
     }
 }

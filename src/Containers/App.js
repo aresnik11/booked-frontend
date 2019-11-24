@@ -17,8 +17,8 @@ import MessageContainer from './MessageContainer'
 import Login from '../components/Login'
 import Signup from '../components/Signup'
 import { connect } from 'react-redux'
-import { autoLogin } from '../actions'
-import ScrollToTop from '../components/ScrollToTop'
+import { autoLogin } from '../actions/user'
+import ScrollToTop from '../helpers/ScrollToTop'
 
 class App extends React.Component {
     componentDidMount() {

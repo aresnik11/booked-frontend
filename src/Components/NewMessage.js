@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addMessage } from '../actions'
+import { addMessage } from '../actions/bookClub'
 import { Form, Message } from 'semantic-ui-react'
 
 class New extends React.Component {
@@ -30,27 +30,25 @@ class New extends React.Component {
 
     render() {
         return (
-            <div className="new-message">
-                <Form onSubmit={this.handleSubmit}>
-                    <Form.Input
-                        action="Send"
-                        name="content"
-                        placeholder="Message"
-                        value={this.state.content}
-                        onChange={this.handleChange}
-                    />
-                    {/* only show message if there is an error */}
-                    {this.props.messageError
-                    ?
-                    <Message
-                        negative
-                        header='Error'
-                        list={this.props.messageError}
-                    />
-                    :
-                    null}
-                </Form>
-            </div>
+            <Form onSubmit={this.handleSubmit}>
+                <Form.Input
+                    action="Send"
+                    name="content"
+                    placeholder="Message"
+                    value={this.state.content}
+                    onChange={this.handleChange}
+                />
+                {/* only show message if there is an error */}
+                {this.props.messageError
+                ?
+                <Message
+                    negative
+                    header='Error'
+                    list={this.props.messageError}
+                />
+                :
+                null}
+            </Form>
         )
     }
 }

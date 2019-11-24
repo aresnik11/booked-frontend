@@ -141,7 +141,7 @@ a, a:hover {
   color: #34495e;
 }
 
-.book-club div {
+.book-club .book-club-name {
   height: 100%;
   width: 100%;
   padding: 10%;
@@ -179,10 +179,10 @@ a, a:hover {
   overflow: auto;
 }
 
-.new-message {
+/* .new-message {
   padding-top: 2%;
   margin: auto;
-}
+} */
 
 /* keeps sender name and date on the same line */
 /* also keeps book list name on same line as x-button on book show page */
