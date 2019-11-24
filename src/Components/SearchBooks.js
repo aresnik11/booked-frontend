@@ -21,7 +21,9 @@ class SearchBooks extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
+        // shows loading component while we are fetching the books
         this.props.setLoading()
+        // send submitted values to the backend to fetch books from Google Books API and update redux store
         this.props.fetchSearchedBooks(this.state)
     }
 
@@ -39,6 +41,7 @@ class SearchBooks extends React.Component {
                         value={this.state.search}
                         onChange={this.handleChange}
                     />
+                    {/* radio buttons for search options */}
                     <Form.Group inline stackable="true">
                         <Form.Radio
                             label='All'

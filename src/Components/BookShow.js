@@ -4,6 +4,7 @@ import { Grid, Image } from 'semantic-ui-react'
 const BookShow = (props) => {
     return (
         <>
+            {/* book image and general info */}
             <Grid.Column width={5}>
                 <div className="book-show content">
                     <Image alt={props.title} src={props.image} className="image-show" />
@@ -17,6 +18,7 @@ const BookShow = (props) => {
                     </div>
                 </div>
             </Grid.Column>
+            {/* book description */}
             <Grid.Column width={6}>
                 <div className="book-show content">
                     <p>{props.description}</p>

@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import Loading from './components/Loading'
-import { pleaseLogIn, removeLogInError } from './actions'
+import Loading from './Loading'
+import { pleaseLogIn, removeLogInError } from '../actions'
 
 function withAuth(MyComponent) {
     class AuthHOC extends React.Component {

@@ -9,23 +9,27 @@ class Delete extends React.Component {
         open: false
     }
 
+    // show confirmation modal
     showConfirmation = () => {
         this.setState({
             open: true
         })
     }
 
+    // closes modal on click on cancel in confirmation modal
     handleCancel = () => {
         this.setState({
             open: false
         })
     }
 
+    // deletes book list in backend and redux store on click in confirmation model
     handleBookListRemove = () => {
         this.props.removeBookList(this.props.id)
         .then(() => this.props.history.push("/booklists"))
     }
 
+    // deletes book club in backend and redux store on click in confirmation model
     handleBookClubRemove = () => {
         this.props.removeBookClub(this.props.id)
         .then(() => this.props.history.push("/bookclubs"))
@@ -39,6 +43,7 @@ class Delete extends React.Component {
                     onClick={this.showConfirmation}
                     content="Delete"
                 />
+                {/* confirmation modal, hidden until delete is clicked and we're on a book list */}
                 {this.props.type === "Book List"
                 ?
                 <Confirm
@@ -50,6 +55,10 @@ class Delete extends React.Component {
                     onConfirm={this.handleBookListRemove}
                 />
                 :
+                null}
+                {/* confirmation modal, hidden until delete is clicked and we're on a book club */}
+                {this.props.type === "Book Club"
+                ?
                 <Confirm
                     open={this.state.open}
                     header="Please Confirm"
@@ -58,8 +67,8 @@ class Delete extends React.Component {
                     onCancel={this.handleCancel}
                     onConfirm={this.handleBookClubRemove}
                 />
-                }
-                
+                :
+                null}
             </div>
         )
     }

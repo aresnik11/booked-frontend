@@ -9,6 +9,7 @@ class AddToBookList extends React.Component {
         addBookError: false
     }
 
+    // controlled form
     handleChange = (e, { value }) => {
         this.setState({
             value: value
@@ -17,6 +18,7 @@ class AddToBookList extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
+        // finding or creating submitted book
         this.addBook(this.props.book)
     }
 
@@ -39,12 +41,14 @@ class AddToBookList extends React.Component {
                 })
             }
             else {
+                // send found or created book to the backend with submitted value (book list) and update redux store
                 this.props.addBookListBook(response, this.state.value)
             }
         })
     }
 
     render() {
+        // creating an array of objects for each of the users book lists that will be an option in the dropdown
         const options = this.props.bookLists.map(bookList => {
             return { key: bookList.id, value: bookList.id, text: bookList.name }
         })
@@ -56,6 +60,7 @@ class AddToBookList extends React.Component {
                         options={options}
                         onChange={this.handleChange}
                     />
+                    {/* show message if error adding book to book list */}
                     {this.props.addError
                     ?
                     <Message
@@ -65,6 +70,7 @@ class AddToBookList extends React.Component {
                     />
                     :
                     null}
+                    {/* show message if error  */}
                     {this.state.addBookError
                     ?
                     <Message

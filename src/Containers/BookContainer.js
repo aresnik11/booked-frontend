@@ -4,7 +4,7 @@ import AddToBookList from '../components/AddToBookList'
 import Loading from '../components/Loading'
 import BookBookLists from '../components/BookBookLists'
 import { connect } from 'react-redux'
-import withAuth from '../withAuth'
+import withAuth from '../components/withAuth'
 import { fetchBook, fetchBookByVolumeId } from '../actions'
 import { Grid } from 'semantic-ui-react'
 import { Redirect } from 'react-router-dom'
@@ -14,6 +14,7 @@ class BookContainer extends React.Component {
         searchTerm: "",
     }
 
+    // controlled search form
     searchBook = (e) => {
         this.setState({
             searchTerm: e.target.value
@@ -57,18 +58,18 @@ class BookContainer extends React.Component {
                                 <Grid.Column width={5}>
                                     <div className="book-show content">
                                         <AddToBookList book={book} />
-                                    {/* only render Book Lists section if this book is on any of the users book lists */}
-                                    {wantedBookLists.length
-                                    ?
-                                    <>
-                                        <br/>
-                                        <h2>Book lists</h2>
-                                        <div>
-                                            {wantedBookLists.map(bookList => <BookBookLists key={bookList.id} {...bookList} bookId={book.id} />)}
-                                        </div>
-                                    </>
-                                    :
-                                    null}
+                                        {/* only render Book Lists section if this book is on any of the users book lists */}
+                                        {wantedBookLists.length
+                                        ?
+                                        <>
+                                            <br/>
+                                            <h2>Book lists</h2>
+                                            <div>
+                                                {wantedBookLists.map(bookList => <BookBookLists key={bookList.id} {...bookList} bookId={book.id} />)}
+                                            </div>
+                                        </>
+                                        :
+                                        null}
                                     </div>
                                 </Grid.Column>
                             </Grid.Row>
@@ -78,7 +79,6 @@ class BookContainer extends React.Component {
             }
             //if selectedBook doesn't have an id, we couldn't find it in our backend and need to look for it in the array of searchedBooks
             else {
-                // const book = this.props.searchedBooks.find(book => book.volume_id === this.props.selectedBook.volume_id)
                 const book = this.props.searchedBooks.find(book => book.volume_id === this.props.match.params.id)
                 //if we found the book in the searchedBooks array, render it
                 if (book) {
@@ -109,18 +109,18 @@ class BookContainer extends React.Component {
                                     <Grid.Column width={5}>
                                         <div className="book-show content">
                                             <AddToBookList book={book} />
-                                        {/* only render Book Lists section if this book is on any of the users book lists */}
-                                        {wantedBookLists.length
-                                        ?
-                                        <>
-                                            <br/>
-                                            <h2>Book lists</h2>
-                                            <div>
-                                                {wantedBookLists.map(bookList => <BookBookLists key={bookList.id} {...bookList} bookId={bookId} />)}
-                                            </div>
-                                        </>
-                                        :
-                                        null}
+                                            {/* only render Book Lists section if this book is on any of the users book lists */}
+                                            {wantedBookLists.length
+                                            ?
+                                            <>
+                                                <br/>
+                                                <h2>Book lists</h2>
+                                                <div>
+                                                    {wantedBookLists.map(bookList => <BookBookLists key={bookList.id} {...bookList} bookId={bookId} />)}
+                                                </div>
+                                            </>
+                                            :
+                                            null}
                                         </div>
                                     </Grid.Column>
                                 </Grid.Row>

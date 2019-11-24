@@ -10,18 +10,21 @@ class BookClubPreview extends React.Component {
         open: false
     }
 
+    // show confirmation modal
     showConfirmation = () => {
         this.setState({
             open: true
         })
     }
 
+    // closes modal on click on cancel in confirmation modal
     handleCancel = () => {
         this.setState({
             open: false
         })
     }
 
+    // deletes book club in backend and redux store on click in confirmation model
     handleBookClubRemove = () => {
         this.props.removeBookClub(this.props.id)
         this.setState({
@@ -32,12 +35,15 @@ class BookClubPreview extends React.Component {
     render() {
         return (
             <div className="book-club">
+                {/* x-button, on click shows confirmation */}
                 <Label as="button" id="x" content="X" size="tiny" basic onClick={this.showConfirmation} />
+                {/* links to specific book club */}
                 <Link to={`/bookclubs/${this.props.id}`}>
                     <div>
                         <h3>{this.props.name}</h3>
                     </div>
                 </Link>
+                {/* confirmation modal, hidden until x-button is clicked */}
                 <Confirm
                     open={this.state.open}
                     header="Please Confirm"

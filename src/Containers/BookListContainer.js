@@ -7,7 +7,7 @@ import Search from '../components/Search'
 import ShareBookList from '../components/ShareBookList'
 import { Route, Switch, Redirect, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import withAuth from '../withAuth'
+import withAuth from '../components/withAuth'
 import { Grid, Button } from 'semantic-ui-react'
 import { resetSelectedBook } from '../actions'
 
@@ -16,6 +16,7 @@ class BookListContainer extends React.Component {
         searchTerm: ""
     }
 
+    // controlled search form
     searchHandler = (e) => {
         this.setState({
             searchTerm: e.target.value
@@ -27,8 +28,21 @@ class BookListContainer extends React.Component {
         this.props.resetSelectedBook()
     }
 
+    // filters books on book list based on search term, creates a book preview component for each book in filtered books
+    makeBookListBooks = (bookListObj) => {
+        const filteredBooks = bookListObj.books.filter(book => book.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+        return filteredBooks.map(book => <BookPreview key={book.id} {...book} bookListId={bookListObj.id} />)
+    }
+
+    // filters book lists based on search term, creates a book list preview component for each book list in filtered book lists
+    makeBookLists = () => {
+        const filteredBookLists = this.props.bookLists.filter(bookList => bookList.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+        return filteredBookLists.map(bookList => <BookListPreview key={bookList.id} {...bookList} />)
+    }
+
     render() {
         return (
+            // render differently depending on if route if /booklists/:id or /booklists
             <Switch>
                 <Route exact path="/booklists/:id" render={(routerProps) => {
                     //find the booklist that matches this id from this users booklists
@@ -36,11 +50,11 @@ class BookListContainer extends React.Component {
                     const bookListObj = this.props.bookLists.find(bookList => bookList.id === bookListId)
                     // only render components if we found the book list object
                     if (bookListObj) {
-                        const filteredBooks = bookListObj.books.filter(book => book.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
                         return (
                             <div>
                                 <h1>{bookListObj.name}</h1>
                                 <br/>
+                                {/* options grid including share book list, link to search all books, delete book list, search books */}
                                 <Grid columns="equal">
                                     <Grid.Column>
                                         <ShareBookList {...bookListObj} />
@@ -55,6 +69,7 @@ class BookListContainer extends React.Component {
                                         <br/><br/>
                                         <Delete type="Book List" id={bookListObj.id} />
                                     </Grid.Column>
+                                    {/* only render search component if there are books on the book list */}
                                     {bookListObj.books.length
                                     ?
                                     <Grid.Column>
@@ -64,8 +79,10 @@ class BookListContainer extends React.Component {
                                     null}
                                 </Grid>
                                 <br/><br/>
+
+                                {/* books on book list */}
                                 <Grid centered>
-                                    {filteredBooks.map(book => <BookPreview key={book.id} {...book} bookListId={bookListId} />)}
+                                    {this.makeBookListBooks(bookListObj)}
                                 </Grid>
                             </div>
                         )
@@ -76,15 +93,16 @@ class BookListContainer extends React.Component {
                     }
                 }} />
                 <Route exact path="/booklists" render={() => {
-                    const filteredBookLists = this.props.bookLists.filter(bookList => bookList.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
                     return (
                         <div>
                             <h1>My Book Lists</h1>
                             <br/>
+                            {/* options grid including new book list and search book lists */}
                             <Grid columns="equal">
                                 <Grid.Column>
                                     <New type="Book List" />
                                 </Grid.Column>
+                                {/* only render search component if there are book lists */}
                                 {this.props.bookLists.length
                                 ?
                                 <Grid.Column>
@@ -94,8 +112,9 @@ class BookListContainer extends React.Component {
                                 null}
                             </Grid>
 
+                            {/* book lists */}
                             <Grid centered>
-                                {filteredBookLists.map(bookList => <BookListPreview key={bookList.id} {...bookList} />)}
+                                {this.makeBookLists()}
                             </Grid>
                         </div>
                     )

@@ -8,6 +8,7 @@ class New extends React.Component {
         content: "",
     }
 
+    // controlled form
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
@@ -16,10 +17,12 @@ class New extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
+        // send submitted values and current book club to the backend and update redux store
         this.props.addMessage({
             content: this.state.content,
             book_club_id: this.props.bookClubId
         })
+        // reset content in state so form looks submitted
         this.setState({
             content: ""
         })
@@ -36,6 +39,7 @@ class New extends React.Component {
                         value={this.state.content}
                         onChange={this.handleChange}
                     />
+                    {/* only show message if there is an error */}
                     {this.props.messageError
                     ?
                     <Message

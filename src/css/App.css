@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=DM+Serif+Display&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Dancing+Script&display=swap');
 
-
 .App {
   text-align: center;
 }
@@ -67,6 +66,14 @@ a, a:hover {
   border-radius: 15px;
 }
 
+/* back to top icon on search page */
+#back-to-top {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 2%;
+}
+
 /* BOOK SHOW PAGE */
 
 /* main container for book show page, centers and shrinks width */
@@ -115,16 +122,19 @@ a, a:hover {
 
 /* BOOK CLUBS */
 
+/* sets fixed width for book club cards */
 .book-club {
   width: 255px;
   margin: 2%;
 }
 
+/* changes background color and font color on hover of book club cards */
 .book-club:hover, .book-club:hover h3 {
   background: #34495e;
   color: #fff;
 }
 
+/* makes x button on book club cards in top right corner and sets color */
 .book-club #x {
   float: right;
   margin-top: 3%;
@@ -150,10 +160,12 @@ a, a:hover {
   padding: 2% 3% 2% 3%;
 }
 
+/* makes name of book club appear in top left */
 .message-header h1 {
   float: left;
 }
 
+/* makes delete book club button appear in top right */
 .message-header div {
   text-align: right;
 }
@@ -243,13 +255,4 @@ a, a:hover {
 .error-container h1 {
   color: #fff;
   font-size: 48px;
-}
-
-/* back to top icon on search page */
-
-#back-to-top {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  margin: 2%;
 }

@@ -1,13 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addBookList, addBookClub, addMessage } from '../actions'
+import { addBookList, addBookClub } from '../actions'
 import { Form, Message } from 'semantic-ui-react'
 
 class New extends React.Component {
     state = {
-        text: "",
+        name: "",
     }
 
+    // controlled form
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
@@ -16,35 +17,31 @@ class New extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
+        // send submitted values to the backend and update redux store
         if (this.props.type === "Book List") {
-            this.props.addBookList({name: this.state.text})
+            this.props.addBookList(this.state)
         }
         else if (this.props.type === "Book Club") {
-            this.props.addBookClub({name: this.state.text})
+            this.props.addBookClub(this.state)
         }
-        else if (this.props.type === "Message") {
-            this.props.addMessage({
-                content: this.state.text,
-                book_club_id: this.props.bookClub.id
-            })
-        }
+        // resets name in state so form looks submitted
         this.setState({
-            text: ""
+            name: ""
         })
     }
 
     render() {
-        const placeholder = this.props.type === "Message" ? `${this.props.type}` : `${this.props.type} Name`
         return (
             <div>
                 <h4>Add New {this.props.type}</h4>
                 <Form onSubmit={this.handleSubmit} className="small-input">
                     <Form.Input
-                        name="text"
-                        placeholder={placeholder}
-                        value={this.state.text}
+                        name="name"
+                        placeholder={`${this.props.type} Name`}
+                        value={this.state.name}
                         onChange={this.handleChange}
                     />
+                    {/* only show message if there is a book list error and we're adding a book list */}
                     {this.props.bookListError && this.props.type === "Book List"
                     ?
                     <Message
@@ -54,21 +51,13 @@ class New extends React.Component {
                     />
                     :
                     null}
+                    {/* only show message if there is a book club error and we're adding a book club */}
                     {this.props.bookClubError && this.props.type === "Book Club"
                     ?
                     <Message
                         negative
                         header='Error'
                         list={this.props.bookClubError}
-                    />
-                    :
-                    null}
-                    {this.props.messageError && this.props.type === "Message"
-                    ?
-                    <Message
-                        negative
-                        header='Error'
-                        list={this.props.messageError}
                     />
                     :
                     null}
@@ -86,8 +75,7 @@ function mapStateToProps(state) {
     return {
         bookListError: state.bookListReducer.bookListError,
         bookClubError: state.bookClubReducer.bookClubError,
-        messageError: state.bookClubReducer.messageError
     }
 }
 
-export default connect(mapStateToProps, { addBookList, addBookClub, addMessage })(New)
+export default connect(mapStateToProps, { addBookList, addBookClub })(New)

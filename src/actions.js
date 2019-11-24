@@ -279,6 +279,7 @@ function autoLogin() {
         .then(resp => resp.json())
         .then(response => {
             if (response.errors) {
+                localStorage.removeItem("token")
                 dispatch({
                     type: LOG_OUT
                 })

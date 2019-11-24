@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { removeAccount } from '../actions'
-import withAuth from '../withAuth'
+import withAuth from './withAuth'
 import { Button, Confirm } from 'semantic-ui-react'
 
 class Profile extends React.Component {
@@ -10,22 +10,24 @@ class Profile extends React.Component {
         open: false
     }
 
+    // shows confirmation modal
     showConfirmation = () => {
         this.setState({
             open: true
         })
     }
 
+    // closes modal on click on cancel in confirmation modal
     handleCancel = () => {
         this.setState({
             open: false
         })
     }
 
+    // deletes account and removes token from localStorage on click in confirmation modal
     handleAccountRemove = () => {
         this.props.removeAccount()
         localStorage.removeItem("token")
-        // this.props.history.push("/signup")
     }
 
     render() {
@@ -59,6 +61,7 @@ class Profile extends React.Component {
                     onClick={this.showConfirmation}
                     content="Delete Account"
                 />
+                {/* confirmation modal, hidden until click on delete account */}
                 <Confirm
                     open={this.state.open}
                     header="Please Confirm"

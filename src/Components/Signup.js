@@ -9,6 +9,7 @@ class Signup extends React.Component {
         password: ""
     }
 
+    // controlled sign up form
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
@@ -17,8 +18,10 @@ class Signup extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
+        // send submitted values to the backend and update redux store
         this.props.signUp(this.state)
         .then(() => {
+            // if the sign up was successful, push to profile page
             if (this.props.currentUser) {
                 this.props.history.push("/profile")
             }
@@ -43,6 +46,7 @@ class Signup extends React.Component {
                         value={this.state.password}
                         onChange={this.handleChange}
                     />
+                    {/* only show message if there is an error */}
                     {this.props.signUpError
                     ?
                     <Message

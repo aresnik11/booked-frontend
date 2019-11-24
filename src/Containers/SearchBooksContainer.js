@@ -4,7 +4,7 @@ import BookPreview from '../components/BookPreview'
 import SearchBooks from '../components/SearchBooks'
 import { connect } from 'react-redux'
 import { fetchSearchedBooks } from '../actions'
-import withAuth from '../withAuth'
+import withAuth from '../components/withAuth'
 import { Grid, Button } from 'semantic-ui-react'
 
 class SearchBooksContainer extends React.Component {
@@ -41,6 +41,7 @@ class SearchBooksContainer extends React.Component {
         }
     }
 
+    // scrolls window back to top and resets state
     scrollToTop = () => {
         window.scrollTo({
             behavior: "smooth",
@@ -52,19 +53,29 @@ class SearchBooksContainer extends React.Component {
         })
     }
 
+    // adds scroll event listener on mount
     componentDidMount() {
         document.addEventListener("scroll", this.renderMoreResults)
     }
 
+    // remove event listener on unmount
     componentWillUnmount() {
         document.removeEventListener("scroll", this.renderMoreResults)
+    }
+
+    // creates a book preview component for each book in the array of searched books
+    makeBooks = () => {
+        return this.props.searchedBooks.map((book, index) => <BookPreview key={index} {...book} />)
     }
 
     render() {
         return (
             <div>
+                {/* search options */}
                 <SearchBooks />
                 <br/><br/>
+
+                {/* if we're loading search results, show loading component */}
                 {this.props.loading
                 ?
                 <Loading />
@@ -72,9 +83,13 @@ class SearchBooksContainer extends React.Component {
                 <div>
                     {/* only show number of search results if totalItems isn't null (initial value before search) */}
                     {this.props.totalItems !== null ? <h3>{this.props.totalItems} search results</h3> : null}
+
+                    {/* book search results */}
                     <Grid centered>
-                        {this.props.searchedBooks.map((book, index) => <BookPreview key={index} {...book} />)}
+                        {this.makeBooks()}
                     </Grid>
+
+                    {/* only show back to top icon when backToTopVisible is true */}
                     {this.state.backToTopVisible
                     ?
                     <Button

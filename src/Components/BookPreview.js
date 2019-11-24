@@ -11,26 +11,21 @@ const BookPreview = (props) => {
             <ul>
                 <li>
                     <figure className='book'>
-
                         {/* Front */}
-
                         <ul className='hardcover_front'>
                             <li>
                                 <img src={props.image} alt="" />
                             </li>
                             <li></li>
                         </ul>
-
                         {/* Pages */}
-                    
                         <ul className='page'>
                             <li></li>
                             <li>
                                 {/* if there is a bookListId prop, link to book with id (from book list), otherwise link to book with volume_id (from search) */}
                                 {props.bookListId
                                 ?
-                                <Link
-                                    to={{
+                                <Link to={{
                                     pathname: `/books/${props.id}`,
                                     state: { fromSearch: false }
                                 }}>
@@ -52,9 +47,7 @@ const BookPreview = (props) => {
                             <li></li>
                             <li></li>
                         </ul>
-
                         {/* Back */}
-
                         <ul className='hardcover_back'>
                             <li></li>
                             <li></li>
@@ -77,7 +70,8 @@ const BookPreview = (props) => {
                     content="Remove"
                 />
             </>
-            : null}
+            :
+            null}
         </div>
     )
 }

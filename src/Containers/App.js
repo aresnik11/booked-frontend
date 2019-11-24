@@ -18,12 +18,12 @@ import Login from '../components/Login'
 import Signup from '../components/Signup'
 import { connect } from 'react-redux'
 import { autoLogin } from '../actions'
-import ScrollToTop from '../ScrollToTop'
+import ScrollToTop from '../components/ScrollToTop'
 
 class App extends React.Component {
     componentDidMount() {
-        const token = localStorage.getItem("token")
-        if (token) {
+        // if there is a token in localStorage, see if we can autologin the user
+        if (localStorage.getItem("token")) {
             this.props.autoLogin()
         }
     }
@@ -31,7 +31,9 @@ class App extends React.Component {
     render() {
         return (
             <div className="App">
+                {/* render header on every page, using catch all route to get access to router props within component */}
                 <Route path="/" component={Header} />
+                    {/* render different component and container depending on route */}
                     <Switch>
                         <Route exact path="/login" render={(routerProps) => {
                             return (
@@ -102,6 +104,7 @@ class App extends React.Component {
                                 </div>
                             )
                         }}/>
+                        {/* if none of the above routes were matched, render error component */}
                         <Route render={() => {
                             return (
                                 <div className="error-container">

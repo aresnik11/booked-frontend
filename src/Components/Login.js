@@ -9,6 +9,7 @@ class Login extends React.Component {
         password: ""
     }
 
+    // controlled log in forrm
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
@@ -19,8 +20,10 @@ class Login extends React.Component {
         e.preventDefault()
         //removePleaseLogin resets flag in redux store that shows the please login message since either successful or will get new error message
         this.props.removePleaseLogin()
+        // send submitted values to the backend and update redux store
         this.props.logIn(this.state)
         .then(() => {
+            // if the log in was successful, push to profile page
             if (this.props.currentUser) {
                 this.props.history.push("/profile")
             }
@@ -32,6 +35,7 @@ class Login extends React.Component {
             <div className="login-container">
                 <h1>Log In</h1>
 
+                {/* show please log in message if were redirected from another page */}
                 {this.props.pleaseLogIn
                 ?
                 <>
@@ -60,6 +64,7 @@ class Login extends React.Component {
                         value={this.state.password}
                         onChange={this.handleChange}
                     />
+                    {/* only show message if there is an error */}
                     {this.props.logInError
                     ?
                     <Message

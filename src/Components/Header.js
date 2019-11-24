@@ -9,12 +9,14 @@ class Header extends React.Component {
         activeItem: ""
     }
 
+    // changes selected/active menu option on click
     handleItemClick = (e, { name }) => {
         this.setState({
             activeItem: name
         })
     }
 
+    // on click of logout, reset current user in redux store, remove token from localStorage, and push back to /login
     handleLogOut = () => {
         this.props.logOut()
         localStorage.removeItem("token")
@@ -26,9 +28,6 @@ class Header extends React.Component {
             <Segment className="fixed">
                 {/* may want to add stackable, makes menu stack in mobile views */}
                 <Menu secondary size="large">
-                    {/* <Menu.Item>
-                        <img src={Booked} alt="Booked"/>
-                    </Menu.Item> */}
                     <Menu.Item
                         icon="book"
                         as={ Link }
@@ -66,6 +65,7 @@ class Header extends React.Component {
                         onClick={this.handleItemClick}
                     />
                     <Menu.Menu position="right">
+                        {/* if user is logged in, show log out. otherwise show log in and sign up */}
                         {localStorage.token
                         ?
                         <Menu.Item
