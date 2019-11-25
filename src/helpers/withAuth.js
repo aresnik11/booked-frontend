@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import Loading from '../components/Loading'
-import { pleaseLogIn, removeLogInError } from '../actions/user'
+import { pleaseLogIn } from '../actions/user'
 
 function withAuth(MyComponent) {
     class AuthHOC extends React.Component {
@@ -22,8 +22,6 @@ function withAuth(MyComponent) {
                 else {
                     //pleaseLogIn sets flag in redux store to show a message on Login screen
                     this.props.pleaseLogIn()
-                    //removes any previous error messages from invalid logins, since now showing the please login message
-                    this.props.removeLogInError()
                     return <Redirect to="/login" />
                 }
             }
@@ -36,7 +34,7 @@ function withAuth(MyComponent) {
         }
     }
 
-    return connect(mapStateToProps, { pleaseLogIn, removeLogInError })(AuthHOC)
+    return connect(mapStateToProps, { pleaseLogIn })(AuthHOC)
 }
 
 export default withAuth

@@ -4,7 +4,8 @@ import {
     PLEASE_LOG_IN,
     SET_CURRENT_USER,
     LOG_OUT,
-    FETCH_USERS
+    FETCH_USERS,
+    DEMO_LOG_IN_ERROR
 } from './types'
 
 function removeAccount() {
@@ -160,13 +161,6 @@ function logIn(user) {
     }
 }
 
-function removeLogInError() {
-    return {
-        type: LOG_IN_ERROR,
-        payload: false
-    }
-}
-
 function pleaseLogIn() {
     return {
         type: PLEASE_LOG_IN,
@@ -174,10 +168,31 @@ function pleaseLogIn() {
     }
 }
 
-function removePleaseLogin() {
-    return {
-        type: PLEASE_LOG_IN,
-        payload: false
+function demoLogIn() {
+    return function (dispatch) {
+        return fetch("https://booked-backend.herokuapp.com/api/v1/demo_login")
+        .then(resp => resp.json())
+        .then(response => {
+            if (response.errors) {
+                dispatch({
+                    type: DEMO_LOG_IN_ERROR,
+                    payload: response.errors
+                })
+            }
+            else {
+                localStorage.setItem("token", response.token)
+                dispatch({
+                    type: SET_CURRENT_USER,
+                    payload: {
+                        currentUser: {
+                            id: response.user.id,
+                            username: response.user.username
+                        },
+                        bookLists: response.user.book_lists
+                    }
+                })
+            }
+        })
     }
 }
 
@@ -189,7 +204,6 @@ export {
     autoLogin,
     signUp,
     logIn,
-    removeLogInError,
     pleaseLogIn,
-    removePleaseLogin
+    demoLogIn
 }

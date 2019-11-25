@@ -35,7 +35,7 @@ a, a:hover {
 }
 
 /* custom text color */
-.ui.comments .comment .author, .ui.comments .comment .text, .ui.radio.checkbox label, .ui.menu .item, .ui.secondary.menu .active.item, .ui.secondary.menu a.item:hover, .ui.secondary.menu .active.item:hover {
+.ui.comments .comment .author, .ui.comments .comment .text, .ui.radio.checkbox label, .ui.menu .item, .ui.secondary.menu .active.item, .ui.secondary.menu a.item:hover, .ui.secondary.menu .active.item:hover, .ui.horizontal.divider {
   color: #34495e;
 }
 
@@ -200,7 +200,7 @@ a, a:hover {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  padding-top: 35vh;
+  padding-top: 30vh;
 }
 
 /* increases font size of title on homepage */

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Form, Message } from 'semantic-ui-react'
-import { signUp } from '../actions/user'
+import { Form, Message, Divider, Button } from 'semantic-ui-react'
+import { signUp, demoLogIn } from '../actions/user'
 
 class Signup extends React.Component {
     state = {
@@ -22,6 +22,16 @@ class Signup extends React.Component {
         this.props.signUp(this.state)
         .then(() => {
             // if the sign up was successful, push to profile page
+            if (this.props.currentUser) {
+                this.props.history.push("/profile")
+            }
+        })
+    }
+
+    handleDemoClick = () => {
+        this.props.demoLogIn()
+        .then(() => {
+            // if the demo log in was successful, push to profile page
             if (this.props.currentUser) {
                 this.props.history.push("/profile")
             }
@@ -61,6 +71,28 @@ class Signup extends React.Component {
                         content="Sign Up"
                     />
                 </Form>
+                
+                {/* demo log in button */}
+                <Divider horizontal content="Or" />
+                <Button
+                    className="btn"
+                    content="Demo Log In"
+                    onClick={this.handleDemoClick}
+                />
+                {/* only show message if there is an error */}
+                {this.props.demoLogInError
+                ?
+                <>
+                    <br/><br/>
+                    <Message
+                        className="small-input"
+                        negative
+                        header='Error'
+                        content={this.props.demoLogInError}
+                    />
+                </>
+                :
+                null}
             </div>
         )
     }
@@ -69,8 +101,9 @@ class Signup extends React.Component {
 function mapStateToProps(state) {
     return {
         currentUser: state.userReducer.currentUser,
-        signUpError: state.userReducer.signUpError
+        signUpError: state.userReducer.signUpError,
+        demoLogInError: state.userReducer.demoLogInError
     }
 }
 
-export default connect(mapStateToProps, { signUp })(Signup)
+export default connect(mapStateToProps, { signUp, demoLogIn })(Signup)

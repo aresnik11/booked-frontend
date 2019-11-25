@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { logIn, removePleaseLogin } from '../actions/user'
-import { Form, Message } from 'semantic-ui-react'
+import { logIn, demoLogIn } from '../actions/user'
+import { Form, Message, Divider, Button } from 'semantic-ui-react'
 
 class Login extends React.Component {
     state = {
@@ -18,12 +18,20 @@ class Login extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        //removePleaseLogin resets flag in redux store that shows the please login message since either successful or will get new error message
-        this.props.removePleaseLogin()
         // send submitted values to the backend and update redux store
         this.props.logIn(this.state)
         .then(() => {
             // if the log in was successful, push to profile page
+            if (this.props.currentUser) {
+                this.props.history.push("/profile")
+            }
+        })
+    }
+
+    handleDemoClick = () => {
+        this.props.demoLogIn()
+        .then(() => {
+            // if the demo log in was successful, push to profile page
             if (this.props.currentUser) {
                 this.props.history.push("/profile")
             }
@@ -78,12 +86,29 @@ class Login extends React.Component {
                         className="btn"
                         content="Log In"
                     />
-                    <Form.Button
-                        className="btn"
-                        content="Demo Log In"
-                    />
                 </Form>
-
+                
+                {/* demo log in button */}
+                <Divider horizontal content="Or" />
+                <Button
+                    className="btn"
+                    content="Demo Log In"
+                    onClick={this.handleDemoClick}
+                />
+                {/* only show message if there is an error */}
+                {this.props.demoLogInError
+                ?
+                <>
+                    <br/><br/>
+                    <Message
+                        className="small-input"
+                        negative
+                        header='Error'
+                        content={this.props.demoLogInError}
+                    />
+                </>
+                :
+                null}
             </div>
         )
     }
@@ -93,8 +118,9 @@ function mapStateToProps(state) {
     return {
         currentUser: state.userReducer.currentUser,
         logInError: state.userReducer.logInError,
-        pleaseLogIn: state.userReducer.pleaseLogIn
+        pleaseLogIn: state.userReducer.pleaseLogIn,
+        demoLogInError: state.userReducer.demoLogInError
     }
 }
 
-export default connect(mapStateToProps, { logIn, removePleaseLogin })(Login)
+export default connect(mapStateToProps, { logIn, demoLogIn })(Login)
