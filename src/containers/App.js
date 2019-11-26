@@ -44,9 +44,12 @@ class App extends React.Component {
         // shows loading component until we can hit the backend
         if (this.state.loading) {
             return (
-                <div className="main-container">
-                    <Loading />
-                </div>
+                <>
+                    <Route path="/" component={Header} />
+                    <div className="main-container">
+                        <Loading />
+                    </div>
+                </>
             )
         }
         else {
