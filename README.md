@@ -1,68 +1,68 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Booked
 
-## Available Scripts
+Booked is a book app that allows users to search for books, add books to book lists, share book lists, and chat in online book clubs.
 
-In the project directory, you can run:
+The frontend repo is deployed via Netlify, and the backend repo ([here](https://github.com/aresnik11/booked-backend)) is deployed via Heroku. Visit the site at [https://booked.netlify.com](https://booked.netlify.com).
 
-### `yarn start`
+[![Netlify Status](https://api.netlify.com/api/v1/badges/73e38dc7-1ee2-4cf8-baf2-52821da94970/deploy-status)](https://app.netlify.com/sites/booked/deploys)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![Booked Book Lists](https://user-images.githubusercontent.com/8761638/69598792-924b9180-0fd8-11ea-9500-6134ad2ead10.png)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+![Booked Books](https://user-images.githubusercontent.com/8761638/69598794-94adeb80-0fd8-11ea-834f-5dd299b52a67.png)
 
-### `yarn test`
+## Demo
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+You can watch a live demo of the app [here](#) or visit the site at [https://booked.netlify.com](https://booked.netlify.com).
 
-### `yarn build`
+## Technology Used
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* React
+* Redux
+* Websockets via ActionCable
+* Google Books API
+* Custom infinite scroll
+* React Router
+* Semantic UI
+* Custom CSS
+* JWT Authentication
+* Ruby on Rails
+* PostgreSQL database
+* ActiveModel Serializer
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+The GitHub repo for the backend can be found [here](https://github.com/aresnik11/booked-backend).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Features
 
-### `yarn eject`
+Booked allows users to:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+* Create an account
+* Securely log in to an existing account
+* Create a new book list
+* Share a book list with another user
+* Delete a book list
+* Search for books by title, author, or genre - makes live calls to the Google Books API
+* Automatically load next 40 books from search when user reaches the bottom of the page
+* Click the back to top button to take the user back to the top of the search page
+* Add a book to one of their book lists
+* Remove a book from one of their book lists
+* Create a new book club
+* Chat with other users in real-time in a book club
+* Delete a book club
+* Securely log out
+* Delete their account
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## How To Use
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Visit the site at [https://booked.netlify.com](https://booked.netlify.com).
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+To test on your own machine:
+1. Visit the backend repo [here](https://github.com/aresnik11/booked-backend) and follow instructions on the README. The backend server should be started before the next steps are run.
+2. Clone this repository
+3. Update all fetch request urls within `actions` to the url where your rails server is running
+4. In terminal run
+```
+npm install
+npm start
+```
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Enjoy!

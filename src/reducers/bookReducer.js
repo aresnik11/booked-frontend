@@ -1,7 +1,8 @@
 import {
     FETCH_SEARCHED_BOOKS,
     SET_LOADING,
-    FETCH_BOOK
+    FETCH_BOOK,
+    LOG_OUT
 } from '../actions/types'
 
 const defaultState = {
@@ -51,6 +52,16 @@ function bookReducer(state = defaultState, action) {
             return {
                 ...state,
                 selectedBook: action.payload,
+            }
+        case LOG_OUT:
+            // resetting all search values on logout
+            return {
+                searchedBooks: [],
+                totalItems: null,
+                searchTerm: "",
+                searchType: "",
+                startIndex: 0,
+                selectedBook: null,
             }
         default:
             return state
