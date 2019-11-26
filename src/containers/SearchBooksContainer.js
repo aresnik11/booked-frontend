@@ -109,7 +109,6 @@ class SearchBooksContainer extends React.Component {
 }
 
 function mapStateToProps(state) {
-    console.log(state)
     return {
         searchedBooks: state.bookReducer.searchedBooks,
         totalItems: state.bookReducer.totalItems,

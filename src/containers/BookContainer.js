@@ -48,7 +48,6 @@ class BookContainer extends React.Component {
                                 <Grid.Column>
                                     <div className="book-show title">
                                         <h1>{book.title}</h1>
-                                        {book.subtitle ? <h2>{book.subtitle}</h2> : null}
                                     </div>
                                 </Grid.Column>
                             </Grid.Row>

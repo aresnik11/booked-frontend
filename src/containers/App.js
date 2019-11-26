@@ -19,9 +19,21 @@ import Signup from '../components/Signup'
 import { connect } from 'react-redux'
 import { autoLogin } from '../actions/user'
 import ScrollToTop from '../helpers/ScrollToTop'
+import Loading from '../components/Loading'
 
 class App extends React.Component {
+    state = {
+        loading: true
+    }
+
     componentDidMount() {
+        // shows loading component until we can hit the backend
+        fetch("https://booked-backend.herokuapp.com/api/v1")
+        .then(() => {
+            this.setState({
+                loading: false
+            })
+        })
         // if there is a token in localStorage, see if we can autologin the user
         if (localStorage.getItem("token")) {
             this.props.autoLogin()
@@ -29,92 +41,102 @@ class App extends React.Component {
     }
 
     render() {
-        return (
-            <div className="App">
-                {/* render header on every page, using catch all route to get access to router props within component */}
-                <Route path="/" component={Header} />
-                    {/* render different component and container depending on route */}
-                    <Switch>
-                        <Route exact path="/login" render={(routerProps) => {
-                            return (
-                                <div className="home-login-container ">
-                                    <Login {...routerProps} />
-                                </div>
-                            )
-                        }}/>
-                        <Route exact path="/signup" render={(routerProps) => {
-                            return (
-                                <div className="home-login-container ">
-                                    <Signup {...routerProps} />
-                                </div>
-                            )
-                        }}/>
-                        <Route exact path="/profile" render={() => {
-                            return (
-                                <div className="profile-container">
-                                    <Profile />
-                                </div>
-                            )
-                        }}/>
-                        <Route exact path="/search" render={() => {
-                            return (
-                                <ScrollToTop>
-                                    <div className="main-container">
-                                        <SearchBooksContainer />
+        // shows loading component until we can hit the backend
+        if (this.state.loading) {
+            return (
+                <div className="main-container">
+                    <Loading />
+                </div>
+            )
+        }
+        else {
+            return (
+                <>
+                    {/* render header on every page, using catch all route to get access to router props within component */}
+                    <Route path="/" component={Header} />
+                        {/* render different component and container depending on route */}
+                        <Switch>
+                            <Route exact path="/login" render={(routerProps) => {
+                                return (
+                                    <div className="home-login-container ">
+                                        <Login {...routerProps} />
                                     </div>
-                                </ScrollToTop>
-                            )
-                        }}/>
-                        <Route path="/booklists" render={() => {
-                            return (
-                                <ScrollToTop>
-                                    <div className="main-container">
-                                        <BookListContainer />
+                                )
+                            }}/>
+                            <Route exact path="/signup" render={(routerProps) => {
+                                return (
+                                    <div className="home-login-container ">
+                                        <Signup {...routerProps} />
                                     </div>
-                                </ScrollToTop>
-                            )
-                        }}/>
-                        <Route exact path="/books/:id" render={(routerProps) => {
-                            return (
-                                <div className="main-container">
-                                    <BookContainer {...routerProps} />
-                                </div>
-                            )
-                        }}/>
-                        <Route exact path="/bookclubs/:id" render={(routerProps) => {
-                            return (
-                                <div className="main-container">
-                                    <MessageContainer {...routerProps} />
-                                </div>
-                            )
-                        }}/>
-                        <Route exact path="/bookclubs" render={() => {
-                            return (
-                                <ScrollToTop>
-                                    <div className="main-container">
-                                        <BookClubContainer />
+                                )
+                            }}/>
+                            <Route exact path="/profile" render={() => {
+                                return (
+                                    <div className="profile-container">
+                                        <Profile />
                                     </div>
-                                </ScrollToTop>
-                            )
-                        }}/>
-                        <Route exact path="/" render={() => {
-                            return (
-                                <div className="home-login-container ">
-                                    <Homepage />
-                                </div>
-                            )
-                        }}/>
-                        {/* if none of the above routes were matched, render error component */}
-                        <Route render={() => {
-                            return (
-                                <div className="error-container">
-                                    <Error />
-                                </div>
-                            )
-                        }}/>
-                    </Switch>
-            </div>
-        );
+                                )
+                            }}/>
+                            <Route exact path="/search" render={() => {
+                                return (
+                                    <ScrollToTop>
+                                        <div className="main-container">
+                                            <SearchBooksContainer />
+                                        </div>
+                                    </ScrollToTop>
+                                )
+                            }}/>
+                            <Route path="/booklists" render={() => {
+                                return (
+                                    <ScrollToTop>
+                                        <div className="main-container">
+                                            <BookListContainer />
+                                        </div>
+                                    </ScrollToTop>
+                                )
+                            }}/>
+                            <Route exact path="/books/:id" render={(routerProps) => {
+                                return (
+                                    <div className="main-container">
+                                        <BookContainer {...routerProps} />
+                                    </div>
+                                )
+                            }}/>
+                            <Route exact path="/bookclubs/:id" render={(routerProps) => {
+                                return (
+                                    <div className="main-container">
+                                        <MessageContainer {...routerProps} />
+                                    </div>
+                                )
+                            }}/>
+                            <Route exact path="/bookclubs" render={() => {
+                                return (
+                                    <ScrollToTop>
+                                        <div className="main-container">
+                                            <BookClubContainer />
+                                        </div>
+                                    </ScrollToTop>
+                                )
+                            }}/>
+                            <Route exact path="/" render={() => {
+                                return (
+                                    <div className="home-login-container ">
+                                        <Homepage />
+                                    </div>
+                                )
+                            }}/>
+                            {/* if none of the above routes were matched, render error component */}
+                            <Route render={() => {
+                                return (
+                                    <div className="error-container">
+                                        <Error />
+                                    </div>
+                                )
+                            }}/>
+                        </Switch>
+                </>
+            );
+        }
     }
 }
 
