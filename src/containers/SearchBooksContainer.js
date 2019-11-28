@@ -28,7 +28,7 @@ class SearchBooksContainer extends React.Component {
             }
         }
         //if we scrolled one screens worth down the page, show the back to top button
-        if ((document.documentElement.scrollTop > window.innerHeight) || (document.body.scrollTo > window.innerHeight)) {
+        if ((document.documentElement.scrollTop > window.innerHeight) || (document.body.scrollTop > window.innerHeight)) {
             this.setState({
                 backToTopVisible: true
             })
