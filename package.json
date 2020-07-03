@@ -4,8 +4,6 @@
   "private": true,
   "dependencies": {
     "moment": "^2.24.0",
-    "node-sass": "^4.13.0",
-    "query-string": "^6.8.3",
     "react": "^16.11.0",
     "react-actioncable-provider": "github:ihollander/react-actioncable-provider",
     "react-dom": "^16.11.0",
